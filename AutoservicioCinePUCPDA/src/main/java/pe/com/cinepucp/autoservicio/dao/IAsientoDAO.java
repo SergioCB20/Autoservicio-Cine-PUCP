@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pe.com.cinepucp.autoservicio.dao;
-import pe.com.cinepucp.autoservicio.model.Asiento;
+import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 
 /**
  *

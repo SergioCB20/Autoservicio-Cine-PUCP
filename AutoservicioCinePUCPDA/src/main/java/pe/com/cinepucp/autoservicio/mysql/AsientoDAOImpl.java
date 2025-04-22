@@ -5,8 +5,8 @@
 package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IAsientoDAO;
-import pe.com.cinepucp.autoservicio.model.Asiento;
-import pe.com.cinepucp.autoservicio.model.Sala;
+import pe.com.cinepucp.autoservicio.model.salas.Asiento;
+import pe.com.cinepucp.autoservicio.model.salas.Sala;
 
 /**
  *
