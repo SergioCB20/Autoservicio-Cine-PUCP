@@ -1,0 +1,5 @@
+# Created at 2025-04-22T17:39:43.549
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Programación 3\BS\Autoservicio-Cine-PUCP-main (2)\Autoservicio-Cine-PUCP-main\AutoservicioCinePUCPDA\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

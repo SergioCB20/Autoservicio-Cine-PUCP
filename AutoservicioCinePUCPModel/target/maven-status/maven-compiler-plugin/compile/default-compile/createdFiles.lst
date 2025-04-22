@@ -1,0 +1,5 @@
+pe\com\cinepucp\autoservicio\model\salas\Sala.class
+pe\com\cinepucp\autoservicio\model\salas\TipoSala.class
+pe\com\cinepucp\autoservicio\model\peliculas\Funcion.class
+pe\com\cinepucp\autoservicio\model\salas\Asiento.class
+pe\com\cinepucp\autoservicio\model\venta\Boleto.class

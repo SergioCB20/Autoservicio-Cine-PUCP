@@ -60,14 +60,15 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
         return conn.prepareCall(sql);
     }
 
-   @Override
+    @Override
     protected Asiento mapearModelo(ResultSet rs) throws SQLException {
         Asiento asiento = new Asiento();
         asiento.setId(rs.getInt("asiento_id"));
         
+        // Mapear la sala asociada
         Sala sala = new Sala();
         sala.setId(rs.getInt("sala_id"));
-        sala.setNombre(rs.getString("sala_nombre")); 
+        sala.setNombre(rs.getString("sala_nombre")); // Usamos el alias del JOIN
         asiento.setSala(sala);
         
         asiento.setFila(rs.getString("fila").charAt(0));
