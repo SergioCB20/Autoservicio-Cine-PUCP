@@ -23,5 +23,14 @@ public enum TipoSala {
     public String getDescripcion() {
         return descripcion;
     }
-}
 
+    // Método para convertir String a enum
+    public static TipoSala fromString(String text) {
+        for (TipoSala tipo : TipoSala.values()) {
+            if (tipo.descripcion.equalsIgnoreCase(text)) {
+                return tipo;
+            }
+        }
+        throw new IllegalArgumentException("Tipo de sala no válido: " + text);
+    }
+}

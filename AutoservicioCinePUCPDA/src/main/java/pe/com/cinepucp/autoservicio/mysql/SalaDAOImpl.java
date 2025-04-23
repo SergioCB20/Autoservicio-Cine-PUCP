@@ -65,7 +65,7 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         sala.setId(rs.getInt("sala_id"));
         sala.setNombre(rs.getString("nombre"));
         sala.setCapacidad(rs.getInt("capacidad"));
-        sala.setTipoSala(TipoSala.valueOf(rs.getString("tipo_sala")));
+        sala.setTipoSala(TipoSala.fromString(rs.getString("tipo_sala")));
         return sala;
     }
 }

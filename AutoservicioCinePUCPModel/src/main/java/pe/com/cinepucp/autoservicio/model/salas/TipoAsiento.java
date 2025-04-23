@@ -21,4 +21,12 @@ public enum TipoAsiento {
     public String getDescripcion() {
         return descripcion;
     }
+    public static TipoAsiento fromString(String text) {
+        for (TipoAsiento tipo : TipoAsiento.values()) {
+            if (tipo.descripcion.equalsIgnoreCase(text)) {
+                return tipo;
+            }
+        }
+        throw new IllegalArgumentException("Tipo de sala no válido: " + text);
+    }
 }

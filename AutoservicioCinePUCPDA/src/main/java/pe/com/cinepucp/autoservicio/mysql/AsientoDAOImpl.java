@@ -73,7 +73,7 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
         
         asiento.setFila(rs.getString("fila").charAt(0));
         asiento.setNumero(rs.getInt("numero"));
-        asiento.setTipo(TipoAsiento.valueOf(rs.getString("tipo")));
+        asiento.setTipo(TipoAsiento.fromString(rs.getString("tipo")));
         
         return asiento;
     }

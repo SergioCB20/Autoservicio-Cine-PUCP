@@ -35,7 +35,7 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
           
             try (ResultSet rs = cmd.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1); 
+                    return rs.getInt(1);
                 }
                 System.err.println("No se pudo obtener el ID generado");
                 return -1;
