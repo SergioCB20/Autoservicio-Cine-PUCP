@@ -9,7 +9,7 @@ public class Usuario {
     private int telefono;
     private String password;
     private LocalDate fechaRegistro;
-    private boolean estaActivo
+    private boolean estaActivo;
     private String idiomaPreferido;
 
     public Usuario() {
