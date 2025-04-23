@@ -1,39 +1,70 @@
-
 package pe.com.cinepucp.autoservicio.main.mysql;
 
+import java.sql.*;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.dao.IGeneroDAO;
 import pe.com.cinepucp.autoservicio.model.peliculas.Genero;
+import pe.com.cinepucp.autoservicio.mysql.BaseDAOImpl;
 
 /**
  *
  * @author Computer
  */
-public class GeneroDAOImpl implements IGeneroDAO{
+public class GeneroDAOImpl extends BaseDAOImpl<Genero> implements IGeneroDAO{
 
     @Override
-    public int insertar(Genero modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected PreparedStatement comandoInsertar(Connection conn, Genero genero) throws SQLException {
+        String sql = "{CALL sp_insertar_genero(?, ?)}";
+        CallableStatement stmt = conn.prepareCall(sql);
+        stmt.setString(1,genero.getNombreEs());
+        stmt.setString(2, genero.getNombreEn());
+
+        return stmt;
     }
 
     @Override
-    public boolean modificar(Genero modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected PreparedStatement comandoModificar(Connection conn, Genero genero) throws SQLException {
+        String sql = "{CALL sp_actualizar_genero(?, ?, ?)}";
+        CallableStatement stmt = conn.prepareCall(sql);
+        stmt.setInt(1, genero.getId());
+        stmt.setString(2, genero.getNombreEs());
+        stmt.setString(3, genero.getNombreEn());
+
+        return stmt;
     }
 
     @Override
-    public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+        String sql = "{CALL sp_eliminar_genero(?)}";
+        CallableStatement stmt = conn.prepareCall(sql);
+        stmt.setInt(1, id);
+        return stmt;
     }
 
     @Override
-    public Genero buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected PreparedStatement comandoBuscar(Connection conn, int id) throws SQLException {
+        String sql = "{CALL sp_buscar_genero(?)}";
+        CallableStatement stmt = conn.prepareCall(sql);
+        stmt.setInt(1, id);
+        return stmt;
     }
 
     @Override
-    public List<Genero> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected PreparedStatement comandoListar(Connection conn) throws SQLException {
+         String sql = "{CALL sp_listar_genero()}";
+        return conn.prepareCall(sql);
     }
+
+    @Override
+    protected Genero mapearModelo(ResultSet rs) throws SQLException {
+        Genero genero = new Genero();
+        genero.setId(rs.getInt("genero_id"));
+        
+        genero.setNombreEs(rs.getString("nombre_es"));
+        genero.setNombreEn(rs.getString("nombre_en"));
+        return genero;
+    }
+
+    
     
 }
