@@ -5,6 +5,7 @@
 package pe.com.cinepucp.autoservicio.mysql;
 import pe.com.cinepucp.autoservicio.model.venta.Boleto;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
+import pe.com.cinepucp.autoservicio.model.venta.TipoBoleto;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.dao.IBoletoDAO;
@@ -20,7 +21,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         String sql = "{CALL sp_insertar_boleto(?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, boleto.getFuncion().getId());
-        stmt.setString(2, boleto.getTipo());
+        stmt.setString(2, boleto.getTipo().getDescripcion());
         stmt.setBigDecimal(3, boleto.getPrecio());
         stmt.setString(4, boleto.getCodigoQr());
         stmt.setBoolean(5, boleto.isUsado());
@@ -35,7 +36,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, boleto.getId());
         stmt.setInt(2, boleto.getFuncion().getId());
-        stmt.setString(3, boleto.getTipo());
+        stmt.setString(3, boleto.getTipo().getDescripcion());
         stmt.setBigDecimal(4, boleto.getPrecio());
         stmt.setString(5, boleto.getCodigoQr());
         stmt.setBoolean(5, boleto.isUsado());
@@ -86,7 +87,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         venta.setId(rs.getInt("venta_id"));
         boleto.setVenta(venta);
         
-        boleto.setTipo(rs.getString("tipo"));
+        boleto.setTipo(TipoBoleto.valueOf(rs.getString("tipo")));
         boleto.setPrecio(rs.getBigDecimal("precio"));
         boleto.setCodigoQr(rs.getString("codigoQr"));
         boleto.setUsado(rs.getBoolean("usado"));

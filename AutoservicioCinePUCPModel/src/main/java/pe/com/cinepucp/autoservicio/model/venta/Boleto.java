@@ -14,7 +14,7 @@ public class Boleto {
 
     private int id;
     private Funcion funcion;
-    private String tipo;
+    private TipoBoleto tipo;
     private BigDecimal precio;
     private String codigoQr;
     private boolean usado;
@@ -24,7 +24,7 @@ public class Boleto {
     public Boleto() {
     }
 
-    public Boleto(BigDecimal precio, String codigoQr, String tipo, boolean usado) {
+    public Boleto(BigDecimal precio, String codigoQr, TipoBoleto tipo, boolean usado) {
         this.precio = precio;
         this.codigoQr = codigoQr;
         this.tipo = tipo;
@@ -71,11 +71,11 @@ public class Boleto {
         this.usado = usado;
     }
 
-    public String getTipo() {
+    public TipoBoleto getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoBoleto tipo) {
         this.tipo = tipo;
     }
     
