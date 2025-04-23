@@ -51,11 +51,12 @@
     <module>AutoservicioCinePUCPModel</module>
               
     
-    
-    <module>AutoservicioCinePUCPDA</module>
           
     
     <module>AutoservicioCinePUCPDBManager</module>
+    
+    
+    <module>AutoservicioCinePUCPDA</module>
       
   </modules>
       

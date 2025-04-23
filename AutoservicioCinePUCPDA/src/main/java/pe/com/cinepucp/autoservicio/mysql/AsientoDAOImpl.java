@@ -7,6 +7,7 @@ import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IAsientoDAO;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
+import pe.com.cinepucp.autoservicio.model.salas.TipoAsiento;
 
 /**
  *
@@ -22,7 +23,7 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
         stmt.setInt(1, asiento.getSala().getId());
         stmt.setString(2, String.valueOf(asiento.getFila()));
         stmt.setInt(3, asiento.getNumero());
-        stmt.setString(4, asiento.getTipo());
+        stmt.setString(4, asiento.getTipo().getDescripcion());
         return stmt;
     }
 
@@ -34,7 +35,7 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
         stmt.setInt(2, asiento.getSala().getId());
         stmt.setString(3, String.valueOf(asiento.getFila()));
         stmt.setInt(4, asiento.getNumero());
-        stmt.setString(5, asiento.getTipo());
+        stmt.setString(5, asiento.getTipo().getDescripcion());
         return stmt;
     }
 
@@ -72,7 +73,7 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
         
         asiento.setFila(rs.getString("fila").charAt(0));
         asiento.setNumero(rs.getInt("numero"));
-        asiento.setTipo(rs.getString("tipo"));
+        asiento.setTipo(TipoAsiento.valueOf(rs.getString("tipo")));
         
         return asiento;
     }

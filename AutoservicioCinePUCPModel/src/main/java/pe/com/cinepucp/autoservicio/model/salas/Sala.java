@@ -15,20 +15,20 @@ public class Sala {
     private int id;
     private String nombre;
     private int capacidad;
-    private String tipoSala;
+    private TipoSala tipoSala;
     private List<Asiento> asientos;
 
     public Sala() {
     }
 
-    public Sala(String nombre, int capacidad, String tipoSala) {
+    public Sala(String nombre, int capacidad, TipoSala tipoSala) {
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.tipoSala = tipoSala;
 	this.asientos = new ArrayList<>();
     }
 
-    public Sala(String nombre, int capacidad, String tipoSala, List<Asiento> asientos) {
+    public Sala(String nombre, int capacidad, TipoSala tipoSala, List<Asiento> asientos) {
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.tipoSala = tipoSala;
@@ -59,11 +59,11 @@ public class Sala {
         this.capacidad = capacidad;
     }
 
-    public String getTipoSala() {
+    public TipoSala getTipoSala() {
         return tipoSala;
     }
 
-    public void setTipoSala(String tipoSala) {
+    public void setTipoSala(TipoSala tipoSala) {
         this.tipoSala = tipoSala;
     }
 

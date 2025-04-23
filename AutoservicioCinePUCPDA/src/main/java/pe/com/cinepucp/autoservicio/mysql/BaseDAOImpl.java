@@ -32,21 +32,21 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             Connection conn = DBManager.getInstance().getConnection();
             PreparedStatement cmd = this.comandoInsertar(conn, modelo);
         ) {
-            if (cmd.executeUpdate() == 0) {
-                System.err.println("El registro no se inserto.");
-                return 0;
-            }
-            
-            try (ResultSet rs = cmd.getGeneratedKeys()) {
-                return rs.next() ? rs.getInt(1) : -1;
+            // Ejecutamos la consulta que debe devolver un ResultSet con el ID
+            try (ResultSet rs = cmd.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1); // Retorna el ID generado
+                }
+                System.err.println("No se pudo obtener el ID generado");
+                return -1;
             }
         }
         catch (SQLException e) {
-            System.err.println("Error SQL durante la insercion: " + e.getMessage());
+            System.err.println("Error SQL durante la inserción: " + e.getMessage());
             throw new RuntimeException("No se pudo insertar el registro.", e);
         }
         catch (Exception e) {
-            System.err.println("Error inpesperado: " + e.getMessage());
+            System.err.println("Error inesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al insertar el registro.", e);
         }
     }
@@ -55,16 +55,22 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
     public boolean modificar(T modelo) {
         try (
             Connection conn = DBManager.getInstance().getConnection();
-            PreparedStatement ps = this.comandoModificar(conn, modelo);
+            PreparedStatement cmd = this.comandoModificar(conn, modelo);
         ) {
-            return ps.executeUpdate() > 0;
+            // Ejecutamos la consulta que debe devolver las filas afectadas
+            try (ResultSet rs = cmd.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // Retorna true si afectó al menos 1 fila
+                }
+                return false;
+            }
         }
         catch (SQLException e) {
-            System.err.println("Error SQL durante la modificacion: " + e.getMessage());
+            System.err.println("Error SQL durante la modificación: " + e.getMessage());
             throw new RuntimeException("No se pudo modificar el registro.", e);
         }
         catch (Exception e) {
-            System.err.println("Error inpesperado: " + e.getMessage());
+            System.err.println("Error inesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al modificar el registro.", e);
         }
     }
@@ -73,16 +79,22 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
     public boolean eliminar(int id) {
         try (
             Connection conn = DBManager.getInstance().getConnection();
-            PreparedStatement ps = this.comandoEliminar(conn, id);
+            PreparedStatement cmd = this.comandoEliminar(conn, id);
         ) {
-            return ps.executeUpdate() > 0;
+            // Ejecutamos la consulta que debe devolver las filas afectadas
+            try (ResultSet rs = cmd.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // Retorna true si afectó al menos 1 fila
+                }
+                return false;
+            }
         }
         catch (SQLException e) {
-            System.err.println("Error SQL durante la eliminacion: " + e.getMessage());
+            System.err.println("Error SQL durante la eliminación: " + e.getMessage());
             throw new RuntimeException("No se pudo eliminar el registro.", e);
         }
         catch (Exception e) {
-            System.err.println("Error inpesperado: " + e.getMessage());
+            System.err.println("Error inesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al eliminar el registro.", e);
         }
     }
@@ -96,18 +108,18 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             ResultSet rs = ps.executeQuery();
             
             if (!rs.next()) {
-                System.err.println("No se encontro el registro con id: " + id);
+                System.err.println("No se encontró el registro con id: " + id);
                 return null;
             }
             
             return this.mapearModelo(rs);
         }
         catch (SQLException e) {
-            System.err.println("Error SQL durante la busqueda: " + e.getMessage());
+            System.err.println("Error SQL durante la búsqueda: " + e.getMessage());
             throw new RuntimeException("No se pudo buscar el registro.", e);
         }
         catch (Exception e) {
-            System.err.println("Error inpesperado: " + e.getMessage());
+            System.err.println("Error inesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al buscar el registro.", e);
         }
     }
@@ -132,7 +144,7 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             throw new RuntimeException("No se pudo listar el registro.", e);
         }
         catch (Exception e) {
-            System.err.println("Error inpesperado: " + e.getMessage());
+            System.err.println("Error inesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al listar los registros.", e);
         }
     }

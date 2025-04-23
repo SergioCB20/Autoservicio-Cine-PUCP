@@ -6,6 +6,7 @@ package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.ISalaDAO;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
+import pe.com.cinepucp.autoservicio.model.salas.TipoSala;
 
 /**
  *
@@ -21,7 +22,7 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, sala.getNombre());
         stmt.setInt(2, sala.getCapacidad());
-        stmt.setString(3, sala.getTipoSala());
+        stmt.setString(3, sala.getTipoSala().getDescripcion());
         return stmt;
     }
 
@@ -32,7 +33,7 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         stmt.setInt(1, sala.getId());
         stmt.setString(2, sala.getNombre());
         stmt.setInt(3, sala.getCapacidad());
-        stmt.setString(4, sala.getTipoSala());
+        stmt.setString(4, sala.getTipoSala().getDescripcion());
         return stmt;
     }
 
@@ -64,7 +65,7 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         sala.setId(rs.getInt("sala_id"));
         sala.setNombre(rs.getString("nombre"));
         sala.setCapacidad(rs.getInt("capacidad"));
-        sala.setTipoSala(rs.getString("tipo_sala"));
+        sala.setTipoSala(TipoSala.valueOf(rs.getString("tipo_sala")));
         return sala;
     }
 }

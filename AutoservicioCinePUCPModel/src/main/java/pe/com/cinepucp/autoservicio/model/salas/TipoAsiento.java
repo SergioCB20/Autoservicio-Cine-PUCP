@@ -8,15 +8,13 @@ package pe.com.cinepucp.autoservicio.model.salas;
  *
  * @author Sergio
  */
-public enum TipoSala {
-    ESTANDAR("estándar"),
-    TRES_D("3D"),
-    PREMIUM("premium"),
-    CUATRO_DX("4DX");
-
+public enum TipoAsiento {
+    NORMAL("normal"),
+    VIP("vip"),
+    DISCAPACITADO("discapacitado");
     private final String descripcion;
 
-    TipoSala(String descripcion) {
+    TipoAsiento(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -24,4 +22,3 @@ public enum TipoSala {
         return descripcion;
     }
 }
-

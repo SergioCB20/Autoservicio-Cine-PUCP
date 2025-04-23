@@ -13,18 +13,18 @@ public class Asiento {
     private Sala sala;
     private char fila;
     private int numero;
-    private String tipo;
+    private TipoAsiento tipo;
 
     public Asiento() {
     }
 
-    public Asiento(char fila, int numero, String tipo) {
+    public Asiento(char fila, int numero, TipoAsiento tipo) {
         this.fila = fila;
         this.numero = numero;
         this.tipo = tipo;
     }
 
-    public Asiento(Sala sala, char fila, int numero, String tipo) {
+    public Asiento(Sala sala, char fila, int numero, TipoAsiento tipo) {
         this.sala = sala;
         this.fila = fila;
         this.numero = numero;
@@ -63,11 +63,11 @@ public class Asiento {
         this.numero = numero;
     }
 
-    public String getTipo() {
+    public TipoAsiento getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoAsiento tipo) {
         this.tipo = tipo;
     }
 
