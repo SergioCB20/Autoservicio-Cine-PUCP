@@ -6,6 +6,7 @@ package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IFuncionDAO;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
+import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
 /**
  *
@@ -22,7 +23,7 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO{
         stmt.setString(3, funcion.getFormatoProyeccion());
         stmt.setString(4, funcion.getIdioma());
         stmt.setBoolean(5, funcion.isSubtitulos());
-//        stmt.setInt(6, funcion.getPelicula().getId());
+        stmt.setInt(6, funcion.getPelicula().getId());
         return stmt;
     }
     
@@ -36,7 +37,7 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO{
         stmt.setString(4, funcion.getFormatoProyeccion());
         stmt.setString(5, funcion.getIdioma());
         stmt.setBoolean(6, funcion.isSubtitulos());
-//        stmt.setInt(7, funcion.getPelicula().getId());
+        stmt.setInt(7, funcion.getPelicula().getId());
         return stmt;
     }
     
@@ -74,9 +75,9 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO{
         funcion.setSala(sala);
         
         // Mapear la película asociada
-//        Pelicula pelicula = new Pelicula();
-//        pelicula.setId(rs.getInt("pelicula_id"));
-//        funcion.setPelicula(pelicula);
+        Pelicula pelicula = new Pelicula();
+        pelicula.setId(rs.getInt("pelicula_id"));
+        funcion.setPelicula(pelicula);
         
         funcion.setFechaHora(rs.getTimestamp("fechaHora").toLocalDateTime());
         funcion.setFormatoProyeccion(rs.getString("formatoProyeccion"));

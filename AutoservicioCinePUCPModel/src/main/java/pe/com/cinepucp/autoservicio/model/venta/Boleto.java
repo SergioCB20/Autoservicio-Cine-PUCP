@@ -19,7 +19,7 @@ public class Boleto {
     private String codigoQr;
     private boolean usado;
     private Asiento asiento;
-//    private Venta venta;
+    private Venta venta;
     
     public Boleto() {
     }
@@ -87,11 +87,11 @@ public class Boleto {
         this.asiento = asiento;
     }
     
-//    public Venta getVenta() {
-//        return venta;
-//    }
-//
-//    public void setVenta(Venta venta) {
-//        this.venta = venta;
-//    }
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
 }

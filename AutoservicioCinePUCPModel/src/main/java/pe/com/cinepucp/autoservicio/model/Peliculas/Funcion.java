@@ -14,7 +14,7 @@ public class Funcion {
     private String formatoProyeccion;
     private String idioma;
     private boolean subtitulos;
-//    private Pelicula pelicula;
+    private Pelicula pelicula;
     
     public Funcion() {
     }
@@ -74,12 +74,12 @@ public class Funcion {
         this.subtitulos = subtitulos;
     }
     
-//    public Pelicula getPelicula() {
-//        return pelicula;
-//    }
-//
-//    public void setPelicula(Pelicula pelicula) {
-//        this.pelicula = pelicula;
-//    }
+    public Pelicula getPelicula() {
+        return pelicula;
+    }
+
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
+    }
 
 }

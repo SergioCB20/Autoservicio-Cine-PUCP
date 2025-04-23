@@ -4,6 +4,7 @@
  */
 package pe.com.cinepucp.autoservicio.mysql;
 import pe.com.cinepucp.autoservicio.model.venta.Boleto;
+import pe.com.cinepucp.autoservicio.model.venta.Venta;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.dao.IBoletoDAO;
@@ -24,7 +25,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         stmt.setString(4, boleto.getCodigoQr());
         stmt.setBoolean(5, boleto.isUsado());
         stmt.setInt(6, boleto.getAsiento().getId());
-//        stmt.setInt(7, boleto.getVenta().getId());
+        stmt.setInt(7, boleto.getVenta().getId());
         return stmt;
     }
     
@@ -39,7 +40,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         stmt.setString(5, boleto.getCodigoQr());
         stmt.setBoolean(5, boleto.isUsado());
         stmt.setInt(6, boleto.getAsiento().getId());
-//        stmt.setInt(7, boleto.getVenta().getId());
+        stmt.setInt(7, boleto.getVenta().getId());
         return stmt;
     }
     
@@ -81,9 +82,9 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         boleto.setAsiento(asiento);
         
         // Mapear la venta asociada
-//        Venta venta = new Venta();
-//        venta.setId(rs.getInt("venta_id"));
-//        boleto.setVenta(venta);
+        Venta venta = new Venta();
+        venta.setId(rs.getInt("venta_id"));
+        boleto.setVenta(venta);
         
         boleto.setTipo(rs.getString("tipo"));
         boleto.setPrecio(rs.getBigDecimal("precio"));
