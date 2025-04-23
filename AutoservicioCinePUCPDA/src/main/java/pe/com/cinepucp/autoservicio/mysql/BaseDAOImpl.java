@@ -32,10 +32,10 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             Connection conn = DBManager.getInstance().getConnection();
             PreparedStatement cmd = this.comandoInsertar(conn, modelo);
         ) {
-            // Ejecutamos la consulta que debe devolver un ResultSet con el ID
+          
             try (ResultSet rs = cmd.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1); // Retorna el ID generado
+                    return rs.getInt(1); 
                 }
                 System.err.println("No se pudo obtener el ID generado");
                 return -1;
@@ -57,10 +57,10 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             Connection conn = DBManager.getInstance().getConnection();
             PreparedStatement cmd = this.comandoModificar(conn, modelo);
         ) {
-            // Ejecutamos la consulta que debe devolver las filas afectadas
+            
             try (ResultSet rs = cmd.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1) > 0; // Retorna true si afectó al menos 1 fila
+                    return rs.getInt(1) > 0; 
                 }
                 return false;
             }
@@ -81,10 +81,10 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             Connection conn = DBManager.getInstance().getConnection();
             PreparedStatement cmd = this.comandoEliminar(conn, id);
         ) {
-            // Ejecutamos la consulta que debe devolver las filas afectadas
+            
             try (ResultSet rs = cmd.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1) > 0; // Retorna true si afectó al menos 1 fila
+                    return rs.getInt(1) > 0;
                 }
                 return false;
             }
