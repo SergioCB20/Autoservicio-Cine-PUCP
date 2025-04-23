@@ -87,7 +87,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         venta.setId(rs.getInt("venta_id"));
         boleto.setVenta(venta);
         
-        boleto.setTipo(TipoBoleto.valueOf(rs.getString("tipo")));
+        boleto.setTipo(TipoBoleto.fromString(rs.getString("tipo")));
         boleto.setPrecio(rs.getBigDecimal("precio"));
         boleto.setCodigoQr(rs.getString("codigoQr"));
         boleto.setUsado(rs.getBoolean("usado"));
