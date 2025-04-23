@@ -4,7 +4,7 @@
  */
 package pe.com.cinepucp.autoservicio.model.venta;
 import java.math.BigDecimal;
-import pe.com.cinepucp.autoservicio.model.peliculas.Funcion;
+import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 /**
  *

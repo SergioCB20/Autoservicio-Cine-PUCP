@@ -4,7 +4,7 @@
  */
 package pe.com.cinepucp.autoservicio.mysql;
 import pe.com.cinepucp.autoservicio.model.venta.Boleto;
-import pe.com.cinepucp.autoservicio.model.peliculas.Funcion;
+import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.dao.IBoletoDAO;
 import java.sql.*;

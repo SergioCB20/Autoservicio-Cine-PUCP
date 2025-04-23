@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package pe.com.cinepucp.autoservicio.dao;
-import pe.com.cinepucp.autoservicio.model.peliculas.Funcion;
+import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
 /**
  *
  * @author Piero

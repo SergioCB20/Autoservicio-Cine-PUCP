@@ -1,5 +1,5 @@
 
-package pe.com.cinepucp.autoservicio.model.peliculas;
+package pe.com.cinepucp.autoservicio.model.Peliculas;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
 import java.time.LocalDateTime;
 

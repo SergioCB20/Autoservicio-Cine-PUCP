@@ -1,5 +1,5 @@
 
-package pe.com.cinepucp.autoservicio.model.peliculas;
+package pe.com.cinepucp.autoservicio.model.Peliculas;
 
 public class Genero {
     private int id;
