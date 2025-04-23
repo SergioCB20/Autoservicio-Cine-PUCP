@@ -1,6 +1,7 @@
 package pe.com.cinepucp.autoservicio.mysql;
 
 import java.sql.*;
+import java.time.LocalDate;
 import pe.com.cinepucp.autoservicio.dao.IUsuarioDAO;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
@@ -8,7 +9,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Usuario usuario) throws SQLException {
-        String sql = "{CALL sp_registrar_usuario(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{ CALL sp_insertar_usuario(?, ?, ?, ?, ?, ?, ?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, usuario.getNombre());
         stmt.setString(2, usuario.getEmail());
@@ -22,7 +23,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected PreparedStatement comandoModificar(Connection conn, Usuario usuario) throws SQLException {
-        String sql = "{CALL sp_actualizar_datos_usuario(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{ CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, usuario.getId());
         stmt.setString(2, usuario.getNombre());
@@ -36,7 +37,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
-        String sql = "{CALL sp_eliminar_usuario(?)}";
+        String sql = "{ CALL sp_eliminar_usuario(?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
         return stmt;
@@ -44,7 +45,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected PreparedStatement comandoBuscar(Connection conn, int id) throws SQLException {
-        String sql = "{CALL sp_obtener_perfil_usuario(?)}";
+        String sql = "{ CALL sp_buscar_usuario(?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
         return stmt;
@@ -52,7 +53,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected PreparedStatement comandoListar(Connection conn) throws SQLException {
-        String sql = "{CALL sp_listar_usuarios()}";
+        String sql = "{ CALL sp_listar_usuarios() }";
         return conn.prepareCall(sql);
     }
 
@@ -64,7 +65,12 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         usuario.setEmail(rs.getString("email"));
         usuario.setTelefono(rs.getInt("telefono"));
         usuario.setPassword(rs.getString("password"));
-        usuario.setFechaRegistro(rs.getDate("fecha_registro").toLocalDate());
+
+        Date fechaRegistro = rs.getDate("fecha_registro");
+        if (fechaRegistro != null) {
+            usuario.setFechaRegistro(fechaRegistro.toLocalDate());
+        }
+
         usuario.setEstaActivo(rs.getBoolean("esta_activo"));
         usuario.setIdiomaPreferido(rs.getString("idioma_preferido"));
         return usuario;
