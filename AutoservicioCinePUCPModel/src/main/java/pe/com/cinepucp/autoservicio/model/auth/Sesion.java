@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 public class Sesion {
     private int id;
-    //private Usuario usuario;  //Falta definir esta clase
+    private Usuario usuario;
     private String token;
     private String metodoLogin;
     private LocalDate fechaInicio;
@@ -23,8 +23,16 @@ public class Sesion {
         this.metodoLogin = metodoLogin;
         this.fechaInicio = fechaInicio;
         this.fechaExpiracion = fechaExpiracion;
-        //this.usuario=usuario;
-    }//falta agregar al usuario;
+    }
+    
+    public Sesion(int id,Usuario usuario, String token, String metodoLogin, LocalDate fechaInicio, LocalDate fechaExpiracion) {
+        this.id = id;
+        this.token = token;
+        this.metodoLogin = metodoLogin;
+        this.fechaInicio = fechaInicio;
+        this.fechaExpiracion = fechaExpiracion;
+        this.usuario = usuario;
+    }
     
     public int getId() {
         return id;

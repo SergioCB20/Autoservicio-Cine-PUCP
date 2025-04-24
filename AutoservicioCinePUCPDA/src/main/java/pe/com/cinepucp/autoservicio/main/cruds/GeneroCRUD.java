@@ -1,7 +1,7 @@
 
 package pe.com.cinepucp.autoservicio.main.cruds;
 import java.util.List;
-import pe.com.cinepucp.autoservicio.model.peliculas.Genero;
+import pe.com.cinepucp.autoservicio.model.Peliculas.Genero;
 import pe.com.cinepucp.autoservicio.main.mysql.GeneroDAOImpl;
 
 public class GeneroCRUD{

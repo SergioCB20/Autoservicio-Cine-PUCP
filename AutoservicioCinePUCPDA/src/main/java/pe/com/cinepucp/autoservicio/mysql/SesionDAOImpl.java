@@ -11,7 +11,7 @@ public class SesionDAOImpl extends BaseDAOImpl<Sesion> implements ISesionDAO{
     
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Sesion sesion) throws SQLException{
-        String sql= "(CALL sp_insertar_sesion(?, ?, ?, ?)";
+        String sql= "{CALL sp_insertar_sesion(?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, sesion.getToken());
         stmt.setString(2, sesion.getMetodoLogin());
@@ -59,16 +59,16 @@ public class SesionDAOImpl extends BaseDAOImpl<Sesion> implements ISesionDAO{
     protected Sesion mapearModelo(ResultSet rs) throws SQLException {
         Sesion sesion = new Sesion();
         // Assuming the columns in the ResultSet match the Sesion properties
-        sesion.setId(rs.getInt("id"));
+        sesion.setId(rs.getInt("sesion_id"));
         sesion.setToken(rs.getString("token"));
-        sesion.setMetodoLogin(rs.getString("metodoLogin"));
+        sesion.setMetodoLogin(rs.getString("metodo_login"));
 
-        Date fechaInicioSql = rs.getDate("fechaInicio");
+        Date fechaInicioSql = rs.getDate("fecha_inicio");
         if (fechaInicioSql != null) {
             sesion.setFechaInicio(fechaInicioSql.toLocalDate());
         }
 
-        Date fechaExpiracionSql = rs.getDate("fechaExpiracion");
+        Date fechaExpiracionSql = rs.getDate("fecha_expiracion");
         if (fechaExpiracionSql != null) {
             sesion.setFechaExpiracion(fechaExpiracionSql.toLocalDate());
         }

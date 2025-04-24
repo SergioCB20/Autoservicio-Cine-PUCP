@@ -2,7 +2,7 @@
 package pe.com.cinepucp.autoservicio.main.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IPeliculaDAO;
-import pe.com.cinepucp.autoservicio.model.peliculas.Pelicula;
+import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
 import pe.com.cinepucp.autoservicio.mysql.BaseDAOImpl;
 
 /**

@@ -1,6 +1,6 @@
 package pe.com.cinepucp.autoservicio.model.auth;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -8,25 +8,34 @@ import java.time.LocalDate;
  */
 public class CodigoVerificacion {
     private int id;
-//    private Usuario usuario; //flata definir esta clase
+    private Usuario usuario; 
     private String telefono;
     private String codigo;
-    private LocalDate fechaCreacion;
-    private LocalDate fechaExpiracion;
+    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaExpiracion;
     private boolean usado;
 
     public CodigoVerificacion() {
     }
 
-    public CodigoVerificacion(int id, String telefono, String codigo, LocalDate fechaCreacion, LocalDate fechaExpiracion, boolean usado) {
+    public CodigoVerificacion(int id, String telefono, String codigo, LocalDateTime fechaCreacion, LocalDateTime fechaExpiracion, boolean usado) {
         this.id = id;
         this.telefono = telefono;
         this.codigo = codigo;
         this.fechaCreacion = fechaCreacion;
         this.fechaExpiracion = fechaExpiracion;
         this.usado = usado;
-        //this.usuario = usuario;
-    } //Estaría faltando agregar el usuario
+    }
+    
+    public CodigoVerificacion(int id,Usuario usuario, String telefono, String codigo, LocalDateTime fechaCreacion, LocalDateTime fechaExpiracion, boolean usado) {
+        this.id = id;
+        this.telefono = telefono;
+        this.codigo = codigo;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaExpiracion = fechaExpiracion;
+        this.usado = usado;
+        this.usuario = usuario;
+    }
     
     public int getId() {
         return id;
@@ -52,19 +61,19 @@ public class CodigoVerificacion {
         this.codigo = codigo;
     }
 
-    public LocalDate getFechaCreacion() {
+    public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public LocalDate getFechaExpiracion() {
+    public LocalDateTime getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(LocalDate fechaExpiracion) {
+    public void setFechaExpiracion(LocalDateTime fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 
@@ -74,5 +83,13 @@ public class CodigoVerificacion {
 
     public void setUsado(boolean usado) {
         this.usado = usado;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

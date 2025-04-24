@@ -1,6 +1,6 @@
 package pe.com.cinepucp.autoservicio.main.cruds;
 import java.util.List;
-import pe.com.cinepucp.autoservicio.model.peliculas.Pelicula;
+import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
 import pe.com.cinepucp.autoservicio.main.mysql.PeliculaDAOImpl;
 public class PeliculaCRUD {
     public static void ejecutarCRUDPelicula() {
