@@ -1,4 +1,3 @@
-
 package pe.com.cinepucp.autoservicio.main.cruds;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Genero;
