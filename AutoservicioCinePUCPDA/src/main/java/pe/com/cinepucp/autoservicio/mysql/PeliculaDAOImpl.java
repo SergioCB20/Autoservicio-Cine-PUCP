@@ -1,4 +1,3 @@
-
 package pe.com.cinepucp.autoservicio.main.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IPeliculaDAO;
@@ -13,13 +12,16 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Pelicula peli) throws SQLException {
                 // Usamos CALL para ejecutar el procedimiento almacenado
-        String sql = "{CALL sp_insertar_pelicula(?, ?, ?, ?)}";
+        String sql = "{CALL sp_insertar_pelicula(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, peli.getTituloEs());
         stmt.setString(2, peli.getTituloEn());
         stmt.setInt(3, peli.getDuracionMin());
         stmt.setString(4, peli.getClasificacion());
-        
+        stmt.setString(5, peli.getSinopsisEn());
+        stmt.setString(6, peli.getSinopsisEn());
+        stmt.setString(7, peli.getImagenUrl());
+        stmt.setBoolean(8, peli.isEstaActiva());
         return stmt;
     }
 
