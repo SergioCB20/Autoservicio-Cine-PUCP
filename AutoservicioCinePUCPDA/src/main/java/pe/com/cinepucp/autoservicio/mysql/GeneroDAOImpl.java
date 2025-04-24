@@ -51,7 +51,7 @@ public class GeneroDAOImpl extends BaseDAOImpl<Genero> implements IGeneroDAO{
 
     @Override
     protected PreparedStatement comandoListar(Connection conn) throws SQLException {
-         String sql = "{CALL sp_listar_genero()}";
+         String sql = "{CALL sp_listar_generos()}";
         return conn.prepareCall(sql);
     }
 
@@ -68,3 +68,4 @@ public class GeneroDAOImpl extends BaseDAOImpl<Genero> implements IGeneroDAO{
     
     
 }
+
