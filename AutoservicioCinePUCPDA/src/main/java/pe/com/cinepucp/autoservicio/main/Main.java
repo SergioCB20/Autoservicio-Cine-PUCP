@@ -18,10 +18,10 @@ import pe.com.cinepucp.autoservicio.main.cruds.PeliculaCRUD;
 public class Main {
 
     public static void main(String[] args) {
-        SalaCRUD.ejecutarCRUDSala();
-        AsientoCRUD.ejecutarCRUDAsiento();
-        
-        SesionCRUD.ejecutarCRUDSesion();
+        //SalaCRUD.ejecutarCRUDSala();
+        //AsientoCRUD.ejecutarCRUDAsiento();
+        //SesionCRUD.ejecutarCRUDSesion();
+        GeneroCRUD.ejecutarCRUDGenero();
         //CodigoVerificacionCRUD.ejecutarCRUDCodigoVerificacion(); 
    }
     
