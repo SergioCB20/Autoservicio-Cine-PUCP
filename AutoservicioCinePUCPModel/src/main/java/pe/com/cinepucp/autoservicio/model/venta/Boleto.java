@@ -4,12 +4,14 @@
  */
 package pe.com.cinepucp.autoservicio.model.venta;
 import java.math.BigDecimal;
+import java.util.List;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 /**
  *
  * @author Piero
  */
+
 public class Boleto {
 
     private int id;
@@ -18,7 +20,7 @@ public class Boleto {
     private BigDecimal precio;
     private String codigoQr;
     private boolean usado;
-    private Asiento asiento;
+    private List<Asiento> asientos;
     private Venta venta;
     
     public Boleto() {

@@ -1,7 +1,6 @@
 package pe.com.cinepucp.autoservicio.mysql;
 
 import java.sql.*;
-import java.time.LocalDate;
 import pe.com.cinepucp.autoservicio.dao.IUsuarioDAO;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 

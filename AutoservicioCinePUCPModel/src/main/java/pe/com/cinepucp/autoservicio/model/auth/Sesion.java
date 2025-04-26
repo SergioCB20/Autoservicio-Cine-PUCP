@@ -10,14 +10,14 @@ public class Sesion {
     private int id;
     private Usuario usuario;
     private String token;
-    private String metodoLogin;
+    private TipoSesion metodoLogin;
     private LocalDate fechaInicio;
     private LocalDate fechaExpiracion;
 
     public Sesion() {
     }
 
-    public Sesion(int id, String token, String metodoLogin, LocalDate fechaInicio, LocalDate fechaExpiracion) {
+    public Sesion(int id, String token, TipoSesion metodoLogin, LocalDate fechaInicio, LocalDate fechaExpiracion) {
         this.id = id;
         this.token = token;
         this.metodoLogin = metodoLogin;
@@ -25,7 +25,7 @@ public class Sesion {
         this.fechaExpiracion = fechaExpiracion;
     }
     
-    public Sesion(int id,Usuario usuario, String token, String metodoLogin, LocalDate fechaInicio, LocalDate fechaExpiracion) {
+    public Sesion(int id,Usuario usuario, String token, TipoSesion metodoLogin, LocalDate fechaInicio, LocalDate fechaExpiracion) {
         this.id = id;
         this.token = token;
         this.metodoLogin = metodoLogin;
@@ -50,11 +50,11 @@ public class Sesion {
         this.token = token;
     }
 
-    public String getMetodoLogin() {
+    public TipoSesion getMetodoLogin() {
         return metodoLogin;
     }
 
-    public void setMetodoLogin(String metodoLogin) {
+    public void setMetodoLogin(TipoSesion metodoLogin) {
         this.metodoLogin = metodoLogin;
     }
 
@@ -72,6 +72,20 @@ public class Sesion {
 
     public void setFechaExpiracion(LocalDate fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
      
 }

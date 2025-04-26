@@ -16,7 +16,8 @@ public class CuponDAOImpl extends BaseDAOImpl<Cupon> implements ICuponDAO{
         stmt.setString(3, modelo.getDescripcionEn());
         stmt.setString(4, modelo.getDescuentoTipo());
         stmt.setBigDecimal(5, modelo.getDescuentoValor());
-        stmt.setDate(6, Date.valueOf(modelo.getFechaInicio()));
+        stmt.setDate(6, Date
+                .valueOf(modelo.getFechaInicio()));
         stmt.setDate(7, Date.valueOf(modelo.getFechaFin()));
         stmt.setInt(8, modelo.getUsosActuales());
         return stmt;

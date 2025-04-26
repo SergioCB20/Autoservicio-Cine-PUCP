@@ -3,6 +3,7 @@ package pe.com.cinepucp.autoservicio.main.cruds;
 import java.time.LocalDate;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.model.auth.Sesion;
+import pe.com.cinepucp.autoservicio.model.auth.TipoSesion;
 //import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 import pe.com.cinepucp.autoservicio.mysql.SesionDAOImpl;
 //import pe.com.cinepucp.autoservicio.mysql.UsuarioDAOImpl;
@@ -32,7 +33,7 @@ public class SesionCRUD {
         // Crear un objeto Sesion de ejemplo
         Sesion nuevaSesion = new Sesion();
         nuevaSesion.setToken("ejemplo_token_" + System.currentTimeMillis()); // Usar timestamp para unicidad simple
-        nuevaSesion.setMetodoLogin("PASSWORD");
+        nuevaSesion.setMetodoLogin(TipoSesion.SMS);
         nuevaSesion.setFechaInicio(LocalDate.now());
         nuevaSesion.setFechaExpiracion(LocalDate.now().plusDays(7)); // Expira en 7 días
 
@@ -84,7 +85,7 @@ public class SesionCRUD {
     public static void actualizarSesion(SesionDAOImpl sesionDAO, int id) {
         Sesion sesion = buscarSesion(sesionDAO, id); 
         
-        sesion.setMetodoLogin("OAUTH");
+        sesion.setMetodoLogin(TipoSesion.SMS);
         sesion.setFechaExpiracion(LocalDate.now().plusDays(30));
 
         if (!sesionDAO.modificar(sesion)) { 

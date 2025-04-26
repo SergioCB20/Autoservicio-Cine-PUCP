@@ -1,6 +1,9 @@
 package pe.com.cinepucp.autoservicio.model.auth;
 
 import java.time.LocalDate;
+import java.util.List;
+import pe.com.cinepucp.autoservicio.model.venta.Cupon;
+import pe.com.cinepucp.autoservicio.model.venta.Venta;
 
 public class Usuario {
     private int id;
@@ -11,6 +14,11 @@ public class Usuario {
     private LocalDate fechaRegistro;
     private boolean estaActivo;
     private String idiomaPreferido;
+    private TipoUsuario tipoUsuario;
+    private List<Sesion> sesiones;
+    private List<Venta> compras;
+    private List<Cupon> cupones;
+    private List<LogSistema> logsUsuario;
 
     public Usuario() {
     }
@@ -88,6 +96,81 @@ public class Usuario {
 
     public void setIdiomaPreferido(String idiomaPreferido) {
         this.idiomaPreferido = idiomaPreferido;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    // Métodos para manipulación de sesiones
+    public void agregarSesion(Sesion sesion) {
+        this.sesiones.add(sesion);
+    }
+
+    public void eliminarSesion(Sesion sesion) {
+        this.sesiones.remove(sesion);
+    }
+
+    public boolean tieneSesiones() {
+        return !this.sesiones.isEmpty();
+    }
+
+    public List<Sesion> obtenerSesiones() {
+        return List.copyOf(this.sesiones); // Devuelve una copia inmutable
+    }
+
+    // Métodos para manipulación de compras
+    public void agregarCompra(Venta venta) {
+        this.compras.add(venta);
+    }
+
+    public void eliminarCompra(Venta venta) {
+        this.compras.remove(venta);
+    }
+
+    public boolean tieneCompras() {
+        return !this.compras.isEmpty();
+    }
+
+    public List<Venta> obtenerCompras() {
+        return List.copyOf(this.compras);
+    }
+
+    // Métodos para manipulación de cupones
+    public void agregarCupon(Cupon cupon) {
+        this.cupones.add(cupon);
+    }
+
+    public void eliminarCupon(Cupon cupon) {
+        this.cupones.remove(cupon);
+    }
+
+    public boolean tieneCupones() {
+        return !this.cupones.isEmpty();
+    }
+
+    public List<Cupon> obtenerCupones() {
+        return List.copyOf(this.cupones);
+    }
+
+    public void agregarLogUsuario(LogSistema log) {
+        this.logsUsuario.add(log);
+    }
+
+    public void eliminarLogUsuario(LogSistema log) {
+        this.logsUsuario.remove(log);
+    }
+
+    public boolean tieneLogsUsuario() {
+        return !this.logsUsuario.isEmpty();
+    }
+
+    public List<LogSistema> obtenerLogsUsuario() {
+        return List.copyOf(this.logsUsuario);
     }
 
     @Override

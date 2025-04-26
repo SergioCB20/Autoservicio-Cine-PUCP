@@ -2,8 +2,8 @@ package pe.com.cinepucp.autoservicio.mysql;
 
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IProductoDAO;
-import pe.com.cinepucp.autoservicio.model.venta.Producto;
-import pe.com.cinepucp.autoservicio.model.venta.TipoProducto;
+import pe.com.cinepucp.autoservicio.model.comida.Producto;
+import pe.com.cinepucp.autoservicio.model.comida.TipoProducto;
 
 public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoDAO {
 

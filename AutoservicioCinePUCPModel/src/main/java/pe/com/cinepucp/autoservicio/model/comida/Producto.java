@@ -1,6 +1,6 @@
 
 
-package pe.com.cinepucp.autoservicio.model.venta;
+package pe.com.cinepucp.autoservicio.model.comida;
 
 
 public class Producto {
