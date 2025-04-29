@@ -1,44 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pe.com.cinepucp.autoservicio.model.venta;
-import java.math.BigDecimal;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
-import pe.com.cinepucp.autoservicio.model.salas.Asiento;
-/**
- *
- * @author Piero
- */
 
 public class Boleto {
 
-    private int id;
-    private Funcion funcion;
-    private TipoBoleto tipo;
-    private BigDecimal precio;
-    private String codigoQr;
-    private boolean usado;
-    private List<Asiento> asientos;
+    private Integer boletoId;
     private Venta venta;
-    
+    private Funcion funcion;
+    private EstadoBoleto estado;
+    private List<BoletoDetalle> detalles = new ArrayList<>();
+
     public Boleto() {
     }
 
-    public Boleto(BigDecimal precio, String codigoQr, TipoBoleto tipo, boolean usado) {
-        this.precio = precio;
-        this.codigoQr = codigoQr;
-        this.tipo = tipo;
-        this.usado = usado;
-    }
-    
-    public int getId() {
-        return id;
+    public Boleto(Venta venta, Funcion funcion, EstadoBoleto estado, List<BoletoDetalle> detalles) {
+        this.venta = venta;
+        this.funcion = funcion;
+        this.estado = estado;
+        this.detalles = detalles;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Integer getBoletoId() {
+        return boletoId;
+    }
+
+    public void setBoletoId(Integer boletoId) {
+        this.boletoId = boletoId;
+    }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
     }
 
     public Funcion getFuncion() {
@@ -48,52 +47,12 @@ public class Boleto {
     public void setFuncion(Funcion funcion) {
         this.funcion = funcion;
     }
-    
-    public BigDecimal getPrecio() {
-        return precio;
+
+    public EstadoBoleto getEstado() {
+        return estado;
     }
 
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-
-    public String getCodigoQr() {
-        return codigoQr;
-    }
-
-    public void setCodigoQr(String codigoQr) {
-        this.codigoQr = codigoQr;
-    }
-
-    public boolean isUsado() {
-        return usado;
-    }
-
-    public void setUsado(boolean usado) {
-        this.usado = usado;
-    }
-
-    public TipoBoleto getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoBoleto tipo) {
-        this.tipo = tipo;
-    }
-    
-    public Asiento getAsiento() {
-        return asiento;
-    }
-
-    public void setAsiento(Asiento asiento) {
-        this.asiento = asiento;
-    }
-    
-    public Venta getVenta() {
-        return venta;
-    }
-
-    public void setVenta(Venta venta) {
-        this.venta = venta;
+    public void setEstado(EstadoBoleto estado) {
+        this.estado = estado;
     }
 }

@@ -1,32 +1,52 @@
 package pe.com.cinepucp.autoservicio.model.venta;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
 public class Venta {
-    private int id;
+    private Integer ventaId;
     private Usuario usuario;
-    
-
     private LocalDateTime fechaHora;
-    private BigDecimal subtotal;
-    private BigDecimal impuestos;
-    private BigDecimal total;
-    private String estado;
-    private String metodoPago;
+    private Double subtotal;
+    private Double impuestos;
+    private Double total;
+    private EstadoVenta estado;
+    private MetodoPago metodoPago;
     private String codigoQr;
+    private List<Boleto> boletos = new ArrayList<>();
+    private List<VentaProducto> productosVendidos = new ArrayList<>();
+    private List<Cupon> cuponesAplicados = new ArrayList<>();
 
-    private List<Boleto> boletos;
+    public Venta(){
 
-    public List<Boleto> getBoletos() {
-        return boletos;
     }
 
-    public void setBoletos(List<Boleto> boletos) {
+    public Venta(Usuario usuario, LocalDateTime fechaHora, Double subtotal, Double impuestos, Double total,
+            EstadoVenta estado, MetodoPago metodoPago, String codigoQr,
+            List<Boleto> boletos,List<VentaProducto> productosVendidos,
+            List<Cupon> cuponesAplicados) {
+        this.usuario= usuario;
+        this.fechaHora = fechaHora;
+        this.subtotal = subtotal;
+        this.impuestos = impuestos;
+        this.total = total;
+        this.estado = estado;
+        this.metodoPago = metodoPago;
+        this.codigoQr = codigoQr;
         this.boletos = boletos;
+        this.productosVendidos = productosVendidos;
+        this.cuponesAplicados = cuponesAplicados;
+    }
+
+    public Integer getVentaId() {
+        return ventaId;
+    }
+
+    public void setVentaId(Integer ventaId) {
+        this.ventaId = ventaId;
     }
 
     public Usuario getUsuario() {
@@ -35,14 +55,6 @@ public class Venta {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public LocalDateTime getFechaHora() {
@@ -53,43 +65,43 @@ public class Venta {
         this.fechaHora = fechaHora;
     }
 
-    public BigDecimal getSubtotal() {
+    public Double getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(BigDecimal subtotal) {
+    public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
 
-    public BigDecimal getImpuestos() {
+    public Double getImpuestos() {
         return impuestos;
     }
 
-    public void setImpuestos(BigDecimal impuestos) {
+    public void setImpuestos(Double impuestos) {
         this.impuestos = impuestos;
     }
 
-    public BigDecimal getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
-    public String getEstado() {
+    public EstadoVenta getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoVenta estado) {
         this.estado = estado;
     }
 
-    public String getMetodoPago() {
+    public MetodoPago getMetodoPago() {
         return metodoPago;
     }
 
-    public void setMetodoPago(String metodoPago) {
+    public void setMetodoPago(MetodoPago metodoPago) {
         this.metodoPago = metodoPago;
     }
 
@@ -100,23 +112,4 @@ public class Venta {
     public void setCodigoQr(String codigoQr) {
         this.codigoQr = codigoQr;
     }
-
-    public Venta(){
-
-    }
-
-    public Venta(int id, LocalDateTime fechaHora, BigDecimal subtotal, BigDecimal impuestos, BigDecimal total,
-            String estado, String metodoPago, String codigoQr) {
-        this.id = id;
-        this.fechaHora = fechaHora;
-        this.subtotal = subtotal;
-        this.impuestos = impuestos;
-        this.total = total;
-        this.estado = estado;
-        this.metodoPago = metodoPago;
-        this.codigoQr = codigoQr;
-    }
-
-    
-
 }

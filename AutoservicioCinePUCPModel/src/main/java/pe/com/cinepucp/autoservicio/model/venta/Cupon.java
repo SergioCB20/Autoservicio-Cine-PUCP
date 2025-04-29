@@ -1,27 +1,34 @@
 package pe.com.cinepucp.autoservicio.model.venta;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
 public class Cupon {
-    private int id;
+    
+    private Integer cuponId;
     private String codigo;
     private String descripcionEs;
     private String descripcionEn;
-    private String descuentoTipo;
-    private BigDecimal descuentoValor;
+    private TipoDescuento descuentoTipo;
+    private Double descuentoValor;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private Integer maxUsos;
-    private int usosActuales;
+    private Integer usosActuales;
     private Usuario creadoPor;
+    private List<Usuario> usuarios = new ArrayList<>(); // Usuarios que tienen este cupón
+    private List<Venta> ventas = new ArrayList<>(); // Ventas donde se aplicó este cupón
 
-    public Cupon(int id, String codigo, String descripcionEs, String descripcionEn, String descuentoTipo,
-            BigDecimal descuentoValor, LocalDate fechaInicio, LocalDate fechaFin, Integer maxUsos, int usosActuales,
+    public Cupon(){
+
+    }
+    
+    public Cupon(String codigo, String descripcionEs, String descripcionEn, TipoDescuento descuentoTipo,
+            Double descuentoValor, LocalDate fechaInicio, LocalDate fechaFin, Integer maxUsos, Integer usosActuales,
             Usuario creadoPor) {
-        this.id = id;
         this.codigo = codigo;
         this.descripcionEs = descripcionEs;
         this.descripcionEn = descripcionEn;
@@ -34,20 +41,12 @@ public class Cupon {
         this.creadoPor = creadoPor;
     }
 
-    public Usuario getCreadoPor() {
-        return creadoPor;
+    public Integer getCuponId() {
+        return cuponId;
     }
 
-    public void setCreadoPor(Usuario creadoPor) {
-        this.creadoPor = creadoPor;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setCuponId(Integer cuponId) {
+        this.cuponId = cuponId;
     }
 
     public String getCodigo() {
@@ -74,19 +73,19 @@ public class Cupon {
         this.descripcionEn = descripcionEn;
     }
 
-    public String getDescuentoTipo() {
+    public TipoDescuento getDescuentoTipo() {
         return descuentoTipo;
     }
 
-    public void setDescuentoTipo(String descuentoTipo) {
+    public void setDescuentoTipo(TipoDescuento descuentoTipo) {
         this.descuentoTipo = descuentoTipo;
     }
 
-    public BigDecimal getDescuentoValor() {
+    public Double getDescuentoValor() {
         return descuentoValor;
     }
 
-    public void setDescuentoValor(BigDecimal descuentoValor) {
+    public void setDescuentoValor(Double descuentoValor) {
         this.descuentoValor = descuentoValor;
     }
 
@@ -114,18 +113,20 @@ public class Cupon {
         this.maxUsos = maxUsos;
     }
 
-    public int getUsosActuales() {
+    public Integer getUsosActuales() {
         return usosActuales;
     }
 
-    public void setUsosActuales(int usosActuales) {
+    public void setUsosActuales(Integer usosActuales) {
         this.usosActuales = usosActuales;
     }
 
-    public Cupon(){
+    public Usuario getCreadoPor() {
+        return creadoPor;
+    }
 
+    public void setCreadoPor(Usuario creadoPor) {
+        this.creadoPor = creadoPor;
     }
     
-
-
 }

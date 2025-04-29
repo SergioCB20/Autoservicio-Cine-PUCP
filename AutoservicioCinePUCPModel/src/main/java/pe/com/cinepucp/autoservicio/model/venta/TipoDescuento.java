@@ -1,12 +1,11 @@
 package pe.com.cinepucp.autoservicio.model.venta;
 
-public enum TipoBoleto {
-    NIÑO("niño"),
-    ADULTO("adulto"),
-    ADULTO_MAYOR("adulto_mayor");
+public enum TipoDescuento {
+    PORCENTAJE("porcentaje"),
+    MONTO_FIJO("monto_fijo");
     private final String descripcion;
 
-    TipoBoleto(String descripcion) {
+    TipoDescuento(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -15,13 +14,12 @@ public enum TipoBoleto {
     }
     
     // Método para convertir String a enum
-    public static TipoBoleto fromString(String text) {
-        for (TipoBoleto tipo : TipoBoleto.values()) {
+    public static TipoDescuento fromString(String text) {
+        for (TipoDescuento tipo : TipoDescuento.values()) {
             if (tipo.descripcion.equalsIgnoreCase(text)) {
                 return tipo;
             }
         }
-        throw new IllegalArgumentException("Tipo de boleto no válido: " + text);
+        throw new IllegalArgumentException("Tipo de descuento no válido: " + text);
     }
-    
 }

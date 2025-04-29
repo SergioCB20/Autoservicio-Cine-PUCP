@@ -8,36 +8,41 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import pe.com.cinepucp.autoservicio.dao.IVentaDAO;
+import pe.com.cinepucp.autoservicio.model.auth.Usuario;
+import pe.com.cinepucp.autoservicio.model.venta.EstadoVenta;
+import pe.com.cinepucp.autoservicio.model.venta.MetodoPago;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
 
 public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
 
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Venta modelo) throws SQLException {
-        String sql = "{CALL sp_insertar_venta(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL sp_insertar_venta(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
-        stmt.setTimestamp(1,Timestamp.valueOf(modelo.getFechaHora()) );
-        stmt.setBigDecimal(2, modelo.getSubtotal());
-        stmt.setBigDecimal(3, modelo.getImpuestos());
-        stmt.setBigDecimal(4, modelo.getTotal());
-        stmt.setString(5, modelo.getEstado());
-        stmt.setString(6, modelo.getMetodoPago());
-        stmt.setString(7, modelo.getCodigoQr());
+        stmt.setInt(1, modelo.getUsuario().getId());
+        stmt.setTimestamp(2,Timestamp.valueOf(modelo.getFechaHora()));
+        stmt.setDouble(3, modelo.getSubtotal());
+        stmt.setDouble(4, modelo.getImpuestos());
+        stmt.setDouble(5, modelo.getTotal());
+        stmt.setString(6, modelo.getEstado().getDescripcion());
+        stmt.setString(7, modelo.getMetodoPago().getDescripcion());
+        stmt.setString(8, modelo.getCodigoQr());
         return stmt;
     }
 
     @Override
     protected PreparedStatement comandoModificar(Connection conn, Venta modelo) throws SQLException {
-        String sql = "{CALL sp_insertar_venta(?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL sp_insertar_venta(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
-        stmt.setInt(1, modelo.getId());
-        stmt.setTimestamp(2,Timestamp.valueOf(modelo.getFechaHora()) );
-        stmt.setBigDecimal(3, modelo.getSubtotal());
-        stmt.setBigDecimal(4, modelo.getImpuestos());
-        stmt.setBigDecimal(5, modelo.getTotal());
-        stmt.setString(6, modelo.getEstado());
-        stmt.setString(7, modelo.getMetodoPago());
-        stmt.setString(8, modelo.getCodigoQr());
+        stmt.setInt(1, modelo.getVentaId());
+        stmt.setInt(2, modelo.getUsuario().getId());
+        stmt.setTimestamp(3,Timestamp.valueOf(modelo.getFechaHora()));
+        stmt.setDouble(4, modelo.getSubtotal());
+        stmt.setDouble(5, modelo.getImpuestos());
+        stmt.setDouble(6, modelo.getTotal());
+        stmt.setString(7, modelo.getEstado().getDescripcion());
+        stmt.setString(8, modelo.getMetodoPago().getDescripcion());
+        stmt.setString(9, modelo.getCodigoQr());
         return stmt;
     }
 
@@ -66,13 +71,18 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
     @Override
     protected Venta mapearModelo(ResultSet rs) throws SQLException {
         Venta venta = new Venta();
-        venta.setId(rs.getInt("id"));
+        venta.setVentaId(rs.getInt("venta_id"));
+        
+        Usuario usuario = new Usuario();
+        usuario.setId(rs.getInt("usuario_id"));
+        venta.setUsuario(usuario);
+        
         venta.setFechaHora(rs.getTimestamp("fecha_hora").toLocalDateTime());
-        venta.setSubtotal(rs.getBigDecimal("subtotal"));
-        venta.setImpuestos(rs.getBigDecimal("impuestos"));
-        venta.setTotal(rs.getBigDecimal("total"));
-        venta.setEstado(rs.getString("estado"));
-        venta.setMetodoPago(rs.getString("metodo_pago"));
+        venta.setSubtotal(rs.getDouble("subtotal"));
+        venta.setImpuestos(rs.getDouble("impuestos"));
+        venta.setTotal(rs.getDouble("total"));
+        venta.setEstado(EstadoVenta.fromString(rs.getString("estado")));
+        venta.setMetodoPago(MetodoPago.fromString(rs.getString("metodo_pago")));
         venta.setCodigoQr(rs.getString("codigo_qr"));
         return venta;
     }
