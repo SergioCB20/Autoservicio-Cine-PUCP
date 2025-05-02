@@ -26,10 +26,10 @@ public class VentaCRUD {
 
     private static int crearVentaEjm(VentaDAOImpl ventaDAO){
          Venta nuevaventa = new Venta();
-         nuevaventa.setSubtotal(new BigDecimal("100.00"));
-         nuevaventa.setImpuestos( new BigDecimal("15.00"));
+        // nuevaventa.setSubtotal(new BigDecimal("100.00"));
+        // nuevaventa.setImpuestos( new BigDecimal("15.00"));
          nuevaventa.setFechaHora(LocalDateTime.now());
-         nuevaventa.setTotal();
+        // nuevaventa.setTotal();
 
         return insertarVenta(ventaDAO,nuevaventa);
 

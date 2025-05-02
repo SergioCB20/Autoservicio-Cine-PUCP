@@ -14,6 +14,7 @@ public class Asiento {
     private char fila;
     private int numero;
     private TipoAsiento tipo;
+    private boolean activo  = true;
 
     public Asiento() {
     }
@@ -70,7 +71,16 @@ public class Asiento {
     public void setTipo(TipoAsiento tipo) {
         this.tipo = tipo;
     }
+    
+    public boolean isActivo() {
+        return activo;
+    }
 
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    
     @Override
     public String toString() {
         return "Asiento{" +
@@ -79,6 +89,7 @@ public class Asiento {
                 ", fila=" + fila +
                 ", numero=" + numero +
                 ", tipo='" + tipo + '\'' +
+                ", activo=" + activo +
                 '}';
     }
 }

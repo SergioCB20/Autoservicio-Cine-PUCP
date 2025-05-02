@@ -58,12 +58,7 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             PreparedStatement cmd = this.comandoModificar(conn, modelo);
         ) {
             
-            try (ResultSet rs = cmd.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0; 
-                }
-                return false;
-            }
+            return cmd.executeUpdate() >= 1;
         }
         catch (SQLException e) {
             System.err.println("Error SQL durante la modificación: " + e.getMessage());
@@ -82,12 +77,7 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             PreparedStatement cmd = this.comandoEliminar(conn, id);
         ) {
             
-            try (ResultSet rs = cmd.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0;
-                }
-                return false;
-            }
+           return cmd.executeUpdate() >= 1;
         }
         catch (SQLException e) {
             System.err.println("Error SQL durante la eliminación: " + e.getMessage());

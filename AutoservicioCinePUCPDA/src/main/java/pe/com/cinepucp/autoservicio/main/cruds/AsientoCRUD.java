@@ -34,12 +34,12 @@ public class AsientoCRUD {
 
     private static int crearAsientoEjemplo(AsientoDAOImpl asientoDAO) {
         SalaDAOImpl salaDAO = new SalaDAOImpl();
-        Sala sala = salaDAO.buscar(1);
+        Sala sala = salaDAO.buscar(3);
         
         Asiento nuevoAsiento = new Asiento();
         nuevoAsiento.setSala(sala);
         nuevoAsiento.setFila('A');
-        nuevoAsiento.setNumero(1);
+        nuevoAsiento.setNumero(2);
         nuevoAsiento.setTipo(TipoAsiento.NORMAL);
         
         return insertarAsiento(asientoDAO, nuevoAsiento);

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pe.com.cinepucp.autoservicio.model.salas;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -10,13 +11,14 @@ import java.util.ArrayList;
  *
  * @author Sergio
  */
-
 public class Sala {
+
     private int id;
     private String nombre;
     private int capacidad;
     private TipoSala tipoSala;
     private List<Asiento> asientos;
+    private boolean activa = true;
 
     public Sala() {
     }
@@ -25,7 +27,7 @@ public class Sala {
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.tipoSala = tipoSala;
-	this.asientos = new ArrayList<>();
+        this.asientos = new ArrayList<>();
     }
 
     public Sala(String nombre, int capacidad, TipoSala tipoSala, List<Asiento> asientos) {
@@ -75,14 +77,23 @@ public class Sala {
         this.asientos = asientos;
     }
 
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
     @Override
     public String toString() {
-        return "Sala{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", capacidad=" + capacidad +
-                ", tipoSala='" + tipoSala + '\'' +
-                ", asientos=" + asientos +
-                '}';
+        return "Sala{"
+                + "id=" + id
+                + ", nombre='" + nombre + '\''
+                + ", capacidad=" + capacidad
+                + ", tipoSala=" + tipoSala
+                + ", asientos=" + asientos
+                + ", activa=" + activa
+                + '}';
     }
 }

@@ -30,12 +30,12 @@ public class CuponCRUD {
         nuevoCupon.setCodigo("DESCUENTO20");
         nuevoCupon.setDescripcionEs("Descuento del 20% en tu compra");
         nuevoCupon.setDescripcionEn("20% discount on your purchase");
-        nuevoCupon.setDescuentoTipo("PORCENTAJE");
+       // nuevoCupon.setDescuentoTipo("PORCENTAJE");
         nuevoCupon.setFechaInicio(LocalDate.now());
         nuevoCupon.setFechaFin(LocalDate.now());
         nuevoCupon.setMaxUsos(100);
         nuevoCupon.setCreadoPor(new Usuario());
-        nuevoCupon.setDescuentoValor(new BigDecimal("0.20"));
+        //nuevoCupon.setDescuentoValor(new BigDecimal("0.20"));
         
         return insertarCupon(cuponDAO, nuevoCupon);
     }
