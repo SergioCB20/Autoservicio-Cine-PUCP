@@ -6,7 +6,6 @@ import pe.com.cinepucp.autoservicio.model.venta.Boleto;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
 import pe.com.cinepucp.autoservicio.model.venta.EstadoBoleto;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
-import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.dao.IBoletoDAO;
 
 public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
@@ -69,7 +68,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         venta.setVentaId(rs.getInt("venta_id"));
         boleto.setVenta(venta);
         
-        boleto.setEstado(EstadoBoleto.fromString(rs.getString("tipo")));
+        boleto.setEstado(EstadoBoleto.fromString(rs.getString("estado")));
         
         return boleto;
     }
