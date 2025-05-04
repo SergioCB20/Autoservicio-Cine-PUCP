@@ -1,7 +1,10 @@
 package pe.com.cinepucp.autoservicio.main.cruds;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
-import pe.com.cinepucp.autoservicio.main.mysql.PeliculaDAOImpl;
+import pe.com.cinepucp.autoservicio.mysql.PeliculaDAOImpl;
+import java.time.LocalDateTime;
+
+
 public class PeliculaCRUD {
     public static void ejecutarCRUDPelicula() {
         System.out.println("\n=== INICIO CRUD PELÍCULA ===");
@@ -28,6 +31,8 @@ public class PeliculaCRUD {
         pelicula.setSinopsisEn("A hacker discovers the truth behind his reality.");
         pelicula.setImagenUrl("https://example.com/matrix.jpg");
         pelicula.setEstaActiva(true);
+        pelicula.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 14, 30));
+        pelicula.setUsuarioModificacion(1);
         return insertarPelicula(peliculaDAO, pelicula);
     }
 
@@ -67,7 +72,13 @@ public class PeliculaCRUD {
         pelicula.setTituloEn("The Matrix Reloaded");
         pelicula.setDuracionMin(138);
         pelicula.setClasificacion("R");
-
+        pelicula.setSinopsisEs("Un hacker descubre la verdad detrás de su realidad.");
+        pelicula.setSinopsisEn("A hacker discovers the truth behind his reality.");
+        pelicula.setImagenUrl("https://example.com/matrix.jpg");
+        pelicula.setEstaActiva(true);
+        pelicula.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 14, 30));
+        pelicula.setUsuarioModificacion(1);
+        
         if (!peliculaDAO.modificar(pelicula)) {
             throw new RuntimeException("Error al actualizar la película con ID: " + id);
         }
