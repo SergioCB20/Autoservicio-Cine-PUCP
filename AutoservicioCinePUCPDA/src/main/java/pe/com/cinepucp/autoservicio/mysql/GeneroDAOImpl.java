@@ -26,7 +26,7 @@ public class GeneroDAOImpl extends BaseDAOImpl<Genero> implements IGeneroDAO{
     protected PreparedStatement comandoModificar(Connection conn, Genero genero) throws SQLException {
         String sql = "{CALL sp_actualizar_genero(?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
-        stmt.setInt(1, genero.getId());
+        stmt.setInt(1, genero.getGeneroId());
         stmt.setString(2, genero.getNombreEs());
         stmt.setString(3, genero.getNombreEn());
 
@@ -58,7 +58,7 @@ public class GeneroDAOImpl extends BaseDAOImpl<Genero> implements IGeneroDAO{
     @Override
     protected Genero mapearModelo(ResultSet rs) throws SQLException {
         Genero genero = new Genero();
-        genero.setId(rs.getInt("genero_id"));
+        genero.setGeneroId(rs.getInt("genero_id"));
         
         genero.setNombreEs(rs.getString("nombre_es"));
         genero.setNombreEn(rs.getString("nombre_en"));
@@ -68,4 +68,5 @@ public class GeneroDAOImpl extends BaseDAOImpl<Genero> implements IGeneroDAO{
     
     
 }
+
 
