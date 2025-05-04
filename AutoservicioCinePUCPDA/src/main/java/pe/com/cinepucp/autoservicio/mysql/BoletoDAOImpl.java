@@ -15,7 +15,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         String sql = "{CALL sp_insertar_boleto(?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, boleto.getVenta().getVentaId());
-        stmt.setInt(2, boleto.getFuncion().getId());
+        stmt.setInt(2, boleto.getFuncion().getFuncionId());
         stmt.setString(3, boleto.getEstado().getDescripcion());
         return stmt;
     }
@@ -26,7 +26,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, boleto.getBoletoId());
         stmt.setInt(2, boleto.getVenta().getVentaId());
-        stmt.setInt(3, boleto.getFuncion().getId());
+        stmt.setInt(3, boleto.getFuncion().getFuncionId());
         stmt.setString(4, boleto.getEstado().getDescripcion());
         return stmt;
     }
@@ -60,7 +60,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
         
         // Mapear la función asociada
         Funcion funcion = new Funcion();
-        funcion.setId(rs.getInt("funcion_id"));;
+        funcion.setFuncionId(rs.getInt("funcion_id"));;
         boleto.setFuncion(funcion);
         
         // Mapear la venta asociada

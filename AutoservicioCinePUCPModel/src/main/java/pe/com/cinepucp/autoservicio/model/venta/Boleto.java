@@ -55,4 +55,14 @@ public class Boleto {
     public void setEstado(EstadoBoleto estado) {
         this.estado = estado;
     }
+    
+    @Override
+    public String toString() {
+        return "Boleto{" +
+                "id=" + boletoId +
+                ", venta_id='" + (venta != null ? venta.getVentaId() : "null") + '\'' +
+                ", funcion_id=" + (funcion != null ? funcion.getFuncionId() : "null") +
+                ", estado='" + estado +
+                '}';
+    }
 }

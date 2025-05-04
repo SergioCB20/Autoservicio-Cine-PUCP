@@ -31,7 +31,7 @@ public class BoletoCRUD {
         venta.setVentaId(1);
         
         Funcion funcion = new Funcion();
-        funcion.setId(1);
+        funcion.setFuncionId(3);
         
         Boleto nuevoBoleto = new Boleto();
         
@@ -74,7 +74,7 @@ public class BoletoCRUD {
 
     public static void actualizarBoleto(IBoletoDAO boletoDAO, int id) {
         Boleto boleto = buscarBoleto(boletoDAO, id);
-        boleto.setEstado(EstadoBoleto.USADO);
+        boleto.setEstado(EstadoBoleto.ANULADO);
         
         if (!boletoDAO.modificar(boleto)) {
             throw new RuntimeException("Error al actualizar el boleto con ID: " + id);
