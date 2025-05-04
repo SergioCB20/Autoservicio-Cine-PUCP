@@ -5,8 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import pe.com.cinepucp.autoservicio.model.auth.Usuario;
+import pe.com.cinepucp.autoservicio.model.venta.EstadoVenta;
+import pe.com.cinepucp.autoservicio.model.venta.MetodoPago;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
+import pe.com.cinepucp.autoservicio.mysql.UsuarioDAOImpl;
 import pe.com.cinepucp.autoservicio.mysql.VentaDAOImpl;
+
 
 public class VentaCRUD {
     public static void ejecutarCRUDVenta(){
@@ -26,11 +31,17 @@ public class VentaCRUD {
 
     private static int crearVentaEjm(VentaDAOImpl ventaDAO){
          Venta nuevaventa = new Venta();
-        // nuevaventa.setSubtotal(new BigDecimal("100.00"));
-        // nuevaventa.setImpuestos( new BigDecimal("15.00"));
+         
+         Usuario usuario = new Usuario();
+         usuario.setId(15);
+         
          nuevaventa.setFechaHora(LocalDateTime.now());
-        // nuevaventa.setTotal();
-
+         nuevaventa.setUsuario(usuario);
+         nuevaventa.setSubtotal(24.3);
+         nuevaventa.setImpuestos(4.3);
+         nuevaventa.setTotal(44.3);
+         nuevaventa.setEstado(EstadoVenta.PENDIENTE);
+         nuevaventa.setMetodoPago(MetodoPago.TARJETA);
         return insertarVenta(ventaDAO,nuevaventa);
 
     }

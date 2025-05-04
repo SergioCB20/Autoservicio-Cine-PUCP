@@ -15,11 +15,27 @@ public class Venta {
     private Double total;
     private EstadoVenta estado;
     private MetodoPago metodoPago;
-    private String codigoQr;
     private List<Boleto> boletos = new ArrayList<>();
     private List<VentaProducto> productosVendidos = new ArrayList<>();
     private List<Cupon> cuponesAplicados = new ArrayList<>();
-
+    
+    @Override
+public String toString() {
+    return "Venta{" +
+           "ventaId=" + ventaId +
+           ", usuario=" + (usuario != null ? usuario.getId(): null) + // Mostrar ID del usuario
+           ", fechaHora=" + fechaHora +
+           ", subtotal=" + subtotal +
+           ", impuestos=" + impuestos +
+           ", total=" + total +
+           ", estado=" + estado +
+           ", metodoPago=" + metodoPago +
+           ", boletos=" + (boletos != null ? boletos.size() : 0) + " boletos" +
+           ", productosVendidos=" + (productosVendidos != null ? productosVendidos.size() : 0) + " productos" +
+           ", cuponesAplicados=" + (cuponesAplicados != null ? cuponesAplicados.size() : 0) + " cupones" +
+           '}';
+}
+    
     public Venta(){
 
     }
@@ -35,7 +51,6 @@ public class Venta {
         this.total = total;
         this.estado = estado;
         this.metodoPago = metodoPago;
-        this.codigoQr = codigoQr;
         this.boletos = boletos;
         this.productosVendidos = productosVendidos;
         this.cuponesAplicados = cuponesAplicados;
@@ -105,11 +120,5 @@ public class Venta {
         this.metodoPago = metodoPago;
     }
 
-    public String getCodigoQr() {
-        return codigoQr;
-    }
-
-    public void setCodigoQr(String codigoQr) {
-        this.codigoQr = codigoQr;
-    }
+ 
 }

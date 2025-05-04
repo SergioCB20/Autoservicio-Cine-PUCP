@@ -7,6 +7,8 @@ import java.util.List;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 import pe.com.cinepucp.autoservicio.model.venta.Cupon;
 import pe.com.cinepucp.autoservicio.mysql.CuponDAOImpl;
+import pe.com.cinepucp.autoservicio.model.venta.TipoDescuento;
+import pe.com.cinepucp.autoservicio.mysql.UsuarioDAOImpl;
 
 public class CuponCRUD {
 
@@ -27,15 +29,19 @@ public class CuponCRUD {
 
     private static int crearCuponEjm(CuponDAOImpl cuponDAO){
         Cupon nuevoCupon = new Cupon();
-        nuevoCupon.setCodigo("DESCUENTO20");
+        nuevoCupon.setCodigo("DESCUENTO25");
         nuevoCupon.setDescripcionEs("Descuento del 20% en tu compra");
         nuevoCupon.setDescripcionEn("20% discount on your purchase");
-       // nuevoCupon.setDescuentoTipo("PORCENTAJE");
+        nuevoCupon.setDescuentoTipo(TipoDescuento.PORCENTAJE);
         nuevoCupon.setFechaInicio(LocalDate.now());
         nuevoCupon.setFechaFin(LocalDate.now());
         nuevoCupon.setMaxUsos(100);
-        nuevoCupon.setCreadoPor(new Usuario());
-        //nuevoCupon.setDescuentoValor(new BigDecimal("0.20"));
+        Usuario usuario = new Usuario();
+        usuario.setId(15); 
+        nuevoCupon.setCreadoPor(usuario);
+        nuevoCupon.setDescuentoValor(20.00);
+        nuevoCupon.setUsosActuales(0);
+        nuevoCupon.setFechaModificacion(LocalDate.now());
         
         return insertarCupon(cuponDAO, nuevoCupon);
     }

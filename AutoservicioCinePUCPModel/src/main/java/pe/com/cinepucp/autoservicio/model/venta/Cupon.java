@@ -7,6 +7,7 @@ import java.util.List;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
 public class Cupon {
+
     
     private Integer cuponId;
     private String codigo;
@@ -19,8 +20,26 @@ public class Cupon {
     private Integer maxUsos;
     private Integer usosActuales;
     private Usuario creadoPor;
+    private LocalDate fechaModificacion;
     private List<Usuario> usuarios = new ArrayList<>(); // Usuarios que tienen este cupón
     private List<Venta> ventas = new ArrayList<>(); // Ventas donde se aplicó este cupón
+    
+    @Override
+public String toString() {
+    return "Cupon{" +
+            "cuponId=" + cuponId +
+            ", codigo='" + codigo + '\'' +
+            ", descripcionEs='" + descripcionEs + '\'' +
+            ", descripcionEn='" + descripcionEn + '\'' +
+            ", descuentoTipo=" + (descuentoTipo != null ? descuentoTipo.getDescripcion() : "null") +
+            ", descuentoValor=" + descuentoValor +
+            ", fechaInicio=" + fechaInicio +
+            ", fechaFin=" + fechaFin +
+            ", maxUsos=" + maxUsos +
+            ", usosActuales=" + usosActuales +
+            ", creadoPor=" + (creadoPor != null ? creadoPor.getId() : "null") +
+            '}';
+}
 
     public Cupon(){
 
@@ -40,7 +59,22 @@ public class Cupon {
         this.usosActuales = usosActuales;
         this.creadoPor = creadoPor;
     }
+    
+    
+    /**
+     * @return the fechaModificacion
+     */
+    public LocalDate getFechaModificacion() {
+        return fechaModificacion;
+    }
 
+    /**
+     * @param fechaModificacion the fechaModificacion to set
+     */
+    public void setFechaModificacion(LocalDate fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+    
     public Integer getCuponId() {
         return cuponId;
     }
