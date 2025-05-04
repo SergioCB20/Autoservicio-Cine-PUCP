@@ -39,7 +39,7 @@ public class AsientoCRUD {
         Asiento nuevoAsiento = new Asiento();
         nuevoAsiento.setSala(sala);
         nuevoAsiento.setFila('A');
-        nuevoAsiento.setNumero(2);
+        nuevoAsiento.setNumero(4);
         nuevoAsiento.setTipo(TipoAsiento.NORMAL);
         
         return insertarAsiento(asientoDAO, nuevoAsiento);
