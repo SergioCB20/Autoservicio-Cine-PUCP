@@ -1,10 +1,12 @@
-
 package pe.com.cinepucp.autoservicio.model.Peliculas;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Genero {
-    private int id;
+    private Integer generoId;
     private String nombreEs;
     private String nombreEn;
+    private List<Pelicula> peliculas = new ArrayList<>();
     
     public Genero(){        
     }
@@ -17,15 +19,25 @@ public class Genero {
     /**
      * @return the id
      */
-    public int getId() {
-        return id;
+   
+    @Override
+    public String toString(){
+        return "Genero{"+"id="+getGeneroId()+",nombreEs="+getNombreEs()+'\''+
+                ",nombreEn"+getNombreEn()+'}';
     }
 
     /**
-     * @param id the id to set
+     * @return the generoId
      */
-    public void setId(int id) {
-        this.id = id;
+    public Integer getGeneroId() {
+        return generoId;
+    }
+
+    /**
+     * @param generoId the generoId to set
+     */
+    public void setGeneroId(Integer generoId) {
+        this.generoId = generoId;
     }
 
     /**
@@ -55,10 +67,19 @@ public class Genero {
     public void setNombreEn(String nombreEn) {
         this.nombreEn = nombreEn;
     }
-    @Override
-    public String toString(){
-        return "Genero{"+"id="+id+",nombreEs="+nombreEs+'\''+
-                ",nombreEn"+nombreEn+'}';
+
+    /**
+     * @return the peliculas
+     */
+    public List<Pelicula> getPeliculas() {
+        return peliculas;
+    }
+
+    /**
+     * @param peliculas the peliculas to set
+     */
+    public void setPeliculas(List<Pelicula> peliculas) {
+        this.peliculas = peliculas;
     }
     
     
