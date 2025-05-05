@@ -12,7 +12,7 @@ public class CodigoVerificacionDAOImpl extends BaseDAOImpl<CodigoVerificacion> i
     
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, CodigoVerificacion codigoVerificacion) throws SQLException {
-        String sql = "{ CALL sp_insertar_codigoVerificacion(?, ?, ?, ?, ?) }";
+        String sql = "{ CALL sp_insertar_codigoVerificacion(?, ?, ?, ?, ?, ?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, codigoVerificacion.getTelefono());
         stmt.setString(2, codigoVerificacion.getCodigo());
@@ -31,7 +31,7 @@ public class CodigoVerificacionDAOImpl extends BaseDAOImpl<CodigoVerificacion> i
     
     @Override
     protected PreparedStatement comandoModificar(Connection conn, CodigoVerificacion codigoVerificacion) throws SQLException {
-        String sql = "{ CALL sp_modificar_codigoVerificacion(?, ?, ?, ?, ?, ?) }";
+        String sql = "{ CALL sp_actualizar_codigoVerificacion(?, ?, ?, ?, ?, ?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, codigoVerificacion.getId());
         stmt.setString(2, codigoVerificacion.getTelefono());

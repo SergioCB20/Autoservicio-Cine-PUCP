@@ -12,6 +12,7 @@ import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
  * @author Sergio
  */
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,24 +24,24 @@ public class LogSistemaDAOImpl extends BaseDAOImpl<LogSistema> implements ILogSi
     
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, LogSistema modelo) throws SQLException {
-        String sql = "{CALL sp_insertar_log_sistema(?, ?, ?, ?)}";
+        String sql = "{CALL sp_insertar_log_sistema(?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
-        stmt.setString(1, modelo.getAccion());
-        stmt.setString(2, convertirListaAString(modelo.getTablesAfectadas()));
+        stmt.setInt(1, modelo.getUsuario().getId());
+        stmt.setString(2, modelo.getAccion());
         stmt.setDate(3, Date.valueOf(modelo.getFecha()));
-        stmt.setInt(4, modelo.getUsuario().getId());
+        
         return stmt;
     }
 
     @Override
     protected PreparedStatement comandoModificar(Connection conn, LogSistema modelo) throws SQLException {
-        String sql = "{CALL sp_modificar_log_sistema(?, ?, ?, ?, ?)}";
+        String sql = "{CALL sp_actualizar_log_sistema(?, ?, ?, ? )}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, modelo.getId());
-        stmt.setString(2, modelo.getAccion());
-        stmt.setString(3, convertirListaAString(modelo.getTablesAfectadas()));
+        stmt.setInt(2, modelo.getUsuario().getId());
+        stmt.setString(3, modelo.getAccion());
         stmt.setDate(4, Date.valueOf(modelo.getFecha()));
-        stmt.setInt(5, modelo.getUsuario().getId());
+        
         return stmt;
     }
 
@@ -69,18 +70,11 @@ public class LogSistemaDAOImpl extends BaseDAOImpl<LogSistema> implements ILogSi
     @Override
     protected LogSistema mapearModelo(ResultSet rs) throws SQLException {
         LogSistema log = new LogSistema();
-        log.setId(rs.getInt("id"));
+        log.setId(rs.getInt("log_id"));
         log.setAccion(rs.getString("accion"));
         
-        // Convertir el VARCHAR a List<String>
-        String tablasStr = rs.getString("tables_afectadas");
-        if (tablasStr != null && !tablasStr.isEmpty()) {
-            log.setTablesAfectadas(convertirStringALista(tablasStr));
-        } else {
-            log.setTablesAfectadas(new ArrayList<>());
-        }
         
-        log.setFecha(rs.getDate("fecha").toLocalDate());
+        log.setFecha(rs.getDate("fecha_hora").toLocalDate());
         
         Usuario usuario = new Usuario();
         usuario.setId(rs.getInt("usuario_id"));

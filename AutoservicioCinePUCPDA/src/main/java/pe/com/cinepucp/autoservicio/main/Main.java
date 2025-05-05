@@ -14,16 +14,20 @@ import pe.com.cinepucp.autoservicio.main.cruds.SesionCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.CodigoVerificacionCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.GeneroCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.PeliculaCRUD;
+import pe.com.cinepucp.autoservicio.main.cruds.UsuarioCRUD;
+import pe.com.cinepucp.autoservicio.main.cruds.LogSistemaCRUD;
 
 public class Main {
 
     public static void main(String[] args) {
         //SalaCRUD.ejecutarCRUDSala();
-        AsientoCRUD.ejecutarCRUDAsiento();
+        //AsientoCRUD.ejecutarCRUDAsiento();
         //SesionCRUD.ejecutarCRUDSesion();
         //GeneroCRUD.ejecutarCRUDGenero();
         //CodigoVerificacionCRUD.ejecutarCRUDCodigoVerificacion(); 
-   }
+        //UsuarioCRUD.ejecutarCRUDUsuario();
+        LogSistemaCRUD.ejecutarCRUDLogSistema();
+    }
     
 
 }

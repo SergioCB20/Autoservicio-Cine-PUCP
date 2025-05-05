@@ -4,26 +4,39 @@ import java.time.LocalDate;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.model.venta.Cupon;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
+import pe.com.cinepucp.autoservicio.model.auth.CodigoVerificacion;
 
 public class Usuario {
     private int id;
     private String nombre;
     private String email;
-    private int telefono;
+    private String telefono;
     private String password;
     private LocalDate fechaRegistro;
     private boolean estaActivo;
     private String idiomaPreferido;
     private TipoUsuario tipoUsuario;
     private List<Sesion> sesiones;
+    private List<CodigoVerificacion> codigosVerificacion;
     private List<Venta> compras;
     private List<Cupon> cupones;
     private List<LogSistema> logsUsuario;
 
     public Usuario() {
     }
-
-    public Usuario(String nombre, String email, int telefono, String password,
+    
+    public Usuario(Usuario usuario){
+        this.id=usuario.getId();
+        this.nombre = usuario.getNombre();
+        this.email = usuario.getEmail();
+        this.telefono = usuario.getTelefono();
+        this.password = usuario.getPassword();
+        this.fechaRegistro = usuario.getFechaRegistro();
+        this.estaActivo = usuario.isEstaActivo();
+        this.idiomaPreferido = usuario.getIdiomaPreferido();
+    }
+    
+    public Usuario(String nombre, String email, String telefono, String password,
             LocalDate fechaRegistro, boolean estaActivo, String idiomaPreferido) {
         this.nombre = nombre;
         this.email = email;
@@ -58,11 +71,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -172,7 +185,28 @@ public class Usuario {
     public List<LogSistema> obtenerLogsUsuario() {
         return List.copyOf(this.logsUsuario);
     }
+    
+    // Métodos para manipulación de codigos de verificacion
+    public void agregarCodigoVerificacion(CodigoVerificacion codV) {
+        this.codigosVerificacion.add(codV);
+    }
 
+    public void eliminarCodigoVerificacion(CodigoVerificacion codV) {
+        this.codigosVerificacion.remove(codV);
+    }
+
+    public boolean tieneCodigosVerificacion() {
+        return !this.codigosVerificacion.isEmpty();
+    }
+
+    public List<CodigoVerificacion> obtenerCodigosVerificacion() {
+        return List.copyOf(this.codigosVerificacion);
+    }
+    
+    
+    
+    
+    
     @Override
     public String toString() {
         return "Usuario{" +

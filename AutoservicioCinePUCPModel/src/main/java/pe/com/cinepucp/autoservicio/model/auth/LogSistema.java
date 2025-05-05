@@ -14,7 +14,6 @@ import java.util.List;
 public class LogSistema {
     private int id;
     private String accion;
-    private List<String> tablesAfectadas;
     private LocalDate fecha;
     private Usuario usuario;
 
@@ -23,7 +22,6 @@ public class LogSistema {
 
     public LogSistema(String accion, List<String> tablesAfectadas, LocalDate fecha, Usuario usuario) {
         this.accion = accion;
-        this.tablesAfectadas = tablesAfectadas;
         this.fecha = fecha;
         this.usuario = usuario;
     }
@@ -44,14 +42,7 @@ public class LogSistema {
         this.accion = accion;
     }
 
-    public List<String> getTablesAfectadas() {
-        return tablesAfectadas;
-    }
-
-    public void setTablesAfectadas(List<String> tablesAfectadas) {
-        this.tablesAfectadas = tablesAfectadas;
-    }
-
+    
     public LocalDate getFecha() {
         return fecha;
     }
@@ -74,7 +65,6 @@ public class LogSistema {
         return "LogSistema{" +
                 "id=" + id +
                 ", accion='" + accion + '\'' +
-                ", tablesAfectadas=" + tablesAfectadas +
                 ", fecha=" + fecha +
                 ", usuario=" + usuario.getNombre()+ "(" + usuario.getId() + ")"+
                 '}';

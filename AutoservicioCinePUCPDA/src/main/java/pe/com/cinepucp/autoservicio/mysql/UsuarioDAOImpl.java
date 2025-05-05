@@ -12,7 +12,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, usuario.getNombre());
         stmt.setString(2, usuario.getEmail());
-        stmt.setInt(3, usuario.getTelefono());
+        stmt.setString(3, usuario.getTelefono());
         stmt.setString(4, usuario.getPassword());
         stmt.setDate(5, Date.valueOf(usuario.getFechaRegistro()));
         stmt.setBoolean(6, usuario.isEstaActivo());
@@ -27,7 +27,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         stmt.setInt(1, usuario.getId());
         stmt.setString(2, usuario.getNombre());
         stmt.setString(3, usuario.getEmail());
-        stmt.setInt(4, usuario.getTelefono());
+        stmt.setString(4, usuario.getTelefono());
         stmt.setString(5, usuario.getPassword());
         stmt.setBoolean(6, usuario.isEstaActivo());
         stmt.setString(7, usuario.getIdiomaPreferido());
@@ -62,8 +62,8 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         usuario.setId(rs.getInt("usuario_id"));
         usuario.setNombre(rs.getString("nombre"));
         usuario.setEmail(rs.getString("email"));
-        usuario.setTelefono(rs.getInt("telefono"));
-        usuario.setPassword(rs.getString("password"));
+        usuario.setTelefono(rs.getString("telefono"));
+        usuario.setPassword(rs.getString("password_hash"));
 
         Date fechaRegistro = rs.getDate("fecha_registro");
         if (fechaRegistro != null) {

@@ -31,13 +31,14 @@ public class CodigoVerificacionCRUD {
 
     private static int crearCodigoVerificacionEjemplo(CodigoVerificacionDAOImpl codigoVerificacionDAO) {
         UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl(); // Assuming you have this DAO
-        Usuario usuarioEjemplo = usuarioDAO.buscar(1);
+        Usuario usuarioEjemplo = usuarioDAO.buscar(15);
         
         if (usuarioEjemplo == null) {
-         throw new RuntimeException("Error: No se encontró un usuario de ejemplo con ID 1. Asegúrate de que exista un usuario en la tabla 'usuarios'.");
+         throw new RuntimeException("Error: No se encontró un usuario de ejemplo con ID 15. Asegúrate de que exista un usuario en la tabla 'usuarios'.");
         }
         
         CodigoVerificacion nuevoCodigo = new CodigoVerificacion();
+        nuevoCodigo.setUsuario(usuarioEjemplo);
         nuevoCodigo.setTelefono("987654321");
         nuevoCodigo.setCodigo("123456");
         nuevoCodigo.setFechaCreacion(LocalDateTime.now());
@@ -83,6 +84,7 @@ public class CodigoVerificacionCRUD {
         }
         System.out.println("READ: Codigo de verificacion encontrado - " +
                            "ID: " + codigo.getId() +
+                           ",ID Usuario: " + codigo.getUsuario().getId() +
                            ", Telefono: " + codigo.getTelefono() +
                            ", Codigo: " + codigo.getCodigo() +
                            ", Creacion: " + codigo.getFechaCreacion() +

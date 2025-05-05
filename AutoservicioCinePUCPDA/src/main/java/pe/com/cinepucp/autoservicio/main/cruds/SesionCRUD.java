@@ -2,11 +2,13 @@ package pe.com.cinepucp.autoservicio.main.cruds;
 
 import java.time.LocalDate;
 import java.util.List;
+import pe.com.cinepucp.autoservicio.dao.IUsuarioDAO;
 import pe.com.cinepucp.autoservicio.model.auth.Sesion;
 import pe.com.cinepucp.autoservicio.model.auth.TipoSesion;
-//import pe.com.cinepucp.autoservicio.model.auth.Usuario;
+import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 import pe.com.cinepucp.autoservicio.mysql.SesionDAOImpl;
-//import pe.com.cinepucp.autoservicio.mysql.UsuarioDAOImpl;
+import pe.com.cinepucp.autoservicio.main.cruds.UsuarioCRUD;
+import pe.com.cinepucp.autoservicio.mysql.UsuarioDAOImpl;
 
 /**
  *
@@ -17,9 +19,11 @@ public class SesionCRUD {
         System.out.println("\n=== INICIO CRUD SESION ===");
         SesionDAOImpl sesionDAO = new SesionDAOImpl();
         
-        listarSesiones("Sesiones al inicio", sesionDAO);
         
         int idSesion = crearSesionEjemplo(sesionDAO);
+        listarSesiones("Sesiones al inicio", sesionDAO);
+        
+        
         buscarSesion(sesionDAO, idSesion);
         actualizarSesion(sesionDAO, idSesion);
         eliminarSesion(sesionDAO, idSesion);
@@ -32,6 +36,12 @@ public class SesionCRUD {
     private static int crearSesionEjemplo(SesionDAOImpl sesionDAO) {
         // Crear un objeto Sesion de ejemplo
         Sesion nuevaSesion = new Sesion();
+        //IUsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        //Usuario usuario =UsuarioCRUD.buscarUsuario(usuarioDAO, 15);//ejemplo de susario fijo en la BD
+        Usuario usuario= new Usuario();
+        
+        usuario.setId(15);
+        nuevaSesion.setUsuario(usuario);
         nuevaSesion.setToken("ejemplo_token_" + System.currentTimeMillis()); // Usar timestamp para unicidad simple
         nuevaSesion.setMetodoLogin(TipoSesion.SMS);
         nuevaSesion.setFechaInicio(LocalDate.now());
@@ -50,6 +60,7 @@ public class SesionCRUD {
         } else {
             sesiones.forEach(sesion -> {
                 System.out.println("ID: " + sesion.getId() +
+                                   ",ID Usuario: " + sesion.getUsuario().getId() +
                                    ", Token: " + sesion.getToken() +
                                    ", Método: " + sesion.getMetodoLogin() +
                                    ", Inicio: " + sesion.getFechaInicio() +
@@ -75,6 +86,7 @@ public class SesionCRUD {
         }
          System.out.println("READ: Sesión encontrada - " +
                            "ID: " + sesion.getId() +
+                           ",ID Usuario: " + sesion.getUsuario().getId() +
                            ", Token: " + sesion.getToken() +
                            ", Método: " + sesion.getMetodoLogin() +
                            ", Inicio: " + sesion.getFechaInicio() +
@@ -87,7 +99,7 @@ public class SesionCRUD {
         
         sesion.setMetodoLogin(TipoSesion.SMS);
         sesion.setFechaExpiracion(LocalDate.now().plusDays(30));
-
+        
         if (!sesionDAO.modificar(sesion)) { 
             throw new RuntimeException("Error al actualizar la sesión con ID: " + id);
         }

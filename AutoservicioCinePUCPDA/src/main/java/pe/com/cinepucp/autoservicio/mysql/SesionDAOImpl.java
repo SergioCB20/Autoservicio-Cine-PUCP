@@ -2,7 +2,10 @@ package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.model.auth.Sesion;
 import pe.com.cinepucp.autoservicio.dao.ISesionDAO;
+import pe.com.cinepucp.autoservicio.dao.IUsuarioDAO;
+import pe.com.cinepucp.autoservicio.main.cruds.UsuarioCRUD;
 import pe.com.cinepucp.autoservicio.model.auth.TipoSesion;
+import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 /**
  *
  * @author Miguel
@@ -11,24 +14,26 @@ public class SesionDAOImpl extends BaseDAOImpl<Sesion> implements ISesionDAO{
     
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Sesion sesion) throws SQLException{
-        String sql= "{CALL sp_insertar_sesion(?, ?, ?, ?)}";
+        String sql= "{CALL sp_insertar_sesion(?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
-        stmt.setString(1, sesion.getToken());
-        stmt.setString(2, sesion.getMetodoLogin().getDescripcion());
-        stmt.setDate(3, Date.valueOf(sesion.getFechaInicio()));
-        stmt.setDate(4, Date.valueOf(sesion.getFechaExpiracion()));
+        stmt.setInt(1, sesion.getUsuario().getId());
+        stmt.setString(2, sesion.getToken());
+        stmt.setString(3, sesion.getMetodoLogin().getDescripcion());
+        stmt.setDate(4, Date.valueOf(sesion.getFechaInicio()));
+        stmt.setDate(5, Date.valueOf(sesion.getFechaExpiracion()));
         return stmt;
     }
     
     @Override
     protected PreparedStatement comandoModificar(Connection conn, Sesion sesion) throws SQLException {
-        String sql = "{ CALL sp_modificar_sesion(?, ?, ?, ?, ?) }";
+        String sql = "{ CALL sp_actualizar_sesion(?, ?, ?, ?, ?, ?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, sesion.getId());
-        stmt.setString(2, sesion.getToken());
-        stmt.setString(3, sesion.getMetodoLogin().getDescripcion());
-        stmt.setDate(4, Date.valueOf(sesion.getFechaInicio()));
-        stmt.setDate(5, Date.valueOf(sesion.getFechaExpiracion()));
+        stmt.setInt(2, sesion.getUsuario().getId());
+        stmt.setString(3, sesion.getToken());
+        stmt.setString(4, sesion.getMetodoLogin().getDescripcion());
+        stmt.setDate(5, Date.valueOf(sesion.getFechaInicio()));
+        stmt.setDate(6, Date.valueOf(sesion.getFechaExpiracion()));
         return stmt;
     }
     
@@ -58,8 +63,12 @@ public class SesionDAOImpl extends BaseDAOImpl<Sesion> implements ISesionDAO{
     @Override
     protected Sesion mapearModelo(ResultSet rs) throws SQLException {
         Sesion sesion = new Sesion();
-        // Assuming the columns in the ResultSet match the Sesion properties
         sesion.setId(rs.getInt("sesion_id"));
+        //usuario
+        IUsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        Usuario usuario = usuarioDAO.buscar(rs.getInt("usuario_id"));
+        sesion.setUsuario(usuario);
+        //usuario
         sesion.setToken(rs.getString("token"));
         sesion.setMetodoLogin(TipoSesion.fromString(rs.getString("metodo_login")));
 
