@@ -31,7 +31,7 @@ public class CodigoVerificacionCRUD {
 
     private static int crearCodigoVerificacionEjemplo(CodigoVerificacionDAOImpl codigoVerificacionDAO) {
         UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl(); // Assuming you have this DAO
-        Usuario usuarioEjemplo = usuarioDAO.buscar(15);
+        Usuario usuarioEjemplo = usuarioDAO.buscar(2);
         
         if (usuarioEjemplo == null) {
          throw new RuntimeException("Error: No se encontró un usuario de ejemplo con ID 15. Asegúrate de que exista un usuario en la tabla 'usuarios'.");

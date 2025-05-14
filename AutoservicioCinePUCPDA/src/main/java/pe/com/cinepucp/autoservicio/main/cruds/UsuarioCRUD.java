@@ -31,9 +31,9 @@ public class UsuarioCRUD {
     
     private static int crearUsuarioEjemplo(IUsuarioDAO usuarioDAO) {
         Usuario nuevoUsuario = new Usuario();
-        nuevoUsuario.setNombre("Ejemplo Usuario");
-        nuevoUsuario.setEmail("ejempl0.usuario@correo.com");
-        nuevoUsuario.setTelefono("1234507494");
+        nuevoUsuario.setNombre("EjemploUsuario1");
+        nuevoUsuario.setEmail("ejemp17.usuario@correo.com");
+        nuevoUsuario.setTelefono("1524507564");
         nuevoUsuario.setPassword("clave123");
         nuevoUsuario.setFechaRegistro(LocalDate.now());
         nuevoUsuario.setEstaActivo(true);
@@ -92,7 +92,7 @@ public class UsuarioCRUD {
         Usuario usuario = buscarUsuario(usuarioDAO, id);
 
      
-        usuario.setEmail("ejemplo.usuario.actualizado@correo.com");
+        usuario.setEmail("ejemplo.usuario12.actualizado@correo.com");
         usuario.setEstaActivo(false); // Example: deactivate the user
 
         if (!usuarioDAO.modificar(usuario)) {

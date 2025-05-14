@@ -32,7 +32,7 @@ public class PeliculaCRUD {
         pelicula.setImagenUrl("https://example.com/matrix.jpg");
         pelicula.setEstaActiva(true);
         pelicula.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 14, 30));
-        pelicula.setUsuarioModificacion(1);
+        pelicula.setUsuarioModificacion(2);
         return insertarPelicula(peliculaDAO, pelicula);
     }
 
@@ -77,7 +77,7 @@ public class PeliculaCRUD {
         pelicula.setImagenUrl("https://example.com/matrix.jpg");
         pelicula.setEstaActiva(true);
         pelicula.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 14, 30));
-        pelicula.setUsuarioModificacion(1);
+        pelicula.setUsuarioModificacion(2);
         
         if (!peliculaDAO.modificar(pelicula)) {
             throw new RuntimeException("Error al actualizar la película con ID: " + id);

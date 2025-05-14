@@ -33,7 +33,7 @@ public class VentaCRUD {
          Venta nuevaventa = new Venta();
          
          Usuario usuario = new Usuario();
-         usuario.setId(15);
+         usuario.setId(2);
          
          nuevaventa.setFechaHora(LocalDateTime.now());
          nuevaventa.setUsuario(usuario);

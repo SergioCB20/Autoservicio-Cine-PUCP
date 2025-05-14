@@ -40,7 +40,7 @@ public class SesionCRUD {
         //Usuario usuario =UsuarioCRUD.buscarUsuario(usuarioDAO, 15);//ejemplo de susario fijo en la BD
         Usuario usuario= new Usuario();
         
-        usuario.setId(15);
+        usuario.setId(2);
         nuevaSesion.setUsuario(usuario);
         nuevaSesion.setToken("ejemplo_token_" + System.currentTimeMillis()); // Usar timestamp para unicidad simple
         nuevaSesion.setMetodoLogin(TipoSesion.SMS);
