@@ -8,13 +8,10 @@ package pe.com.cinepucp.autoservicio.mysql;
  *
  * @author gonza
  */
-import java.util.List;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IComboItemDAO;
 import pe.com.cinepucp.autoservicio.model.comida.Producto;
 import pe.com.cinepucp.autoservicio.model.comida.ComboItem;
-
-import pe.com.cinepucp.autoservicio.mysql.ComboItemDAOImpl;
 
 public class ComboItemDAOImpl extends BaseDAOImpl<ComboItem> implements IComboItemDAO {
 

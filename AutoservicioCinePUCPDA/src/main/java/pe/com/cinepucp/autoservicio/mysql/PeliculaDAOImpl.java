@@ -2,7 +2,6 @@ package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IPeliculaDAO;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
-import pe.com.cinepucp.autoservicio.mysql.BaseDAOImpl;
 
 /**
    
@@ -18,7 +17,7 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setString(2, peli.getTituloEn());
         stmt.setInt(3, peli.getDuracionMin());
         stmt.setString(4, peli.getClasificacion());
-        stmt.setString(5, peli.getSinopsisEn());
+        stmt.setString(5, peli.getSinopsisEs());
         stmt.setString(6, peli.getSinopsisEn());
         stmt.setString(7, peli.getImagenUrl());
         stmt.setBoolean(8, peli.isEstaActiva());
@@ -37,7 +36,7 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setString(3, peli.getTituloEn());
         stmt.setInt(4, peli.getDuracionMin());
         stmt.setString(5, peli.getClasificacion());
-        stmt.setString(6, peli.getSinopsisEn());
+        stmt.setString(6, peli.getSinopsisEs());
         stmt.setString(7, peli.getSinopsisEn());
         stmt.setString(8, peli.getImagenUrl());
         stmt.setBoolean(9, peli.isEstaActiva());
