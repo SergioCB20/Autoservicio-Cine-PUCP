@@ -17,7 +17,7 @@ import pe.com.cinepucp.autoservicio.mysql.PeliculaDAOImpl;
  */
 public class PeliculaBOImpl implements IPeliculaBO {
     
-    private IPeliculaDAO peliculaDAO;
+    private final IPeliculaDAO peliculaDAO;
     
     public PeliculaBOImpl() {
         peliculaDAO = new PeliculaDAOImpl();
@@ -71,7 +71,7 @@ public class PeliculaBOImpl implements IPeliculaBO {
         peliculaDAO.eliminar(id);
     }
     @Override
-    public void buscarPorId(int id){
-        peliculaDAO.buscar(id);
+    public Pelicula buscarPorId(int id){
+        return peliculaDAO.buscar(id);
     }
 }

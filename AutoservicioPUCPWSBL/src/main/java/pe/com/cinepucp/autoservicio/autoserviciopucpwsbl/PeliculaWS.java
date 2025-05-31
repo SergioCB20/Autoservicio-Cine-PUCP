@@ -53,9 +53,9 @@ public class PeliculaWS {
     }
     
     @WebMethod(operationName = "buscarPeliculaPorId")
-    public void buscarPeliculaPorId(int id) {
+    public Pelicula buscarPeliculaPorId(int id) {
         try {
-            peliculaBO.buscarPorId(id);
+            return peliculaBO.buscarPorId(id);
         } catch (Exception e) {
             throw new WebServiceException("Error al buscar pelicula por id: " + e.getMessage());
         }
