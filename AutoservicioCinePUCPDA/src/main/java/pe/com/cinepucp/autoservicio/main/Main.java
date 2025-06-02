@@ -24,12 +24,12 @@ public class Main {
     public static void main(String[] args) {
         //SalaCRUD.ejecutarCRUDSala();
         //AsientoCRUD.ejecutarCRUDAsiento();
-        SesionCRUD.ejecutarCRUDSesion();
+        //SesionCRUD.ejecutarCRUDSesion();
         //GeneroCRUD.ejecutarCRUDGenero();
         //CodigoVerificacionCRUD.ejecutarCRUDCodigoVerificacion(); 
         //UsuarioCRUD.ejecutarCRUDUsuario();
         //LogSistemaCRUD.ejecutarCRUDLogSistema();
-        //PeliculaCRUD.ejecutarCRUDPelicula();
+        PeliculaCRUD.ejecutarCRUDPelicula();
         //BoletoCRUD.ejecutarCRUDBoleto();
         //VentaCRUD.ejecutarCRUDVenta();
     }

@@ -1,17 +1,21 @@
 package pe.com.cinepucp.autoservicio.mysql;
+
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IPeliculaDAO;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
+import java.util.Date; // Add this import for java.util.Date
 
 /**
-   
+ * Data Access Object (DAO) implementation for Pelicula entity,
+ * extending BaseDAOImpl for common CRUD operations.
  */
-public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaDAO{
-    private final int usuarioModificacionId = 1;
+public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaDAO {
+    private final int usuarioModificacionId = 4;
+
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Pelicula peli) throws SQLException {
-                // Usamos CALL para ejecutar el procedimiento almacenado
-        String sql = "{CALL sp_insertar_pelicula(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        // Usamos CALL para ejecutar el procedimiento almacenado
+        String sql = "{CALL sp_insertar_pelicula(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, peli.getTituloEs());
         stmt.setString(2, peli.getTituloEn());
@@ -21,9 +25,8 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setString(6, peli.getSinopsisEn());
         stmt.setString(7, peli.getImagenUrl());
         stmt.setBoolean(8, peli.isEstaActiva());
-        stmt.setTimestamp(9, Timestamp.valueOf(peli.getFechaModificacion()));
-        stmt.setInt(10,peli.getUsuarioModificacion());
-        
+        stmt.setInt(9, peli.getUsuarioModificacion());
+
         return stmt;
     }
 
@@ -40,8 +43,7 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setString(7, peli.getSinopsisEn());
         stmt.setString(8, peli.getImagenUrl());
         stmt.setBoolean(9, peli.isEstaActiva());
-        
-        stmt.setInt(10,peli.getUsuarioModificacion());
+        stmt.setInt(10, peli.getUsuarioModificacion());
         return stmt;
     }
 
@@ -64,7 +66,7 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
 
     @Override
     protected PreparedStatement comandoListar(Connection conn) throws SQLException {
-        String sql = "{CALL sp_listar_peliculas(FALSE)}";
+        String sql = "{CALL sp_listar_peliculas(FALSE)}"; // Assuming FALSE means active or something
         return conn.prepareCall(sql);
     }
 
@@ -80,11 +82,7 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         peli.setSinopsisEn(rs.getString("sinopsis_en"));
         peli.setImagenUrl(rs.getString("imagen_url"));
         peli.setEstaActiva(rs.getBoolean("esta_activa"));
-        
-        peli.setFechaModificacion(rs.getTimestamp("fecha_modificacion").toLocalDateTime());
+        peli.setFechaModificacion(rs.getTimestamp("fecha_modificacion")); 
         return peli;
     }
-
-    
 }
-

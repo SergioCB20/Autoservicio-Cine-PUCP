@@ -27,6 +27,14 @@ public class PeliculaWS {
     
     @WebMethod(operationName = "registrarPelicula")
     public void registrarPelicula(Pelicula peli) {
+        System.out.println("--- Java Pelicula object received from Web Service ---");
+        System.out.println("peliculaId: " + peli.getPeliculaId());
+        System.out.println("tituloEs: " + peli.getTituloEs());
+        System.out.println("duracionMin: " + peli.getDuracionMin());
+        System.out.println("estaActiva: " + peli.isEstaActiva());
+        System.out.println("fechaModificacion: " + peli.getFechaModificacion());
+        System.out.println("usuarioModificacion: " + peli.getUsuarioModificacion()); 
+        System.out.println("-----------------------------------------------------");
         try {
             peliculaBO.registrar(peli);
         } catch (Exception e) {
@@ -37,6 +45,14 @@ public class PeliculaWS {
     @WebMethod(operationName = "actualizarPelicula")
     public void actualizarPelicula(Pelicula peli) {
         try {
+            System.out.println("--- Java Pelicula object received from Web Service ---");
+        System.out.println("peliculaId: " + peli.getPeliculaId());
+        System.out.println("tituloEs: " + peli.getTituloEs());
+        System.out.println("duracionMin: " + peli.getDuracionMin());
+        System.out.println("estaActiva: " + peli.isEstaActiva());
+        System.out.println("fechaModificacion: " + peli.getFechaModificacion());
+        System.out.println("usuarioModificacion: " + peli.getUsuarioModificacion()); 
+        System.out.println("-----------------------------------------------------");
             peliculaBO.actualizar(peli);
         } catch (Exception e) {
             throw new WebServiceException("Error al actualizar pelicula: " + e.getMessage());
@@ -46,6 +62,7 @@ public class PeliculaWS {
     @WebMethod(operationName = "eliminarPelicula")
     public void eliminarPelicula(int id) {
         try {
+            System.out.println("peliculaId: " + id);
             peliculaBO.eliminar(id);
         } catch (Exception e) {
             throw new WebServiceException("Error al eliminar pelicula: " + e.getMessage());

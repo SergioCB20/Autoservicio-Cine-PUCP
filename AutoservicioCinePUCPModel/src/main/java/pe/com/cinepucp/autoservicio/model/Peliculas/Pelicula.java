@@ -3,6 +3,7 @@ package pe.com.cinepucp.autoservicio.model.Peliculas;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Pelicula {
     private Integer peliculaId;
@@ -14,7 +15,7 @@ public class Pelicula {
     private String sinopsisEn;
     private String imagenUrl;
     private boolean estaActiva;
-    private LocalDateTime fechaModificacion;
+    private Date fechaModificacion;
     private Integer usuarioModificacion;
     private List<Genero> generos = new ArrayList<>();
     private List<Funcion> funciones = new ArrayList<>();
@@ -171,14 +172,14 @@ public class Pelicula {
     /**
      * @return the fechaModificacion
      */
-    public LocalDateTime getFechaModificacion() {
+    public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
     /**
      * @param fechaModificacion the fechaModificacion to set
      */
-    public void setFechaModificacion(LocalDateTime fechaModificacion) {
+    public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 

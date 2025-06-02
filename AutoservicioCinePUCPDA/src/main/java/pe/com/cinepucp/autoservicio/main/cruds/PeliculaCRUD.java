@@ -3,6 +3,8 @@ import java.util.List;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
 import pe.com.cinepucp.autoservicio.mysql.PeliculaDAOImpl;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.time.ZoneId; 
 
 
 public class PeliculaCRUD {
@@ -31,8 +33,8 @@ public class PeliculaCRUD {
         pelicula.setSinopsisEn("A hacker discovers the truth behind his reality.");
         pelicula.setImagenUrl("https://example.com/matrix.jpg");
         pelicula.setEstaActiva(true);
-        pelicula.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 14, 30));
-        pelicula.setUsuarioModificacion(2);
+        pelicula.setFechaModificacion(Date.from(LocalDateTime.of(2025, 5, 3, 14, 30).atZone(ZoneId.systemDefault()).toInstant()));
+        pelicula.setUsuarioModificacion(4);
         return insertarPelicula(peliculaDAO, pelicula);
     }
 
@@ -76,8 +78,8 @@ public class PeliculaCRUD {
         pelicula.setSinopsisEn("A hacker discovers the truth behind his reality.");
         pelicula.setImagenUrl("https://example.com/matrix.jpg");
         pelicula.setEstaActiva(true);
-        pelicula.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 14, 30));
-        pelicula.setUsuarioModificacion(2);
+        pelicula.setFechaModificacion(Date.from(LocalDateTime.of(2025, 5, 3, 14, 30).atZone(ZoneId.systemDefault()).toInstant()));
+        pelicula.setUsuarioModificacion(4);
         
         if (!peliculaDAO.modificar(pelicula)) {
             throw new RuntimeException("Error al actualizar la película con ID: " + id);
