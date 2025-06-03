@@ -13,7 +13,8 @@ import pe.com.cinepucp.autoservicio.model.venta.Boleto;
  *
  * @author Piero
  */
-@WebService(serviceName = "BoletoWS")
+@WebService(serviceName = "BoletoWS",
+        targetNamespace = "http://services.AutoCine.pucp.edu.pe/")
 public class BoletoWS {
 
     private final IBoletoBO boletoBO;
