@@ -17,7 +17,8 @@ import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
  * @author Sergio
  */
 
-@WebService(serviceName = "PeliculaWS")
+@WebService(serviceName = "PeliculaWS",
+        targetNamespace = "http://services.AutoCine.pucp.edu.pe/")
 public class PeliculaWS {
     private final IPeliculaBO peliculaBO;
     
