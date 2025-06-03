@@ -18,7 +18,8 @@ import pe.com.cinepucp.autoservicio.model.venta.Cupon;
  *
  * @author Amira
  */
-@WebService(serviceName = "CuponWS")
+@WebService(serviceName = "CuponWS",
+        targetNamespace = "http://services.AutoCine.pucp.edu.pe/")
 public class CuponWS {
     private final ICuponBO cuponBO;
     
