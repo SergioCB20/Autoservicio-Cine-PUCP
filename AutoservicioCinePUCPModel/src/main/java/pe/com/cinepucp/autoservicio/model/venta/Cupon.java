@@ -23,6 +23,21 @@ public class Cupon {
     private LocalDate fechaModificacion;
     private List<Usuario> usuarios = new ArrayList<>(); // Usuarios que tienen este cupón
     private List<Venta> ventas = new ArrayList<>(); // Ventas donde se aplicó este cupón
+    private boolean activo;
+    
+    /**
+     * @return the activo
+     */
+    public boolean isActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     
     @Override
 public String toString() {
@@ -42,7 +57,7 @@ public String toString() {
 }
 
     public Cupon(){
-
+        
     }
     
     public Cupon(String codigo, String descripcionEs, String descripcionEn, TipoDescuento descuentoTipo,
