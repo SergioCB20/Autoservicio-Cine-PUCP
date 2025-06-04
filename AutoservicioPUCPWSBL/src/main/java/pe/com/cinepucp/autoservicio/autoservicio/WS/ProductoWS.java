@@ -11,6 +11,7 @@ import java.util.List;
 import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.bo.IProductoBO;
 import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.boimpl.ProductoBOImpl;
 import pe.com.cinepucp.autoservicio.model.comida.Producto;
+import pe.com.cinepucp.autoservicio.model.comida.TipoProducto;
 /**
  *
  * @author gonza
@@ -35,9 +36,25 @@ public class ProductoWS {
         System.out.println("Tipo: " + prod.getTipo().name());        
         System.out.println("estaActiva: " + prod.isEstaActivo()); 
         System.out.println("-----------------------------------------------------");
+        
+        // *** Punto de verificación crítico ***
+        if (prod.getTipo() == null) {
+            System.err.println("ERROR CRÍTICO: TipoProducto es NULL al recibir el objeto Producto en registrarProducto.");
+            // Lanza una excepción más específica para el cliente C#
+            throw new WebServiceException("Error del servicio: El tipo de producto enviado no pudo ser procesado. Es posible que el valor no sea reconocido o esté ausente.");
+        }
+
+        // Si llegamos aquí, el tipo NO es null, y podemos llamarle a .name()
+        System.out.println("Tipo: " + prod.getTipo().name());
+        System.out.println("estaActiva: " + prod.isEstaActivo());
+        System.out.println("-----------------------------------------------------");
+
+        
         try {
             productoBO.registrar(prod);                    
         } catch (Exception e) {
+            // *** MUY IMPORTANTE: Imprimir la pila de la excepción completa ***
+            e.printStackTrace(); // Esto imprimirá el stack trace en la consola del servidor de aplicaciones
             throw new WebServiceException("Error al registrar producto: " + e.getMessage());
         }
     }
