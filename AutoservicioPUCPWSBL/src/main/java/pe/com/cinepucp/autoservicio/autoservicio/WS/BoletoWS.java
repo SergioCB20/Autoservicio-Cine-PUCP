@@ -1,7 +1,7 @@
-/*package pe.com.cinepucp.autoservicio.autoservicio.WS;
+package pe.com.cinepucp.autoservicio.autoservicio.WS;
 
 import jakarta.jws.WebService;
-/*import jakarta.jws.WebMethod;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.xml.ws.WebServiceException;
 import java.util.List;
@@ -47,4 +47,3 @@ public class BoletoWS {
     }
     
 }   
-*/
