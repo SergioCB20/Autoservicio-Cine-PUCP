@@ -1,18 +1,13 @@
-package pe.com.cinepucp.autoservicio.autoservicio.WS;
+/*package pe.com.cinepucp.autoservicio.autoservicio.WS;
 
 import jakarta.jws.WebService;
-import jakarta.jws.WebMethod;
+/*import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.xml.ws.WebServiceException;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.bo.IBoletoBO;
 import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.boimpl.BoletoBOImpl;
 import pe.com.cinepucp.autoservicio.model.venta.Boleto;
-
-/**
- *
- * @author Piero
- */
 @WebService(serviceName = "BoletoWS",
         targetNamespace = "http://services.AutoCine.pucp.edu.pe/")
 public class BoletoWS {
@@ -51,6 +46,5 @@ public class BoletoWS {
         this.boletoBO.eliminar(id);
     }
     
-    
-    
-}
+}   
+*/

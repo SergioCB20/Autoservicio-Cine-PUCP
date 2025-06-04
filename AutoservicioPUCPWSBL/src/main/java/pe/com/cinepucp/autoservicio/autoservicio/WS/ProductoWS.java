@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pe.com.cinepucp.autoservicio.autoserviciopucpwsbl;
+package pe.com.cinepucp.autoservicio.autoservicio.WS;
 
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
@@ -77,8 +77,8 @@ public class ProductoWS {
         }
     }
     
-    @WebMethod(operationName = "listarPeliculas")
-    public List<Producto> listarPeliculas() {
+    @WebMethod(operationName = "listarProductos")
+    public List<Producto> listarProductos() {
         try {
             return productoBO.listar();
         } catch (Exception e) {
