@@ -24,6 +24,7 @@ public class Cupon {
     private List<Usuario> usuarios = new ArrayList<>(); // Usuarios que tienen este cupón
     private List<Venta> ventas = new ArrayList<>(); // Ventas donde se aplicó este cupón
     private boolean activo;
+    private Usuario modificadopor;
     
     /**
      * @return the activo
@@ -176,6 +177,14 @@ public String toString() {
 
     public void setCreadoPor(Usuario creadoPor) {
         this.creadoPor = creadoPor;
+    }
+
+    public Usuario getModificadoPor() {
+        return modificadopor;
+    }
+
+    public void setModificadoPor(Usuario modificadopor) {
+        this.modificadopor = modificadopor;
     }
     
 }

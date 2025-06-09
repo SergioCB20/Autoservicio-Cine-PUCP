@@ -79,6 +79,8 @@ public class VentaCRUD {
 
     public static void actualizarVenta(VentaDAOImpl ventaDAO,int id){
         Venta venta = ventaDAO.buscar(id);
+        venta.setEstado(EstadoVenta.COMPLETADA);
+        ventaDAO.modificar(venta);
         if (venta == null) {
             throw new RuntimeException("Error al actualizar la venta con ID: " + id);
         }

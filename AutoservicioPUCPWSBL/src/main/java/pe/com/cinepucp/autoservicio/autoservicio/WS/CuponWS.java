@@ -25,6 +25,7 @@ public class CuponWS {
     
     public CuponWS() {
         cuponBO = new CuponBOImpl();
+        
     }
     
     @WebMethod(operationName = "registrarCupon")

@@ -23,13 +23,13 @@ protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throw
         stmt.setInt(10, modelo.getCreadoPor().getId());
         stmt.setBoolean(11, true); // esta_activo por defecto al insertar
         stmt.setTimestamp(12, Timestamp.valueOf(LocalDateTime.now().now())); // fecha_modificacion
-        stmt.setInt(13, modelo.getCreadoPor().getId()); // usuario_modificacion (asumiendo mismo creador)
+        stmt.setInt(13, modelo.getModificadoPor().getId()); // usuario_modificacion (asumiendo mismo creador)
         return stmt;
     }
 
     @Override
     protected PreparedStatement comandoModificar(Connection conn, Cupon modelo) throws SQLException {
-        String sql = "{CALL sp_actualizar_cupon(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL sp_actualizar_cupon(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"; // 14
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, modelo.getCuponId());
         stmt.setString(2, modelo.getCodigo());
@@ -43,7 +43,8 @@ protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throw
         stmt.setInt(10, modelo.getUsosActuales());
         stmt.setInt(11, modelo.getCreadoPor().getId());
         stmt.setBoolean(12, true); // esta_activo
-        stmt.setInt(13, modelo.getCreadoPor().getId()); // usuario_modificacion
+        stmt.setTimestamp(13, Timestamp.valueOf(LocalDateTime.now().now())); // fecha_modificacion
+        stmt.setInt(14, modelo.getModificadoPor().getId()); // usuario_modificacion
         return stmt;
     }
 
@@ -65,7 +66,7 @@ protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throw
 
     @Override
     protected PreparedStatement comandoListar(Connection conn) throws SQLException {
-        String sql = "{CALL sp_listar_cupones()}";
+        String sql = "{CALL sp_listar_cupones ()}";
         return conn.prepareCall(sql);
     }
 
@@ -86,7 +87,8 @@ protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throw
         Usuario creador = new Usuario();
         creador.setId(rs.getInt("creado_por"));
         cupon.setCreadoPor(creador);
-
+        creador.setId(rs.getInt("usuario_modificacion"));
+        cupon.setModificadoPor(creador);
         // Puedes mapear esta_activo si es necesario en el modelo
         return cupon;
     }
