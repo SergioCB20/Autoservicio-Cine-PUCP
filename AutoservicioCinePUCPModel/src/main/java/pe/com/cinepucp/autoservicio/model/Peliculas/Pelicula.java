@@ -2,7 +2,6 @@
 package pe.com.cinepucp.autoservicio.model.Peliculas;
 import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Pelicula {
