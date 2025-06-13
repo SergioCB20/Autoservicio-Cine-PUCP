@@ -4,12 +4,17 @@
  */
 package pe.com.cinepucp.autoservicio.autoservicio.WS;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.xml.ws.WebServiceException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
-import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.bo.IProductoBO;
-import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.boimpl.ProductoBOImpl;
+import java.util.ResourceBundle;
 import pe.com.cinepucp.autoservicio.model.comida.Producto;
 /**
  *
@@ -18,72 +23,84 @@ import pe.com.cinepucp.autoservicio.model.comida.Producto;
 @WebService(serviceName="ProductoWS",
         targetNamespace = "http://services.AutoCine.pucp.edu.pe/")
 public class ProductoWS {
-    private final IProductoBO productoBO;
+    private final ResourceBundle config;
+    private final String urlBase;
+    private final HttpClient client = HttpClient.newHttpClient();
+    private final String PRODUCTO_RESOURCE = "productos";
     
-    public ProductoWS() {
-       
-        this.productoBO = new ProductoBOImpl();
+    public ProductoWS() {       
+        this.config = ResourceBundle.getBundle("app");
+        this.urlBase = this.config.getString("app.services.rest.baseurl");
     }
     
     @WebMethod(operationName = "registrarProducto")
-    public void registrarProducto(Producto prod) {
-        System.out.println("--- Java Producto object received from Web Service ---");
-        System.out.println("productoId: " + prod.getId());
-        System.out.println("Nombre: " + prod.getNombre());
-        System.out.println("Descripcion: " + prod.getDescripcion());
-        System.out.println("Precio: " + prod.getPrecio());
-        System.out.println("Tipo: " + prod.getTipo().name());        
-        System.out.println("estaActiva: " + prod.isEstaActivo()); 
-        System.out.println("-----------------------------------------------------");
-        try {
-            productoBO.registrar(prod);                    
-        } catch (Exception e) {
-            throw new WebServiceException("Error al registrar producto: " + e.getMessage());
-        }
+    public void registrarProducto(@WebParam(name = "prod")Producto prod) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(prod);
+
+        String url;
+        HttpRequest request;
+        url = this.urlBase + "/" + this.PRODUCTO_RESOURCE;
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+        client.send(request, HttpResponse.BodyHandlers.ofString());
     }
     
     @WebMethod(operationName = "actualizarProducto")
-    public void actualizarProducto(Producto prod) {
-        System.out.println("--- Java Producto object received from Web Service ---");
-        System.out.println("productoId: " + prod.getId());
-        System.out.println("Nombre: " + prod.getNombre());
-        System.out.println("Descripcion: " + prod.getDescripcion());
-        System.out.println("Precio: " + prod.getPrecio());
-        System.out.println("Tipo: " + prod.getTipo().name());        
-        System.out.println("estaActiva: " + prod.isEstaActivo()); 
-        System.out.println("-----------------------------------------------------");
-        try {
-            productoBO.actualizar(prod);
-        } catch (Exception e) {
-            throw new WebServiceException("Error al actualizar producto: " + e.getMessage());
-        }
+    public void actualizarProducto(@WebParam(name = "prod")Producto prod) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(prod);
+
+        String url;
+        HttpRequest request;
+        url = this.urlBase + "/" + this.PRODUCTO_RESOURCE + "/" + prod.getId();
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .PUT(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+        client.send(request, HttpResponse.BodyHandlers.ofString());
     }
     
     @WebMethod(operationName = "eliminarProducto")
-    public void eliminarProducto(int id) {
-        try {
-            productoBO.eliminar(id);
-        } catch (Exception e) {
-            throw new WebServiceException("Error al eliminar producto: " + e.getMessage());
-        }
+    public void eliminarProducto(@WebParam(name = "id")int id) throws Exception {
+        String url = this.urlBase + "/" + this.PRODUCTO_RESOURCE + "/" + id;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .DELETE()
+                .build();
+        client.send(request, HttpResponse.BodyHandlers.ofString());
     }
     
     @WebMethod(operationName = "buscarProductoPorId")
-    public Producto buscarProductoPorId(int id) {
-        try {
-            return productoBO.buscarPorId(id);
-        } catch (Exception e) {
-            throw new WebServiceException("Error al buscar producto por id: " + e.getMessage());
-        }
+    public Producto buscarProductoPorId(@WebParam(name = "id")int id) throws Exception {
+        String url = this.urlBase + "/" + this.PRODUCTO_RESOURCE + "/" + id;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+        
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String json = response.body();
+        ObjectMapper mapper= new ObjectMapper();
+        Producto producto = mapper.readValue(json, Producto.class);        
+        return producto;
     }
     
     @WebMethod(operationName = "listarProductos")
-    public List<Producto> listarProductos() {
-        try {
-            return productoBO.listar();
-        } catch (Exception e) {
-            throw new WebServiceException("Error al listar productos: " + e.getMessage());
-        }
+    public List<Producto> listarProductos() throws Exception {
+        String url = this.urlBase+"/"+this.PRODUCTO_RESOURCE;
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String json = response.body();
+        ObjectMapper mapper= new ObjectMapper();
+        List<Producto> productos=mapper.readValue(json, new TypeReference<List<Producto>>(){});
+        return productos;
     }
     
 }
