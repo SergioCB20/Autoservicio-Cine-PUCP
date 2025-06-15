@@ -14,6 +14,7 @@ import pe.com.cinepucp.autoservicio.main.cruds.SalaCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.SesionCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.CodigoVerificacionCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.CuponCRUD;
+import pe.com.cinepucp.autoservicio.main.cruds.FuncionCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.GeneroCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.PeliculaCRUD;
 import pe.com.cinepucp.autoservicio.main.cruds.UsuarioCRUD;
@@ -31,9 +32,13 @@ public class Main {
         //UsuarioCRUD.ejecutarCRUDUsuario();
         //LogSistemaCRUD.ejecutarCRUDLogSistema();
         //PeliculaCRUD.ejecutarCRUDPelicula();
-        //BoletoCRUD.ejecutarCRUDBoleto();
-        VentaCRUD.ejecutarCRUDVenta();
+        
+//        FuncionCRUD.ejecutarCRUDFuncion();
+//        VentaCRUD.ejecutarCRUDVenta();
+        BoletoCRUD.ejecutarCRUDBoleto();
+
         //CuponCRUD.ejecutarCRUDCupon();
+        
     }
     
 

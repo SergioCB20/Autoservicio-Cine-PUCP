@@ -10,7 +10,7 @@ import pe.com.cinepucp.autoservicio.model.salas.Sala;
  * @author Piero
  */
 public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO{
-    private final int usuarioModificacionId = 1;
+//    private final int usuarioModificacionId = 1;
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Funcion funcion) throws SQLException {
         String sql = "{CALL sp_insertar_funcion(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -24,7 +24,7 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO{
         stmt.setBoolean(6, funcion.getSubtitulos());
         stmt.setBoolean(7, funcion.getEstaActiva());
         stmt.setTimestamp(8, Timestamp.valueOf(funcion.getFechaModificacion()));
-        stmt.setInt(9, usuarioModificacionId);
+        stmt.setInt(9, funcion.getUsuarioModificacion());
         return stmt;
     }
     
@@ -40,7 +40,7 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO{
         stmt.setString(6, funcion.getIdioma());
         stmt.setBoolean(7, funcion.getSubtitulos());
         stmt.setBoolean(8, funcion.getEstaActiva());
-        stmt.setInt(9, usuarioModificacionId);
+        stmt.setInt(9, funcion.getUsuarioModificacion());
         return stmt;
     }
     
@@ -49,7 +49,7 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO{
         String sql = "{CALL sp_eliminar_funcion(?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
-        stmt.setInt(2, usuarioModificacionId);
+        stmt.setInt(2, 2);
         return stmt;
     }
     

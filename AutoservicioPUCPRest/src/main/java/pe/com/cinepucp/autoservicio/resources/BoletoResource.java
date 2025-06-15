@@ -74,7 +74,7 @@ public class BoletoResource {
                     .entity("Boleto: " + id + ", no encontrada")
                     .build();
         }
-        
+        boleto.setBoletoId(id);
         this.boletoBO.actualizar(boleto);
         
         return Response.ok(boleto).build();
