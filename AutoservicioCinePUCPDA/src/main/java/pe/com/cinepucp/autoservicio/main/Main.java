@@ -32,16 +32,13 @@ public class Main {
         //UsuarioCRUD.ejecutarCRUDUsuario();
         //LogSistemaCRUD.ejecutarCRUDLogSistema();
         //PeliculaCRUD.ejecutarCRUDPelicula();
-<<<<<<< HEAD
         
 //        FuncionCRUD.ejecutarCRUDFuncion();
 //        VentaCRUD.ejecutarCRUDVenta();
-        BoletoCRUD.ejecutarCRUDBoleto();
+    //    BoletoCRUD.ejecutarCRUDBoleto();
 
-=======
         //BoletoCRUD.ejecutarCRUDBoleto();
-        //VentaCRUD.ejecutarCRUDVenta();
->>>>>>> 5f22f0b (cambios en Salas (usen siempre Integer causas :'u ))
+        //VentaCRUD.ejecutarCRUDVenta(); 
         //CuponCRUD.ejecutarCRUDCupon();
         
     }

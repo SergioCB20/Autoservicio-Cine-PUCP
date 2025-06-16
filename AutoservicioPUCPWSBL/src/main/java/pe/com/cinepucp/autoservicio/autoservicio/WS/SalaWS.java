@@ -16,6 +16,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.ResourceBundle;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
+import pe.com.cinepucp.autoservicio.utils.JsonUtils;
 
 /**
  *
@@ -29,46 +30,35 @@ public class SalaWS {
     private final String urlBase;
     private final HttpClient client = HttpClient.newHttpClient();
     private final String SALA_RESOURCE = "salas";
+    private final ObjectMapper deserializationMapper;
+    private final ObjectMapper serializationMapper;
     
     public SalaWS(){
         this.config = ResourceBundle.getBundle("app");
         this.urlBase = this.config.getString("app.services.rest.baseurl");
+        
+        this.deserializationMapper = JsonUtils.getDeserializationMapper();
+        this.serializationMapper = JsonUtils.getSerializationMapper();
     }
     @WebMethod(operationName = "registrarSala")
     public void registrarSala(@WebParam(name = "sala") Sala sala) throws Exception{
-        System.out.println("--- Java Sala object received from Web Service ---");
-        System.out.println("SalaId: " + sala.getId());
-        System.out.println("Nombre: " + sala.getNombre());
-        System.out.println("Tipo de sala: " + sala.getTipoSala().getDescripcion());
-        System.out.println("Capacidad: " + sala.getCapacidad());
-        System.out.println("estaActiva: " + sala.isActiva()); 
-        System.out.println("-----------------------------------------------------");
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(sala);
+        String json = this.serializationMapper.writeValueAsString(sala);
 
         String url;
         HttpRequest request;
         url = this.urlBase + "/" + this.SALA_RESOURCE;
-            request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(json))
-                    .build();
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
         client.send(request, HttpResponse.BodyHandlers.ofString());
+        
     }
     
     @WebMethod(operationName = "actualizarSala")
     public void actualizarSala(@WebParam(name = "sala") Sala sala) throws Exception{
-        System.out.println("--- Java Sala object received from Web Service ---");
-        System.out.println("SalaId: " + sala.getId());
-        System.out.println("Nombre: " + sala.getNombre());
-        System.out.println("Tipo de sala: " + sala.getTipoSala().name());
-        System.out.println("Capacidad: " + sala.getCapacidad());
-        System.out.println("estaActiva: " + sala.isActiva()); 
-        System.out.println("-----------------------------------------------------");
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(sala);
-
+        String json = this.serializationMapper.writeValueAsString(sala);
         String url;
         HttpRequest request;
         url = this.urlBase + "/" + this.SALA_RESOURCE + "/" + sala.getId();
@@ -91,7 +81,7 @@ public class SalaWS {
     }
     
     @WebMethod(operationName = "buscarSalaPorId")
-    public Sala buscarSalaPorId(@WebParam(name = "id") int id) throws Exception{
+    public Sala buscarSalaPorId(@WebParam(name = "id") int id) throws Exception{        
         String url = this.urlBase + "/" + this.SALA_RESOURCE + "/" + id;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -100,9 +90,8 @@ public class SalaWS {
         
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
-        ObjectMapper mapper= new ObjectMapper();
-        Sala sala = mapper.readValue(json, Sala.class);
         
+        Sala sala = this.deserializationMapper.readValue(json, Sala.class);        
         return sala;
     }
     
@@ -114,8 +103,7 @@ public class SalaWS {
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
-        ObjectMapper mapper= new ObjectMapper();
-        List<Sala> salas=mapper.readValue(json, new TypeReference<List<Sala>>(){});
+        List<Sala> salas=this.deserializationMapper.readValue(json, new TypeReference<List<Sala>>(){});
         return salas;
     }
 }

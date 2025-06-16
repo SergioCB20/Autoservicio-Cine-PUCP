@@ -3,7 +3,6 @@ package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IPeliculaDAO;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
-import java.util.Date; // Add this import for java.util.Date
 
 /**
  * Data Access Object (DAO) implementation for Pelicula entity,
