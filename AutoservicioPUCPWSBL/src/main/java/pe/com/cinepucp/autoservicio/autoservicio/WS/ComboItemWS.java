@@ -4,12 +4,17 @@
  */
 package pe.com.cinepucp.autoservicio.autoservicio.WS;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.xml.ws.WebServiceException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
-import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.bo.IComboItemBO;
-import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.boimpl.ComboItemBOImpl;
+import java.util.ResourceBundle;
 import pe.com.cinepucp.autoservicio.model.comida.ComboItem;
 /**
  *
@@ -18,63 +23,93 @@ import pe.com.cinepucp.autoservicio.model.comida.ComboItem;
 @WebService(serviceName="ComboItemWS",
         targetNamespace = "http://services.AutoCine.pucp.edu.pe/")
 public class ComboItemWS {
-    private final IComboItemBO ComboItemBo;
+    private final ResourceBundle config;
+    private final String urlBase;
+    private final HttpClient client = HttpClient.newHttpClient();
+    private final String COMBO_RESOURCE = "combos";
     
     public ComboItemWS(){
-        this.ComboItemBo=new ComboItemBOImpl();
+        this.config = ResourceBundle.getBundle("app");
+        this.urlBase = this.config.getString("app.services.rest.baseurl");
     }
     @WebMethod(operationName = "registrarComboItem")
-    public void registrarComboItem(ComboItem combo) {
+    public void registrarComboItem(@WebParam(name = "combo")ComboItem combo) throws Exception {
         System.out.println("--- Java ComboItem object received from Web Service ---");
         System.out.println("ComboItemId: " + combo.getCombo().getId());
         System.out.println("Nombre: " + combo.getProducto().getNombre());
         System.out.println("Cantidad: " + combo.getCantidad());
         System.out.println("-----------------------------------------------------");
-        try {
-            ComboItemBo.registrar(combo);
-        } catch (Exception e) {
-            throw new WebServiceException("Error al registrar Comboitem: " + e.getMessage());
-        }
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(combo);
+
+        String url;
+        HttpRequest request;
+        url = this.urlBase + "/" + this.COMBO_RESOURCE;
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+        client.send(request, HttpResponse.BodyHandlers.ofString());
     }
     
     @WebMethod(operationName = "actualizarComboItem")
-    public void actualizarComboItem(ComboItem combo) {
+    public void actualizarComboItem(@WebParam(name = "combo") ComboItem combo) throws Exception{
         System.out.println("--- Java ComboItem object received from Web Service ---");
         System.out.println("ComboItemId: " + combo.getCombo().getId());
         System.out.println("Nombre: " + combo.getProducto().getNombre());
         System.out.println("Cantidad: " + combo.getCantidad());
-        try {
-            ComboItemBo.actualizar(combo);
-        } catch (Exception e) {
-            throw new WebServiceException("Error al actualizar ComboItem: " + e.getMessage());
-        }
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(combo);
+
+        String url;
+        HttpRequest request;
+        url = this.urlBase + "/" + this.COMBO_RESOURCE + "/" + combo.getCombo().getId();
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .PUT(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+        client.send(request, HttpResponse.BodyHandlers.ofString());
     }
     
     @WebMethod(operationName = "eliminarComboItem")
-    public void eliminarComboItem(int id) {
-        try {
-            ComboItemBo.eliminar(id);
-        } catch (Exception e) {
-            throw new WebServiceException("Error al eliminar ComboItem: " + e.getMessage());
-        }
+    public void eliminarComboItem(@WebParam(name = "id") int id) throws Exception{
+        String url = this.urlBase + "/" + this.COMBO_RESOURCE + "/" + id;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .DELETE()
+                .build();
+        client.send(request, HttpResponse.BodyHandlers.ofString());
     }
     
     @WebMethod(operationName = "buscarComboItemPorId")
-    public ComboItem buscarComboItemPorId(int id) {
-        try {
-            return ComboItemBo.buscarPorId(id);
-        } catch (Exception e) {
-            throw new WebServiceException("Error al buscar ComboItem por id: " + e.getMessage());
-        }
+    public ComboItem buscarComboItemPorId(@WebParam(name = "id") int id)throws Exception {
+        String url = this.urlBase + "/" + this.COMBO_RESOURCE + "/" + id;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+        
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String json = response.body();
+        ObjectMapper mapper= new ObjectMapper();
+        ComboItem combo = mapper.readValue(json, ComboItem.class);
+        
+        return combo;
     }
     
     @WebMethod(operationName = "listarComboItems")
-    public List<ComboItem> listarComboItems() {
-        try {
-            return ComboItemBo.listar();
-        } catch (Exception e) {
-            throw new WebServiceException("Error al listar ComboItem: " + e.getMessage());
-        }
+    public List<ComboItem> listarComboItems() throws Exception{
+        String url = this.urlBase+"/"+this.COMBO_RESOURCE;
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String json = response.body();
+        ObjectMapper mapper= new ObjectMapper();
+        List<ComboItem> combos=mapper.readValue(json, new TypeReference<List<ComboItem>>(){});
+        return combos;
     }    
     
 }

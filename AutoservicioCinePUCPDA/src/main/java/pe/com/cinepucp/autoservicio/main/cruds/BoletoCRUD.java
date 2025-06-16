@@ -28,10 +28,10 @@ public class BoletoCRUD {
 
     private static int crearBoletoEjemplo(IBoletoDAO boletoDAO) {
         Venta venta = new Venta();
-        venta.setVentaId(1);
+        venta.setVentaId(5);
         
         Funcion funcion = new Funcion();
-        funcion.setFuncionId(3);
+        funcion.setFuncionId(4);
         
         Boleto nuevoBoleto = new Boleto();
         

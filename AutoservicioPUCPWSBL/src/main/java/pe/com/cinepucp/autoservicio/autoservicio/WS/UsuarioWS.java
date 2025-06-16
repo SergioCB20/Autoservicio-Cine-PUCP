@@ -1,4 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pe.com.cinepucp.autoservicio.autoservicio.WS;
+
+/**
+ *
+ * @author Amira
+ */
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,21 +27,21 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.ResourceBundle;
-import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
+import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 import pe.com.cinepucp.autoservicio.utils.JsonUtils;
 
-@WebService(serviceName = "PeliculaWS",
+@WebService(serviceName = "UsuarioWS",
         targetNamespace = "http://services.AutoCine.pucp.edu.pe/")
-public class PeliculaWS {
-
+public class UsuarioWS {
+    
     private final ResourceBundle config;
     private final String urlBase;
     private final HttpClient client = HttpClient.newHttpClient();
-    private final String PELICULA_RESOURCE = "peliculas";
+    private final String USUARIO_RESOURCE = "usuario";
     private final ObjectMapper deserializationMapper;
     private final ObjectMapper serializationMapper;
 
-    public PeliculaWS() {
+    public UsuarioWS() {
         this.config = ResourceBundle.getBundle("app");
         this.urlBase = this.config.getString("app.services.rest.baseurl");
         
@@ -41,13 +50,13 @@ public class PeliculaWS {
         this.serializationMapper = JsonUtils.getSerializationMapper();
     }
 
-    @WebMethod(operationName = "registrarPelicula")
-    public void registrarPelicula(@WebParam(name = "pelicula") Pelicula pelicula) throws Exception {
-        String json = this.serializationMapper.writeValueAsString(pelicula);
+    @WebMethod(operationName = "registrarUsuario")
+    public void registrarUsuario(@WebParam(name = "usuario") Usuario usuario) throws Exception {
+        String json = this.serializationMapper.writeValueAsString(usuario);
 
         String url;
         HttpRequest request;
-        url = this.urlBase + "/" + this.PELICULA_RESOURCE;
+        url = this.urlBase + "/" + this.USUARIO_RESOURCE;
         request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -56,13 +65,13 @@ public class PeliculaWS {
         client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    @WebMethod(operationName = "actualizarPelicula")
-    public void actualizarPelicula(@WebParam(name = "pelicula") Pelicula pelicula) throws Exception {
-        String json = this.serializationMapper.writeValueAsString(pelicula);
+    @WebMethod(operationName = "actualizarUsuario")
+    public void actualizarUsuario(@WebParam(name = "pelicula") Usuario usuario) throws Exception {
+        String json = this.serializationMapper.writeValueAsString(usuario);
 
         String url;
         HttpRequest request;
-        url = this.urlBase + "/" + this.PELICULA_RESOURCE + "/" + pelicula.getPeliculaId();
+        url = this.urlBase + "/" + this.USUARIO_RESOURCE + "/" + usuario.getId();
         request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -71,9 +80,9 @@ public class PeliculaWS {
         client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    @WebMethod(operationName = "eliminarPelicula")
-    public void eliminarPelicula(@WebParam(name = "id") int id) throws Exception {
-        String url = this.urlBase + "/" + this.PELICULA_RESOURCE + "/" + id;
+    @WebMethod(operationName = "eliminarUsuario")
+    public void eliminarUsuario(@WebParam(name = "id") int id) throws Exception {
+        String url = this.urlBase + "/" + this.USUARIO_RESOURCE + "/" + id;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()
@@ -81,9 +90,9 @@ public class PeliculaWS {
         client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    @WebMethod(operationName = "buscarPeliculaPorId")
-    public Pelicula buscarPeliculaPorId(@WebParam(name = "id") int id) throws Exception {
-        String url = this.urlBase + "/" + this.PELICULA_RESOURCE + "/" + id;
+    @WebMethod(operationName = "buscarUsuarioPorId")
+    public Usuario buscarusarioPorId(@WebParam(name = "id") int id) throws Exception {
+        String url = this.urlBase + "/" + this.USUARIO_RESOURCE + "/" + id;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
@@ -91,21 +100,21 @@ public class PeliculaWS {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
-        Pelicula pelicula = this.deserializationMapper.readValue(json, Pelicula.class);
-        return pelicula;
+        Usuario usuario = this.deserializationMapper.readValue(json, Usuario.class);
+        return usuario;
     }
 
-    @WebMethod(operationName = "listarPeliculas")
-    public List<Pelicula> listarPeliculas() throws Exception {
-        String url = this.urlBase + "/" + this.PELICULA_RESOURCE;
+    @WebMethod(operationName = "listarUsuario")
+    public List<Usuario> listarUsuario() throws Exception {
+        String url = this.urlBase + "/" + this.USUARIO_RESOURCE;
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
                 .GET()
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
         System.out.println(json);
-        List<Pelicula> peliculas = this.deserializationMapper.readValue(json, new TypeReference<List<Pelicula>>() {});
+        List<Usuario> usuarios = this.deserializationMapper.readValue(json, new TypeReference<List<Usuario>>() {});
 
-        return peliculas;
+        return usuarios;
     }
 }

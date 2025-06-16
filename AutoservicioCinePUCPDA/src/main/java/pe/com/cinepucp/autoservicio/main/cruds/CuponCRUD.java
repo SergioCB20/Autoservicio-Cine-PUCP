@@ -37,12 +37,13 @@ public class CuponCRUD {
         nuevoCupon.setFechaFin(LocalDate.now());
         nuevoCupon.setMaxUsos(100);
         Usuario usuario = new Usuario();
-        usuario.setId(15); 
+        usuario.setId(2); 
         nuevoCupon.setCreadoPor(usuario);
         nuevoCupon.setDescuentoValor(20.00);
         nuevoCupon.setUsosActuales(0);
         nuevoCupon.setFechaModificacion(LocalDate.now());
-        
+        nuevoCupon.setActivo(true);
+        nuevoCupon.setModificadoPor(usuario);
         return insertarCupon(cuponDAO, nuevoCupon);
     }
 
@@ -79,6 +80,8 @@ public class CuponCRUD {
 
     public static void actualizarCupon(CuponDAOImpl cuponDAO,int id){
         Cupon cupon = cuponDAO.buscar(id);
+        cupon.setUsosActuales(50);
+        cuponDAO.modificar(cupon);
         if (cupon == null) {
             throw new RuntimeException("Error al actualizar el cupón con ID: " + id);
         }

@@ -18,7 +18,7 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
 
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Venta modelo) throws SQLException {
-        String sql = "{CALL sp_insertar_venta(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL sp_insertar_venta(?, ?, ?, ?, ?, ?, ?)}"; //7
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, modelo.getUsuario().getId());
         stmt.setTimestamp(2, Timestamp.valueOf(modelo.getFechaHora()));
@@ -32,7 +32,7 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
 
     @Override
     protected PreparedStatement comandoModificar(Connection conn, Venta modelo) throws SQLException {
-        String sql = "{CALL sp_insertar_venta(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL sp_actualizar_venta(?, ?, ?, ?, ?, ?, ?, ?)}"; //8
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, modelo.getVentaId());
         stmt.setInt(2, modelo.getUsuario().getId());

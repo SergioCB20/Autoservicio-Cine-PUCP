@@ -15,7 +15,7 @@ import pe.com.cinepucp.autoservicio.model.salas.TipoSala;
 
 public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
 
-    private final int usuarioModificacionId = 1; // TODO: Obtener el ID del usuario de la sesión
+    private final int usuarioModificacionId = 4; // TODO: Obtener el ID del usuario de la sesión
 
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Sala sala) throws SQLException {
@@ -73,7 +73,8 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         sala.setCapacidad(rs.getInt("capacidad"));
         sala.setTipoSala(TipoSala.fromString(rs.getString("tipo_sala")));
         sala.setActiva(rs.getBoolean("esta_activa"));
-        // No mapeamos fecha_modificacion ni usuario_modificacion en el modelo por ahora
+        sala.setFechaModificacion(rs.getTimestamp("fecha_modificacion"));
+        // No mapeamos usuario_modificacion en el modelo por ahora
         return sala;
     }
 }

@@ -30,10 +30,10 @@ public class FuncionCRUD {
     private static int crearFuncionEjemplo(FuncionDAOImpl funcionDAO) {
         Funcion funcion=new Funcion();
         PeliculaDAOImpl peliDAO=new PeliculaDAOImpl();
-        Pelicula pelicula=peliDAO.buscar(2);
+        Pelicula pelicula=peliDAO.buscar(7);
         
         SalaDAOImpl salaDAO=new SalaDAOImpl();
-        Sala sala=salaDAO.buscar(3);
+        Sala sala=salaDAO.buscar(8);
         funcion.setPelicula(pelicula); // Asumiendo que ya existe una película con ID 
         funcion.setSala(sala);         
         funcion.setFechaHora(LocalDateTime.of(2025, 5, 3, 18, 30));
@@ -42,7 +42,7 @@ public class FuncionCRUD {
         funcion.setSubtitulos(false);
         funcion.setEstaActiva(true);
         funcion.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 20, 30));
-        funcion.setUsuarioModificacion(1);
+        funcion.setUsuarioModificacion(2);
         return insertarFuncion(funcionDAO, funcion);
     }
 
@@ -84,7 +84,7 @@ public class FuncionCRUD {
         funcion.setSubtitulos(true);
         funcion.setEstaActiva(true);
         funcion.setFechaModificacion(LocalDateTime.of(2025, 5, 3, 20, 30));
-        funcion.setUsuarioModificacion(1);
+        funcion.setUsuarioModificacion(2); //SI NO EXISTE EL USUARIO LANZA ERROR -------------
         if (!funcionDAO.modificar(funcion)) {
             throw new RuntimeException("Error al actualizar la función con ID: " + id);
         }
