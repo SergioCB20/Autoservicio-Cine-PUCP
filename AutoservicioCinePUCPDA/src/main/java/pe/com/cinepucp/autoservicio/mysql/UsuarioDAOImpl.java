@@ -1,6 +1,10 @@
 package pe.com.cinepucp.autoservicio.mysql;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pe.com.cinepucp.autoservicio.config.DBManager;
 import pe.com.cinepucp.autoservicio.dao.IUsuarioDAO;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
@@ -73,5 +77,27 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         usuario.setEstaActivo(rs.getBoolean("esta_activo"));
         usuario.setIdiomaPreferido(rs.getString("idioma_preferido"));
         return usuario;
+    }
+    
+    @Override
+    public Usuario buscarPorEmail(String email){
+        try(Connection conn = DBManager.getInstance().getConnection();) {
+            String sql = "{ CALL sp_buscar_usuario_por_email(?) }";
+            PreparedStatement cmd = conn.prepareCall(sql);
+            cmd.setString(1, email);
+            ResultSet rs = cmd.executeQuery();
+             if (!rs.next()) {
+                System.err.println("No se encontró el registro con email: " + email);
+                return null;
+            }
+            return this.mapearModelo(rs);
+        }catch (SQLException e) {
+            System.err.println("Error SQL durante la inserción: " + e.getMessage());
+            throw new RuntimeException("No se pudo insertar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al insertar el registro.", e);
+        }
     }
 }

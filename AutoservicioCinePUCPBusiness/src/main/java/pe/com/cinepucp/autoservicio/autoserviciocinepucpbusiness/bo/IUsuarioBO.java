@@ -11,5 +11,6 @@ import pe.com.cinepucp.autoservicio.model.auth.Usuario;
  * @author Amira
  */
 public interface IUsuarioBO extends IBOBase<Usuario> {
-    
+    Usuario buscarPorEmail(String email);
+    Usuario autenticarUsuario(String email, String password)throws Exception;
 }
