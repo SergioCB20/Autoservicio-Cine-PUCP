@@ -24,11 +24,13 @@ public class SalaCRUD {
         System.out.println("\n=== INICIO CRUD SALA ===");
         SalaDAOImpl salaDAO = new SalaDAOImpl();
 
-        listarSalas("Salas al inicio", salaDAO);
+        //listarSalas("Salas al inicio", salaDAO);
         
         int idSala = crearSalaEjemplo(salaDAO);
-        buscarSala(salaDAO, idSala);
-        actualizarSala(salaDAO, idSala);
+        Sala sala=buscarSala(salaDAO, idSala);
+        //actualizarSala(salaDAO, idSala);
+        System.out.println(sala.getId());
+        System.out.println(sala.getTipoSala());
         eliminarSala(salaDAO, idSala);
         
         listarSalas("Salas al final", salaDAO);

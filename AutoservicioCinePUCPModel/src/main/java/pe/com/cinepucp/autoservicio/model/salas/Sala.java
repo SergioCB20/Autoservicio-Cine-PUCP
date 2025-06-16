@@ -6,42 +6,52 @@ package pe.com.cinepucp.autoservicio.model.salas;
 
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Date;
 /**
  *
  * @author Sergio
  */
 public class Sala {
 
-    private int id;
+    private Integer id;
     private String nombre;
-    private int capacidad;
+    private Integer capacidad;
     private TipoSala tipoSala;
     private List<Asiento> asientos;
     private boolean activa = true;
+    private Date fechaModificacion;
+    private Integer usuarioModificacion;
 
     public Sala() {
     }
 
-    public Sala(String nombre, int capacidad, TipoSala tipoSala) {
+    public Sala(String nombre, Integer capacidad, TipoSala tipoSala) {
         this.nombre = nombre;
         this.capacidad = capacidad;
-        this.tipoSala = tipoSala;
-        this.asientos = new ArrayList<>();
+        this.tipoSala = tipoSala;    
+        this.asientos = new ArrayList<>();        
+        
     }
 
-    public Sala(String nombre, int capacidad, TipoSala tipoSala, List<Asiento> asientos) {
+    public Sala(String nombre, Integer capacidad, TipoSala tipoSala, List<Asiento> asientos) {
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.tipoSala = tipoSala;
         this.asientos = asientos;
     }
+    public Sala(String nombre, Integer capacidad, TipoSala tipoSala, boolean activo,Integer usuario) {
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.tipoSala = tipoSala;
+        this.activa=activo;
+        this.usuarioModificacion=usuario;
+    }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,11 +63,11 @@ public class Sala {
         this.nombre = nombre;
     }
 
-    public int getCapacidad() {
+    public Integer getCapacidad() {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
+    public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
     }
 
@@ -95,5 +105,33 @@ public class Sala {
                 + ", asientos=" + asientos
                 + ", activa=" + activa
                 + '}';
+    }
+
+    /**
+     * @return the fechaModificacion
+     */
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    /**
+     * @param fechaModificacion the fechaModificacion to set
+     */
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    /**
+     * @return the usuarioModificacion
+     */
+    public Integer getUsuarioModificacion() {
+        return usuarioModificacion;
+    }
+
+    /**
+     * @param usuarioModificacion the usuarioModificacion to set
+     */
+    public void setUsuarioModificacion(Integer usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
     }
 }
