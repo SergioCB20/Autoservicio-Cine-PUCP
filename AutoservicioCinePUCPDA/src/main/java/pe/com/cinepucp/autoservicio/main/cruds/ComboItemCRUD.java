@@ -36,11 +36,11 @@ public class ComboItemCRUD {
 
         Producto combo = new Producto();
         combo.setId(1); // ID de un combo existente
-        combo.setNombre("Combo Almuerzo");
+        combo.setNombre_es("Combo Almuerzo");
 
         Producto producto = new Producto();
         producto.setId(2); // ID de un producto existente
-        producto.setNombre("Bebida");
+        producto.setNombre_es("Bebida");
 
         item.setCombo(combo);
         item.setProducto(producto);

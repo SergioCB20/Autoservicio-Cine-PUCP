@@ -32,8 +32,8 @@ public class ProductoCRUD {
 
     private static int crearProductoEjemplo(ProductoDAOImpl productoDAO) {
         Producto nuevoProducto = new Producto();
-        nuevoProducto.setNombre("Gaseosa");
-        nuevoProducto.setDescripcion("Bebida fría de 500ml");
+        nuevoProducto.setNombre_es("Gaseosa");
+        nuevoProducto.setDescripcion_es("Bebida fría de 500ml");
         nuevoProducto.setPrecio(5.5);
         nuevoProducto.setTipo(TipoProducto.BEBIDA);
         nuevoProducto.setEstaActivo(true);
@@ -72,8 +72,8 @@ public class ProductoCRUD {
 
     public static void actualizarProducto(ProductoDAOImpl productoDAO, int id) {
         Producto producto = buscarProducto(productoDAO, id);
-        producto.setNombre("Gaseosa Light");
-        producto.setDescripcion("Bebida sin azúcar de 500ml");
+        producto.setNombre_es("Gaseosa Light");
+        producto.setDescripcion_es("Bebida sin azúcar de 500ml");
         producto.setPrecio(6.0);
         producto.setTipo(TipoProducto.BEBIDA);
         producto.setEstaActivo(true);
