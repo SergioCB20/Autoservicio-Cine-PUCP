@@ -15,7 +15,7 @@ import pe.com.cinepucp.autoservicio.model.salas.TipoSala;
 
 public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
 
-    private final int usuarioModificacionId = 1; // TODO: Obtener el ID del usuario de la sesión
+    private final int usuarioModificacionId = 4; // TODO: Obtener el ID del usuario de la sesión
 
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Sala sala) throws SQLException {

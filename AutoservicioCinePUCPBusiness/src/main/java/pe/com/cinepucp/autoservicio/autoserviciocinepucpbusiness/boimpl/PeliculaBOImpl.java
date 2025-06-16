@@ -60,6 +60,7 @@ public class PeliculaBOImpl implements IPeliculaBO {
     @Override
     public void actualizar(Pelicula peli) throws Exception{
         validarPelicula(peli);
+        
         peliculaDAO.modificar(peli);
     }
     @Override
