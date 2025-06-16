@@ -16,6 +16,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.ResourceBundle;
 import pe.com.cinepucp.autoservicio.model.comida.Producto;
+import pe.com.cinepucp.autoservicio.utils.JsonUtils;
 /**
  *
  * @author gonza
@@ -27,16 +28,20 @@ public class ProductoWS {
     private final String urlBase;
     private final HttpClient client = HttpClient.newHttpClient();
     private final String PRODUCTO_RESOURCE = "productos";
+    private final ObjectMapper deserializationMapper;
+    private final ObjectMapper serializationMapper;
     
     public ProductoWS() {       
         this.config = ResourceBundle.getBundle("app");
         this.urlBase = this.config.getString("app.services.rest.baseurl");
+        // Inyectamos los mappers desde JsonUtils
+        this.deserializationMapper = JsonUtils.getDeserializationMapper();
+        this.serializationMapper = JsonUtils.getSerializationMapper();
     }
     
     @WebMethod(operationName = "registrarProducto")
     public void registrarProducto(@WebParam(name = "prod")Producto prod) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(prod);
+        String json = this.serializationMapper.writeValueAsString(prod);
 
         String url;
         HttpRequest request;
@@ -51,8 +56,7 @@ public class ProductoWS {
     
     @WebMethod(operationName = "actualizarProducto")
     public void actualizarProducto(@WebParam(name = "prod")Producto prod) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(prod);
+        String json = this.serializationMapper.writeValueAsString(prod);
 
         String url;
         HttpRequest request;
@@ -84,9 +88,8 @@ public class ProductoWS {
                 .build();
         
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        String json = response.body();
-        ObjectMapper mapper= new ObjectMapper();
-        Producto producto = mapper.readValue(json, Producto.class);        
+        String json = response.body();        
+        Producto producto = this.deserializationMapper.readValue(json, Producto.class);        
         return producto;
     }
     
@@ -98,8 +101,7 @@ public class ProductoWS {
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
-        ObjectMapper mapper= new ObjectMapper();
-        List<Producto> productos=mapper.readValue(json, new TypeReference<List<Producto>>(){});
+        List<Producto> productos=this.deserializationMapper.readValue(json, new TypeReference<List<Producto>>(){});
         return productos;
     }
     
