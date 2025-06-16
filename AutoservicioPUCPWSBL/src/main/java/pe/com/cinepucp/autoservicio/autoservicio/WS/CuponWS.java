@@ -37,19 +37,43 @@ public class CuponWS {
     
     @WebMethod(operationName = "registrarCupon")
     public void registrarCupon(@WebParam(name = "cupon") Cupon cupon) throws Exception{
+         
+    if (cupon == null) {
+        System.out.println("ERROR: Cupon es null");
+        throw new IllegalArgumentException("El cupón no puede ser null");
+    }
+    
+    try {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(cupon);
-
-        String url;
-        HttpRequest request;
-        url = this.urlBase + "/" + this.CUPON_RESOURCE;
-            request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(json))
-                    .build();
-        client.send(request, HttpResponse.BodyHandlers.ofString());
-    }
+        System.out.println("JSON generado: " + json);
+        
+        String url = this.urlBase + "/" + this.CUPON_RESOURCE;
+        System.out.println("URL destino: " + url);
+        
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+        
+        System.out.println("Enviando petición...");
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        
+        System.out.println("Código de respuesta: " + response.statusCode());
+        System.out.println("Cuerpo de respuesta: " + response.body());
+        
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            throw new Exception("Error al registrar cupón. Código: " + response.statusCode());
+        }
+        
+        System.out.println("=== CUPON REGISTRADO EXITOSAMENTE ===");
+        
+    } catch (Exception e) {
+        System.out.println("ERROR en registrarCupon: " + e.getMessage());
+        e.printStackTrace();
+        throw e;
+    }    }
     
     @WebMethod(operationName = "actualizarCupon")
     public void actualizarCupon(@WebParam(name = "cupon") Cupon cupon) throws Exception{
