@@ -18,8 +18,8 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         stmt.setString(3, producto.getDescripcion_es());
         stmt.setString(4, producto.getDescripcion_en());        
         stmt.setDouble(5, producto.getPrecio());
-        stmt.setString(6, producto.getImagenUrl());
-        stmt.setString(7, producto.getTipo().name());
+        stmt.setString(6, producto.getTipo().name());
+        stmt.setString(7, producto.getImagenUrl());
         stmt.setBoolean(8, producto.isEstaActivo());
         stmt.setInt(9,producto.getUsuarioModificacion());
         return stmt;
@@ -35,8 +35,8 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         stmt.setString(4, producto.getDescripcion_es());
         stmt.setString(5, producto.getDescripcion_en());        
         stmt.setDouble(6, producto.getPrecio());
-        stmt.setString(7, producto.getImagenUrl());
-        stmt.setString(8, producto.getTipo().name());
+        stmt.setString(7, producto.getTipo().name());
+        stmt.setString(8, producto.getImagenUrl());
         stmt.setBoolean(9, producto.isEstaActivo());
         stmt.setInt(10,producto.getUsuarioModificacion());
         
