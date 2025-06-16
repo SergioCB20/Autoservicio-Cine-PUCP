@@ -4,6 +4,8 @@
  */
 package pe.com.cinepucp.autoservicio.main.cruds;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.mysql.ProductoDAOImpl;
 import pe.com.cinepucp.autoservicio.model.comida.Producto;
@@ -33,10 +35,15 @@ public class ProductoCRUD {
     private static int crearProductoEjemplo(ProductoDAOImpl productoDAO) {
         Producto nuevoProducto = new Producto();
         nuevoProducto.setNombre_es("Gaseosa");
+        nuevoProducto.setNombre_en("Soda");
         nuevoProducto.setDescripcion_es("Bebida fría de 500ml");
+        nuevoProducto.setDescripcion_en("Soda 500ml");
         nuevoProducto.setPrecio(5.5);
         nuevoProducto.setTipo(TipoProducto.BEBIDA);
         nuevoProducto.setEstaActivo(true);
+        nuevoProducto.setUsuarioModificacion(4);
+        nuevoProducto.setImagenUrl("asddajlkdaj");
+        nuevoProducto.setFechaModificacion(java.util.Date.from(LocalDateTime.of(2025, 5, 3, 14, 30).atZone(ZoneId.systemDefault()).toInstant()));
         return insertarProducto(productoDAO, nuevoProducto);
     }
 
@@ -73,11 +80,16 @@ public class ProductoCRUD {
     public static void actualizarProducto(ProductoDAOImpl productoDAO, int id) {
         Producto producto = buscarProducto(productoDAO, id);
         producto.setNombre_es("Gaseosa Light");
+        producto.setNombre_en("Soda light");
         producto.setDescripcion_es("Bebida sin azúcar de 500ml");
+        producto.setDescripcion_en("Soda zero 500ml");        
         producto.setPrecio(6.0);
         producto.setTipo(TipoProducto.BEBIDA);
         producto.setEstaActivo(true);
-
+        producto.setUsuarioModificacion(4);
+        producto.setImagenUrl("waaaaa");
+        producto.setFechaModificacion(java.util.Date.from(LocalDateTime.of(2025, 5, 1, 14, 30).atZone(ZoneId.systemDefault()).toInstant()));
+        
         if (!productoDAO.modificar(producto)) {
             throw new RuntimeException("Error al actualizar el producto con ID: " + id);
         }

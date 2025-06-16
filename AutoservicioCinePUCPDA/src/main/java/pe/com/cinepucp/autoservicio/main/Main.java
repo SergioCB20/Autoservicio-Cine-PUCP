@@ -40,7 +40,7 @@ public class Main {
         //BoletoCRUD.ejecutarCRUDBoleto();
         //VentaCRUD.ejecutarCRUDVenta(); 
         //CuponCRUD.ejecutarCRUDCupon();
-        ProductoCRUD.ejecutarCRUDProducto();
+        //ProductoCRUD.ejecutarCRUDProducto();
         
     }
     
