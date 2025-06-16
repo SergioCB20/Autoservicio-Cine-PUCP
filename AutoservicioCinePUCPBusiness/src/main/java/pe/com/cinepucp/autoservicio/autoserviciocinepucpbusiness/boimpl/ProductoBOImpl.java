@@ -25,10 +25,10 @@ public class ProductoBOImpl implements IProductoBO{
          
         Objects.requireNonNull(producto, "El producto no puede ser nulo.");
 
-        if (producto.getNombre()== null || producto.getNombre().trim().isEmpty()) {
+        if (producto.getNombre_es()== null || producto.getNombre_es().trim().isEmpty()) {
             throw new Exception("El nombre del producto es requerido.");
         }
-        if (producto.getDescripcion() == null || producto.getDescripcion().trim().isEmpty()) {
+        if (producto.getDescripcion_es() == null || producto.getDescripcion_es().trim().isEmpty()) {
             throw new Exception("La descripcion de producto es requerido.");
         }
         if (producto.getPrecio()<=0) {

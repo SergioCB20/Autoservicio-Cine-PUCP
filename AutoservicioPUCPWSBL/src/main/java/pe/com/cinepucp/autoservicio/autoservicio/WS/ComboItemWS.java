@@ -36,7 +36,7 @@ public class ComboItemWS {
     public void registrarComboItem(@WebParam(name = "combo")ComboItem combo) throws Exception {
         System.out.println("--- Java ComboItem object received from Web Service ---");
         System.out.println("ComboItemId: " + combo.getCombo().getId());
-        System.out.println("Nombre: " + combo.getProducto().getNombre());
+        System.out.println("Nombre: " + combo.getProducto().getNombre_es());
         System.out.println("Cantidad: " + combo.getCantidad());
         System.out.println("-----------------------------------------------------");
         ObjectMapper mapper = new ObjectMapper();
@@ -57,7 +57,7 @@ public class ComboItemWS {
     public void actualizarComboItem(@WebParam(name = "combo") ComboItem combo) throws Exception{
         System.out.println("--- Java ComboItem object received from Web Service ---");
         System.out.println("ComboItemId: " + combo.getCombo().getId());
-        System.out.println("Nombre: " + combo.getProducto().getNombre());
+        System.out.println("Nombre: " + combo.getProducto().getNombre_es());
         System.out.println("Cantidad: " + combo.getCantidad());
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(combo);

@@ -69,12 +69,14 @@ public class ComboItemDAOImpl extends BaseDAOImpl<ComboItem> implements IComboIt
 
         Producto combo = new Producto();
         combo.setId(rs.getInt("combo_id"));
-        combo.setNombre(rs.getString("combo_nombre")); // Asegúrate que el SP lo retorne
+        combo.setNombre_es(rs.getString("combo_nombre_es")); // Asegúrate que el SP lo retorne
+        combo.setNombre_en(rs.getString("combo_nombre_en"));
         item.setCombo(combo);
 
         Producto producto = new Producto();
         producto.setId(rs.getInt("producto_id"));
-        producto.setNombre(rs.getString("producto_nombre")); // Asegúrate que el SP lo retorne
+        producto.setNombre_es(rs.getString("producto_nombre_es")); // Asegúrate que el SP lo retorne
+        producto.setNombre_en(rs.getString("producto_nombre_en")); // Asegúrate que el SP lo retorne
         item.setProducto(producto);
 
         item.setCantidad(rs.getInt("cantidad"));

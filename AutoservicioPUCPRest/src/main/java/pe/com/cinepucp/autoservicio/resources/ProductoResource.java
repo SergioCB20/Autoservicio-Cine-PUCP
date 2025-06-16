@@ -47,7 +47,7 @@ public class ProductoResource {
     }
     @POST
     public Response crear(Producto producto) throws Exception {
-        if (producto == null || producto.getNombre()==null ||producto.getNombre().isBlank()){
+        if (producto == null || producto.getNombre_es()==null ||producto.getNombre_es().isBlank()){
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("El producto no es valida")
                     .build();
@@ -64,7 +64,7 @@ public class ProductoResource {
     @PUT
     @Path("{id}")
     public Response actualizar(@PathParam("id") int id, Producto producto) throws Exception {
-        if (producto == null || producto.getNombre()==null ||producto.getNombre().isBlank()) {
+        if (producto == null || producto.getNombre_es()==null ||producto.getNombre_es().isBlank()) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Producto: " + id + ", no encontrado")
                     .build();
