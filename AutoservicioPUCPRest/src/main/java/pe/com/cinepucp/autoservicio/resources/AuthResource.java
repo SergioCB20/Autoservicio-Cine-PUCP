@@ -44,7 +44,7 @@ public class AuthResource {
                     "id", usuarioAutenticado.getId(),
                     "nombre", usuarioAutenticado.getNombre(),
                     "email", usuarioAutenticado.getEmail(),
-                    "tipoUsuario", usuarioAutenticado.getTipoUsuario().getDescripcion()
+                    "tipoUsuario", usuarioAutenticado.isAdmin() ? "ADMIN" : "CLIENTE"
                 );
                 return Response.ok(responseData).build();
             } else {

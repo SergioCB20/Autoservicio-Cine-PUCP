@@ -50,9 +50,6 @@ public class UsuarioBOImpl implements IUsuarioBO {
         if (usuario.getTelefono() == null || usuario.getTelefono().trim().isEmpty()) {
             throw new Exception("El teléfono del usuario es requerido.");
         }
-        if (usuario.getTipoUsuario() == null) {
-            throw new Exception("El tipo de usuario es requerido.");
-        }
     }
 
     @Override

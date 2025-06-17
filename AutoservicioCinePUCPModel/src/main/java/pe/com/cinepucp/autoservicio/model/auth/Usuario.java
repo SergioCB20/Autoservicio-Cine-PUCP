@@ -5,6 +5,7 @@ import java.util.List;
 import pe.com.cinepucp.autoservicio.model.venta.Cupon;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
 import pe.com.cinepucp.autoservicio.model.auth.CodigoVerificacion;
+import java.util.ArrayList; // Importar ArrayList para inicializar las listas
 
 public class Usuario {
     private int id;
@@ -15,7 +16,9 @@ public class Usuario {
     private LocalDate fechaRegistro;
     private boolean estaActivo;
     private String idiomaPreferido;
-    private TipoUsuario tipoUsuario;
+    // private TipoUsuario tipoUsuario; // <-- ELIMINAR ESTA LÍNEA
+    private boolean isAdmin; // <-- AÑADIR ESTA LÍNEA
+
     private List<Sesion> sesiones;
     private List<CodigoVerificacion> codigosVerificacion;
     private List<Venta> compras;
@@ -23,6 +26,12 @@ public class Usuario {
     private List<LogSistema> logsUsuario;
 
     public Usuario() {
+        // Inicializar listas en el constructor por defecto para evitar NullPointerException
+        this.sesiones = new ArrayList<>();
+        this.codigosVerificacion = new ArrayList<>();
+        this.compras = new ArrayList<>();
+        this.cupones = new ArrayList<>();
+        this.logsUsuario = new ArrayList<>();
     }
     
     public Usuario(Usuario usuario){
@@ -34,10 +43,17 @@ public class Usuario {
         this.fechaRegistro = usuario.getFechaRegistro();
         this.estaActivo = usuario.isEstaActivo();
         this.idiomaPreferido = usuario.getIdiomaPreferido();
+        this.isAdmin = usuario.isAdmin(); // <-- COPIAR EL VALOR DE isAdmin
+        // Asumiendo que quieres copiar las listas también, si no, puedes quitarlas
+        this.sesiones = new ArrayList<>(usuario.obtenerSesiones());
+        this.codigosVerificacion = new ArrayList<>(usuario.obtenerCodigosVerificacion());
+        this.compras = new ArrayList<>(usuario.obtenerCompras());
+        this.cupones = new ArrayList<>(usuario.obtenerCupones());
+        this.logsUsuario = new ArrayList<>(usuario.obtenerLogsUsuario());
     }
     
     public Usuario(String nombre, String email, String telefono, String password,
-            LocalDate fechaRegistro, boolean estaActivo, String idiomaPreferido) {
+            LocalDate fechaRegistro, boolean estaActivo, String idiomaPreferido, boolean isAdmin) { // <-- Añadir isAdmin aquí
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
@@ -45,6 +61,12 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
         this.estaActivo = estaActivo;
         this.idiomaPreferido = idiomaPreferido;
+        this.isAdmin = isAdmin; // <-- Asignar isAdmin
+        this.sesiones = new ArrayList<>();
+        this.codigosVerificacion = new ArrayList<>();
+        this.compras = new ArrayList<>();
+        this.cupones = new ArrayList<>();
+        this.logsUsuario = new ArrayList<>();
     }
 
     public int getId() {
@@ -111,12 +133,13 @@ public class Usuario {
         this.idiomaPreferido = idiomaPreferido;
     }
 
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
+    // AÑADIR get y set para isAdmin
+    public boolean isAdmin() { // Getter para booleanos suele ser 'isNombrePropiedad'
+        return isAdmin;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setAdmin(boolean admin) { // Setter para isAdmin
+        isAdmin = admin;
     }
 
     // Métodos para manipulación de sesiones
@@ -133,7 +156,7 @@ public class Usuario {
     }
 
     public List<Sesion> obtenerSesiones() {
-        return List.copyOf(this.sesiones); // Devuelve una copia inmutable
+        return List.copyOf(this.sesiones);
     }
 
     // Métodos para manipulación de compras
@@ -203,10 +226,6 @@ public class Usuario {
         return List.copyOf(this.codigosVerificacion);
     }
     
-    
-    
-    
-    
     @Override
     public String toString() {
         return "Usuario{" +
@@ -218,6 +237,7 @@ public class Usuario {
                 ", fechaRegistro=" + fechaRegistro +
                 ", estaActivo=" + estaActivo +
                 ", idiomaPreferido='" + idiomaPreferido + '\'' +
+                ", isAdmin=" + isAdmin + // <-- Añadir isAdmin al toString
                 '}';
     }
 }

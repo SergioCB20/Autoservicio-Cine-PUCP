@@ -80,8 +80,7 @@ public class UsuarioResource {
                 responseUsuario.setNombre(usuario.getNombre());
                 responseUsuario.setEmail(usuario.getEmail());
                 responseUsuario.setTelefono(usuario.getTelefono());
-                responseUsuario.setTipoUsuario(usuario.getTipoUsuario());
-                // No responseUsuario.setPassword(usuario.getPassword());
+                responseUsuario.setAdmin(usuario.isAdmin());
 
                 return Response.ok(responseUsuario).build(); // 200 OK
             } else {

@@ -53,7 +53,7 @@ public class AuthWS {
         Map<String, String> credentials = Map.of("email", email, "password", password);
         String jsonRequest = this.serializationMapper.writeValueAsString(credentials);
 
-        String url = this.urlBaseRest + "auth/login"; // Endpoint REST para login
+        String url = this.urlBaseRest + "/auth/login"; // Endpoint REST para login
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", MediaType.APPLICATION_JSON)
@@ -75,9 +75,12 @@ public class AuthWS {
     
     @WebMethod(operationName = "registrarUsuario")
     public String registrarUsuario(@WebParam(name = "usuario") Usuario usuario) throws Exception {
+        String tipo = usuario.isAdmin() ? "ADMIN" : "CLIENTE";
+        System.out.println(tipo);
         String jsonRequest = this.serializationMapper.writeValueAsString(usuario);
 
-        String url = this.urlBaseRest + "auth/signup"; // Endpoint REST para registro
+        String url = this.urlBaseRest + "/auth/signup"; // Endpoint REST para registro
+        System.out.println(url);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", MediaType.APPLICATION_JSON)
@@ -90,6 +93,7 @@ public class AuthWS {
             return "Registro exitoso.";
         } else {
             String errorMsg = response.body();
+            System.out.println(errorMsg);
             Map<String, String> errorMap = this.deserializationMapper.readValue(errorMsg, Map.class);
             throw new Exception("Error en el registro: " + errorMap.getOrDefault("message", "Error desconocido."));
         }

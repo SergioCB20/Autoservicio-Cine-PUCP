@@ -12,32 +12,34 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Usuario usuario) throws SQLException {
-        String sql = "{ CALL sp_insertar_usuario(?, ?, ?, ?, ?, ?, ?) }";
+        String sql = "{ CALL sp_insertar_usuario(?, ?, ?, ?) }"; // Ya no se envía isAdmin
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, usuario.getNombre());
         stmt.setString(2, usuario.getEmail());
         stmt.setString(3, usuario.getTelefono());
-        stmt.setString(4, usuario.getPassword());
-        stmt.setDate(5, Date.valueOf(usuario.getFechaRegistro()));
-        stmt.setBoolean(6, usuario.isEstaActivo());
-        stmt.setString(7, usuario.getIdiomaPreferido());
+        stmt.setString(4, usuario.getPassword()); 
         return stmt;
     }
 
     @Override
     protected PreparedStatement comandoModificar(Connection conn, Usuario usuario) throws SQLException {
-        String sql = "{ CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?) }";
+        // Para la modificación, incluimos `isAdmin` ya que es un campo que podría ser cambiado
+        // por un administrador (por ejemplo, para promover o degradar un usuario).
+        // También incluimos `usuario_modificacion` (si lo deseas) y `fecha_modificacion`
+        // Aunque `fecha_modificacion` se actualiza automáticamente en la BD con `ON UPDATE CURRENT_TIMESTAMP`.
+        String sql = "{ CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?) }"; // Añadimos isAdmin y usuario_modificacion
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, usuario.getId());
         stmt.setString(2, usuario.getNombre());
         stmt.setString(3, usuario.getEmail());
         stmt.setString(4, usuario.getTelefono());
         stmt.setString(5, usuario.getPassword());
-        stmt.setBoolean(6, usuario.isEstaActivo());
-        stmt.setString(7, usuario.getIdiomaPreferido());
+        stmt.setBoolean(6, usuario.isAdmin()); 
+        stmt.setBoolean(7, usuario.isEstaActivo());
+        stmt.setString(8, usuario.getIdiomaPreferido());
+        stmt.setInt(9, 4); //id usuariomodificacion
         return stmt;
     }
-
     @Override
     protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
         String sql = "{ CALL sp_eliminar_usuario(?) }";
@@ -68,7 +70,6 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         usuario.setEmail(rs.getString("email"));
         usuario.setTelefono(rs.getString("telefono"));
         usuario.setPassword(rs.getString("password_hash"));
-
         Date fechaRegistro = rs.getDate("fecha_registro");
         if (fechaRegistro != null) {
             usuario.setFechaRegistro(fechaRegistro.toLocalDate());
@@ -76,6 +77,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
         usuario.setEstaActivo(rs.getBoolean("esta_activo"));
         usuario.setIdiomaPreferido(rs.getString("idioma_preferido"));
+        usuario.setAdmin(rs.getInt("isAdmin") == 1);
         return usuario;
     }
     
