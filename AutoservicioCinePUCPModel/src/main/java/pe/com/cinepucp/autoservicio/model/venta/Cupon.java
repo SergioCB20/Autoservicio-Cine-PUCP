@@ -15,12 +15,12 @@ public class Cupon {
     private String descripcionEn;
     private TipoDescuento descuentoTipo;
     private Double descuentoValor;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private LocalDate fechaInicio = null;
+    private LocalDate fechaFin = null;
     private Integer maxUsos;
     private Integer usosActuales;
     private Usuario creadoPor = null;
-    private LocalDate fechaModificacion;
+    private LocalDate fechaModificacion = null;
     private List<Usuario> usuarios = new ArrayList<>(); // Usuarios que tienen este cupón
     private List<Venta> ventas = new ArrayList<>(); // Ventas donde se aplicó este cupón
     private boolean activo;
