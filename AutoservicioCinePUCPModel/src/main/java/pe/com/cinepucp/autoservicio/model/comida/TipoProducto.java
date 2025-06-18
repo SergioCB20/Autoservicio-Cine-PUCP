@@ -6,6 +6,7 @@ package pe.com.cinepucp.autoservicio.model.comida;
  */
 public enum TipoProducto {
     BEBIDA,
-    SNACK,
-    COMBO
+    COMIDA,
+    COMBO;
+  
 }
