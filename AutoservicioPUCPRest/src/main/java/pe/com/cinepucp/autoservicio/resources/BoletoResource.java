@@ -54,13 +54,15 @@ public class BoletoResource {
     public Response crear(Boleto boleto) throws Exception {
         if (boleto == null ) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("El Boleto no es valida")
+                    .entity("El Boleto no es valido")
                     .build();
         }
-        
+        System.out.println("=== Boleto recibido ===");
+        System.out.println(boleto.getEstado().getDescripcion());
+        System.out.println(boleto.getVenta().getEstado().getDescripcion());
         this.boletoBO.registrar(boleto);
         URI location = URI.create("/AutoservicioCine/api/Boletos/" + boleto.getBoletoId());
-        
+        System.out.println("Se recibió POST en BoletoResource: " + boleto);
         return Response.created(location)
                 .entity(boleto)
                 .build();

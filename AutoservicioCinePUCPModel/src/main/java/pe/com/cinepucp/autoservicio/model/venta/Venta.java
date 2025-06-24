@@ -31,8 +31,8 @@ public String toString() {
            ", estado=" + estado +
            ", metodoPago=" + metodoPago +
            ", boletos=" + (boletos != null ? boletos.size() : 0) + " boletos" +
-           ", productosVendidos=" + (productosVendidos != null ? productosVendidos.size() : 0) + " productos" +
-           ", cuponesAplicados=" + (cuponesAplicados != null ? cuponesAplicados.size() : 0) + " cupones" +
+           ", productosVendidos=" + (getProductosVendidos() != null ? getProductosVendidos().size() : 0) + " productos" +
+           ", cuponesAplicados=" + (getCuponesAplicados() != null ? getCuponesAplicados().size() : 0) + " cupones" +
            '}';
 }
     
@@ -118,6 +118,22 @@ public String toString() {
 
     public void setMetodoPago(MetodoPago metodoPago) {
         this.metodoPago = metodoPago;
+    }
+
+    public List<VentaProducto> getProductosVendidos() {
+        return productosVendidos;
+    }
+
+    public void setProductosVendidos(List<VentaProducto> productosVendidos) {
+        this.productosVendidos = productosVendidos;
+    }
+
+    public List<Cupon> getCuponesAplicados() {
+        return cuponesAplicados;
+    }
+
+    public void setCuponesAplicados(List<Cupon> cuponesAplicados) {
+        this.cuponesAplicados = cuponesAplicados;
     }
 
  
