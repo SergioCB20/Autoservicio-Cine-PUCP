@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,6 +46,7 @@ public class JsonUtils {
             }
         });
         deserializationMapper.registerModule(customDateModule);
+        deserializationMapper.registerModule(new JavaTimeModule());
 
         serializationMapper = new ObjectMapper();
         serializationMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
