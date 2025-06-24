@@ -4,6 +4,9 @@
  */
 package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import pe.com.cinepucp.autoservicio.config.DBManager;
 import pe.com.cinepucp.autoservicio.dao.IAsientoDAO;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
@@ -56,7 +59,7 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
 
     @Override
     protected PreparedStatement comandoBuscar(Connection conn, int id) throws SQLException {
-        String sql = "{CALL sp_leer_asiento(?)}";
+        String sql = "{CALL sp_buscar_asiento(?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
         return stmt;
@@ -64,11 +67,39 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
 
     @Override
     protected PreparedStatement comandoListar(Connection conn) throws SQLException {
-        String sql = "{CALL sp_listar_asientos()}";
+        String sql = "{CALL sp_listar_asientos(false)}";
         CallableStatement stmt = conn.prepareCall(sql);
         return stmt;
     }
-
+    protected CallableStatement comandolistaAsientoSala(Connection conn,int idsala) throws SQLException {
+        String sql = "{CALL sp_listarAsientosSala(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, idsala);
+        return cmd;
+    }
+    @Override
+    public List<Asiento> listaAsientos(int idsala) {
+        try (
+            Connection conn = DBManager.getInstance().getConnection();
+            CallableStatement cmd = this.comandolistaAsientoSala(conn, idsala);
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            AsientoDAOImpl asientoDAO =new AsientoDAOImpl();
+            List<Asiento> asientos = new ArrayList<>();
+            while (rs.next()) {
+                asientos.add(asientoDAO.mapearModelo(rs));
+            }
+            return asientos;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante el listado: " + e.getMessage());
+            throw new RuntimeException("No se pudo listar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al listar los registros.", e);
+        }        
+    }
     @Override
     protected Asiento mapearModelo(ResultSet rs) throws SQLException {
         Asiento asiento = new Asiento();
@@ -85,4 +116,5 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
 
         return asiento;
     }
+
 }

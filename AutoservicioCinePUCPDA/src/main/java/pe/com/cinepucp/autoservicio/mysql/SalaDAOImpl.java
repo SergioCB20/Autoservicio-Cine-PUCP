@@ -4,7 +4,11 @@
  */
 package pe.com.cinepucp.autoservicio.mysql;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import pe.com.cinepucp.autoservicio.config.DBManager;
 import pe.com.cinepucp.autoservicio.dao.ISalaDAO;
+import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
 import pe.com.cinepucp.autoservicio.model.salas.TipoSala;
 
@@ -77,4 +81,5 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         // No mapeamos usuario_modificacion en el modelo por ahora
         return sala;
     }
+    
 }

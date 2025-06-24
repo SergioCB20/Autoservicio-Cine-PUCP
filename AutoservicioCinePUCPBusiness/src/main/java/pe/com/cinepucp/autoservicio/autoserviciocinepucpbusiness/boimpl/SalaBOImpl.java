@@ -63,7 +63,6 @@ public class SalaBOImpl implements ISalaBO{
     public Sala buscarPorId(int id) {
         return salaDAO.buscar(id);
     }
-    
-    
+
     
 }

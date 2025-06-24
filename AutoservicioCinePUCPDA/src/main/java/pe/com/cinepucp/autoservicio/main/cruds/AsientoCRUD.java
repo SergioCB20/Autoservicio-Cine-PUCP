@@ -23,12 +23,13 @@ public class AsientoCRUD {
         
         listarAsientos("Asientos al inicio", asientoDAO);
         
-        int idAsiento = crearAsientoEjemplo(asientoDAO);
-        buscarAsiento(asientoDAO, idAsiento);
-        actualizarAsiento(asientoDAO, idAsiento);
-        eliminarAsiento(asientoDAO, idAsiento);
-        
-        listarAsientos("Asientos al final", asientoDAO);
+//        int idAsiento = crearAsientoEjemplo(asientoDAO);
+//        buscarAsiento(asientoDAO, idAsiento);
+//        actualizarAsiento(asientoDAO, idAsiento);
+//        eliminarAsiento(asientoDAO, idAsiento);
+//        
+//        listarAsientos("Asientos al final", asientoDAO);
+        listarASientosSala("Asientos por sala 8",asientoDAO,8);
         System.out.println("=== CRUD ASIENTO COMPLETADO CON ÉXITO ===\n");
     }
 
@@ -50,6 +51,17 @@ public class AsientoCRUD {
         System.out.println("\n" + titulo);
         System.out.println("======================================");
         List<Asiento> asientos = asientoDAO.listar();
+        if (asientos.isEmpty()) {
+            System.out.println("No hay asientos registrados");
+        } else {
+            asientos.forEach(System.out::println);
+        }
+        System.out.println("======================================\n");
+    }
+    public static void listarASientosSala(String titulo, AsientoDAOImpl asientoDAO,int salaid){
+        System.out.println("\n" + titulo);
+        System.out.println("======================================");
+        List<Asiento> asientos = asientoDAO.listaAsientos(salaid);
         if (asientos.isEmpty()) {
             System.out.println("No hay asientos registrados");
         } else {
