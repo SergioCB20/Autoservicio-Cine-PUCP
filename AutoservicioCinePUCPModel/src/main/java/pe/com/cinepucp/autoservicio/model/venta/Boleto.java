@@ -56,6 +56,14 @@ public class Boleto {
         this.estado = estado;
     }
     
+    public List<BoletoDetalle> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<BoletoDetalle> detalles) {
+        this.detalles = detalles;
+    }
+    
     @Override
     public String toString() {
         return "Boleto{" +
