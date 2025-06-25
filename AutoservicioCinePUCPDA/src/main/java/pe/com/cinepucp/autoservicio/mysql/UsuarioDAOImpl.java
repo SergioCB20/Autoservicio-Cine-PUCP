@@ -37,7 +37,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         stmt.setBoolean(6, usuario.isAdmin()); 
         stmt.setBoolean(7, usuario.isEstaActivo());
         stmt.setString(8, usuario.getIdiomaPreferido());
-        stmt.setInt(9, 4); //id usuariomodificacion
+        stmt.setInt(9, usuario.getId()); //id usuariomodificacion
         return stmt;
     }
     @Override

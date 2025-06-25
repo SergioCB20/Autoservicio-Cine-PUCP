@@ -26,7 +26,7 @@ public class Main {
 
     public static void main(String[] args) {
         //SalaCRUD.ejecutarCRUDSala();
-        AsientoCRUD.ejecutarCRUDAsiento();
+        //AsientoCRUD.ejecutarCRUDAsiento();
         //SesionCRUD.ejecutarCRUDSesion();
         //GeneroCRUD.ejecutarCRUDGenero();
         //CodigoVerificacionCRUD.ejecutarCRUDCodigoVerificacion(); 
@@ -35,7 +35,7 @@ public class Main {
         //PeliculaCRUD.ejecutarCRUDPelicula();
         
 //        FuncionCRUD.ejecutarCRUDFuncion();
-//        VentaCRUD.ejecutarCRUDVenta();
+        VentaCRUD.ejecutarCRUDVenta();
 
         //BoletoCRUD.ejecutarCRUDBoleto();
         //VentaCRUD.ejecutarCRUDVenta(); 
