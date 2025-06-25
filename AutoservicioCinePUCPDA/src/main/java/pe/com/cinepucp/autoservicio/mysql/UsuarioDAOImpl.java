@@ -27,7 +27,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         // por un administrador (por ejemplo, para promover o degradar un usuario).
         // También incluimos `usuario_modificacion` (si lo deseas) y `fecha_modificacion`
         // Aunque `fecha_modificacion` se actualiza automáticamente en la BD con `ON UPDATE CURRENT_TIMESTAMP`.
-        String sql = "{ CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?) }"; // Añadimos isAdmin y usuario_modificacion
+        String sql = "{ CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?) }"; // Añadimos isAdmin y usuario_modificacion
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, usuario.getId());
         stmt.setString(2, usuario.getNombre());
@@ -37,7 +37,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         stmt.setBoolean(6, usuario.isAdmin()); 
         stmt.setBoolean(7, usuario.isEstaActivo());
         stmt.setString(8, usuario.getIdiomaPreferido());
-        stmt.setInt(9, 4); //id usuariomodificacion
+        stmt.setInt(9, usuario.getId()); //id usuariomodificacion
         return stmt;
     }
     @Override
