@@ -61,7 +61,7 @@ public class UsuarioWS {
         String json = this.serializationMapper.writeValueAsString(usuario);
 
         // Asume que tu API REST usa el ID del usuario en la URL para PUT, ej: /api/usuarios/{id}
-        String url = this.urlBaseRest + this.USUARIO_RESOURCE + "/" + usuario.getId();
+        String url = this.urlBaseRest + "/" + this.USUARIO_RESOURCE + "/" + usuario.getId();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -77,7 +77,7 @@ public class UsuarioWS {
 
     @WebMethod(operationName = "eliminarUsuario")
     public void eliminarUsuario(@WebParam(name = "id") int id) throws Exception {
-        String url = this.urlBaseRest + this.USUARIO_RESOURCE + "/" + id; // Asume /api/usuarios/{id}
+        String url = this.urlBaseRest + "/" + this.USUARIO_RESOURCE + "/" + id; // Asume /api/usuarios/{id}
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()
@@ -92,13 +92,14 @@ public class UsuarioWS {
     
     @WebMethod(operationName = "buscarUsuarioPorId")
     public Usuario buscarUsuarioPorId(@WebParam(name = "id") int id) throws Exception {
-        String url = this.urlBaseRest + this.USUARIO_RESOURCE + "/" + id; // Asume /api/usuarios/{id}
+        String url = this.urlBaseRest + "/" + this.USUARIO_RESOURCE + "/" + id; // Asume /api/usuarios/{id}
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Respuesta del servidor: " + response.body()); // Debug del JSON
         if (response.statusCode() == 200) {
             String json = response.body();
             // Deserializa el JSON a un objeto Usuario
