@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
@@ -93,8 +94,8 @@ public class VentaWS {
         return venta;
     }
 
-    @WebMethod(operationName = "listarVentas")
-    public List<Venta> listarVentas() throws Exception {
+    @WebMethod(operationName = "listarVentasReporte")
+    public List<Venta> listarVentasReporte(@WebParam(name = "fechaini") LocalDateTime fechaini,@WebParam(name = "fechafin") LocalDateTime fechafin) throws Exception {
         String url = this.urlBase + "/" + this.VENTA_RESOURCE;
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
                 .GET()
