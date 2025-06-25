@@ -3,6 +3,7 @@ package pe.com.cinepucp.autoservicio.main.cruds;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
@@ -18,14 +19,15 @@ public class VentaCRUD {
         System.out.println("\n=== INICIO CRUD VENTA ===");
         VentaDAOImpl ventaDAO = new VentaDAOImpl();
 
-        listarVentas("Ventas al inicio", ventaDAO);
+        //listarVentas("Ventas al inicio", ventaDAO);
         
-        int idVentas = crearVentaEjm(ventaDAO);
-        buscarVenta(ventaDAO, idVentas);
-        actualizarVenta(ventaDAO, idVentas);
-        eliminarVenta(ventaDAO, idVentas);
-
-        listarVentas(null, ventaDAO);
+//        int idVentas = crearVentaEjm(ventaDAO);
+//        buscarVenta(ventaDAO, idVentas);
+//        actualizarVenta(ventaDAO, idVentas);
+//        eliminarVenta(ventaDAO, idVentas);
+//
+//        listarVentas(null, ventaDAO);
+        listarVentasreporte("Ventas en rango", ventaDAO);
         System.out.println("\n=== CRUD VENTAS COMPLETADO CON ÉXITO ===");
     }
 
@@ -50,6 +52,18 @@ public class VentaCRUD {
         System.out.println("\n" + titulo);
         System.out.println("======================================");
         List<Venta> ventas = ventaDAO.listar();
+        if(ventas.isEmpty()){
+            System.out.println("No hay ventas registradas");
+        }else{
+            ventas.forEach(System.out::println);
+        }
+        System.out.println("======================================\n");
+
+    }
+    public static void listarVentasreporte(String titulo, VentaDAOImpl ventaDAO){
+        System.out.println("\n" + titulo);
+        System.out.println("======================================");
+        List<Venta> ventas = ventaDAO.listarVentasRep(LocalDateTime.of(2025,06,01,10,00), LocalDateTime.now());
         if(ventas.isEmpty()){
             System.out.println("No hay ventas registradas");
         }else{

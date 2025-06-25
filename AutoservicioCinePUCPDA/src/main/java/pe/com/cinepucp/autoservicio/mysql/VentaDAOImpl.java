@@ -6,9 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import pe.com.cinepucp.autoservicio.config.DBManager;
 
 import pe.com.cinepucp.autoservicio.dao.IVentaDAO;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
+import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.model.venta.EstadoVenta;
 import pe.com.cinepucp.autoservicio.model.venta.MetodoPago;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
@@ -66,7 +71,36 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
         String sql = "{CALL sp_listar_ventas()}";
         return conn.prepareCall(sql);
     }
-
+    protected CallableStatement comandolistaVentaReporte(Connection conn,LocalDateTime fechaini,LocalDateTime fechafin) throws SQLException {
+        String sql = "{CALL sp_listarVentasReporte(?, ?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setTimestamp(1, Timestamp.valueOf(fechaini));
+        cmd.setTimestamp(2, Timestamp.valueOf(fechafin));
+        return cmd;
+    }
+    @Override
+    public List<Venta> listarVentasRep(LocalDateTime fechaini,LocalDateTime fechafin){
+         try (
+            Connection conn = DBManager.getInstance().getConnection();
+            CallableStatement cmd = this.comandolistaVentaReporte(conn, fechaini,fechafin);
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            VentaDAOImpl ventaDAO =new VentaDAOImpl();
+            List<Venta> ventas = new ArrayList<>();
+            while (rs.next()) {
+                ventas.add(ventaDAO.mapearModelo(rs));
+            }
+            return ventas;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante el listado: " + e.getMessage());
+            throw new RuntimeException("No se pudo listar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al listar los registros.", e);
+        }     
+    }
     @Override
     protected Venta mapearModelo(ResultSet rs) throws SQLException {
         Venta venta = new Venta();

@@ -15,6 +15,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.bo.IVentaBO;
@@ -35,8 +36,9 @@ public class VentaResource {
         this.ventaBO=new VentaBOImpl();
     }
     @GET
-    public List<Venta> listar(){
-        return this.ventaBO.listar();
+    @Path("{fechaini}-{fechafin}")
+    public List<Venta> listar(@PathParam("fechaini")LocalDateTime fechaini,@PathParam("fechafin")LocalDateTime fechafin){
+        return this.ventaBO.listarVentaReporte(fechaini,fechafin);
     }
     
     @GET
