@@ -86,7 +86,7 @@ public class CuponResource {
     public Response eliminar(@PathParam("id") int id) {
         if (this.cuponBO.buscarPorId(id) == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Boleto: " + id + ", no encontrada")
+                    .entity("Cupon: " + id + ", no encontrada")
                     .build();
         }
         this.cuponBO.eliminar(id);

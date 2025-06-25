@@ -21,7 +21,7 @@ public class CuponCRUD {
         int idCupon = crearCuponEjm(cuponDAO);
         buscarCupon(cuponDAO, idCupon);
         actualizarCupon(cuponDAO, idCupon);
-        eliminarCupon(cuponDAO, idCupon);
+        //eliminarCupon(cuponDAO, idCupon);
 
         listarCupon(null, cuponDAO);
         System.out.println("\n=== CRUD CUPONES COMPLETADO CON ÉXITO ===");
@@ -29,17 +29,17 @@ public class CuponCRUD {
 
     private static int crearCuponEjm(CuponDAOImpl cuponDAO){
         Cupon nuevoCupon = new Cupon();
-        nuevoCupon.setCodigo("DESCUENTO25");
-        nuevoCupon.setDescripcionEs("Descuento del 20% en tu compra");
-        nuevoCupon.setDescripcionEn("20% discount on your purchase");
+        nuevoCupon.setCodigo("DESCUENTO10");
+        nuevoCupon.setDescripcionEs("Descuento del 10% en tu compra");
+        nuevoCupon.setDescripcionEn("10% discount on your purchase");
         nuevoCupon.setDescuentoTipo(TipoDescuento.PORCENTAJE);
         nuevoCupon.setFechaInicio(LocalDate.now());
-        nuevoCupon.setFechaFin(LocalDate.now());
+        nuevoCupon.setFechaFin(LocalDate.now().plusMonths(1));
         nuevoCupon.setMaxUsos(100);
-        Usuario usuario = new Usuario();
-        usuario.setId(2); 
+        UsuarioDAOImpl usuarioDao = new UsuarioDAOImpl();
+        Usuario usuario = usuarioDao.buscar(16);
         nuevoCupon.setCreadoPor(usuario);
-        nuevoCupon.setDescuentoValor(20.00);
+        nuevoCupon.setDescuentoValor(10.00);
         nuevoCupon.setUsosActuales(0);
         nuevoCupon.setFechaModificacion(LocalDate.now());
         nuevoCupon.setActivo(true);

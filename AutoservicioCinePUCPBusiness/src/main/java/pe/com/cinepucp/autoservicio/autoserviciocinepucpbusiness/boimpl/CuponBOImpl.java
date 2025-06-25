@@ -30,8 +30,8 @@ public class CuponBOImpl implements ICuponBO{
     
     @Override
     public void registrar(Cupon cupon) throws Exception {
-        //validarCupon(cupon);
-        cuponDAO.insertar(cupon);
+        validarCupon(cupon);
+        int idCupon = cuponDAO.insertar(cupon);
     }
     
     @Override
