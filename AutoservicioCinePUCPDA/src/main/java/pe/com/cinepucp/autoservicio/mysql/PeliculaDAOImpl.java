@@ -1,8 +1,10 @@
 package pe.com.cinepucp.autoservicio.mysql;
 
 import java.sql.*;
+import java.time.LocalDate;
 import pe.com.cinepucp.autoservicio.dao.IPeliculaDAO;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
+import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 
 /**
  * Data Access Object (DAO) implementation for Pelicula entity,
@@ -10,6 +12,7 @@ import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
  */
 public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaDAO {
     private final int usuarioModificacionId = 4;
+    private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
 
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Pelicula peli) throws SQLException {
@@ -25,7 +28,10 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setString(7, peli.getImagenUrl());
         stmt.setBoolean(8, peli.isEstaActiva());
         stmt.setInt(9, peli.getUsuarioModificacion());
-
+        LogSistema log = new LogSistema();
+        log.setAccion("Insertar pelicula " +  peli.getTituloEs());
+        log.setUsuario(peli.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
@@ -43,6 +49,10 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setString(8, peli.getImagenUrl());
         stmt.setBoolean(9, peli.isEstaActiva());
         stmt.setInt(10, peli.getUsuarioModificacion());
+        LogSistema log = new LogSistema();
+        log.setAccion("Modificar pelicula " +  peli.getTituloEs());
+        log.setUsuario(peli.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
@@ -52,6 +62,10 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
         stmt.setInt(2, usuarioModificacionId);
+        LogSistema log = new LogSistema();
+        log.setAccion("Elimino pelicula con id: " +  id);
+        log.setUsuario(usuarioModificacionId);
+        logDAO.insertar(log);
         return stmt;
     }
 
