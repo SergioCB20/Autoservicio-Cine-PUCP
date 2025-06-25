@@ -91,6 +91,10 @@ public class UsuarioBOImpl implements IUsuarioBO {
         if (!PasswordHasher.checkPassword(password, usuario.getPassword())) {
             throw new Exception("Credenciales inválidas.");
         }
+        
+        if(!usuario.isEstaActivo()){
+            throw new Exception("Usuario Vetado.");
+        }
 
         // Si llegó hasta aquí, las credenciales son válidas
         return usuario;

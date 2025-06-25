@@ -38,7 +38,7 @@ public class LogSistemaCRUD {
         LogSistema nuevoLog = new LogSistema();
         nuevoLog.setAccion("Prueba de Inserción");
         nuevoLog.setFecha(LocalDate.now());
-        nuevoLog.setUsuario(usuario);
+        nuevoLog.setUsuario(usuario.getId());
 
         return insertarLogSistema(logSistemaDAO, nuevoLog);
     }
@@ -81,7 +81,7 @@ public class LogSistemaCRUD {
         }
 
         log.setAccion("Prueba de Actualización");
-        log.setUsuario(usuario);
+        log.setUsuario(usuario.getId());
 
         if (!logSistemaDAO.modificar(log)) {
             throw new RuntimeException("Error al actualizar el log con ID: " + id);

@@ -25,7 +25,7 @@ public class UsuarioWS {
     private final ResourceBundle config;
     private final String urlBaseRest;
     private final HttpClient client = HttpClient.newHttpClient();
-    private final String USUARIO_RESOURCE = "usuarios"; 
+    private final String USUARIO_RESOURCE = "/usuarios"; 
     private final ObjectMapper deserializationMapper;
     private final ObjectMapper serializationMapper;
 

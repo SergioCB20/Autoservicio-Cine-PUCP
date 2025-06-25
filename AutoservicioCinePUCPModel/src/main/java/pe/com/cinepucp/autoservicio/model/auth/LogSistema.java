@@ -9,21 +9,20 @@ package pe.com.cinepucp.autoservicio.model.auth;
  * @author Sergio
  */
 import java.time.LocalDate;
-import java.util.List;
 
 public class LogSistema {
     private int id;
     private String accion;
     private LocalDate fecha;
-    private Usuario usuario;
+    private int id_usuario;
 
     public LogSistema() {
     }
 
-    public LogSistema(String accion, List<String> tablesAfectadas, LocalDate fecha, Usuario usuario) {
+    public LogSistema(String accion, LocalDate fecha, int id_usuario) {
         this.accion = accion;
         this.fecha = fecha;
-        this.usuario = usuario;
+        this.id_usuario = id_usuario;
     }
 
     public int getId() {
@@ -51,12 +50,12 @@ public class LogSistema {
         this.fecha = fecha;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getUsuario() {
+        return id_usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     // Método toString
@@ -66,7 +65,7 @@ public class LogSistema {
                 "id=" + id +
                 ", accion='" + accion + '\'' +
                 ", fecha=" + fecha +
-                ", usuario=" + usuario.getNombre()+ "(" + usuario.getId() + ")"+
+                ", usuario id=" + id_usuario +
                 '}';
     }
 }
