@@ -6,6 +6,7 @@ package pe.com.cinepucp.autoservicio.autoservicio.WS;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.jws.Oneway;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;

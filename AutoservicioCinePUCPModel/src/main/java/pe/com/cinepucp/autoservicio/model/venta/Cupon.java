@@ -1,21 +1,30 @@
 package pe.com.cinepucp.autoservicio.model.venta;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import pe.com.cinepucp.autoservicio.model.adapters.LocalDateAdapter;
 
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Cupon {
 
-    
     private Integer cuponId;
     private String codigo;
     private String descripcionEs;
     private String descripcionEn;
     private TipoDescuento descuentoTipo;
     private Double descuentoValor;
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaInicio = null;
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaFin = null;
     private Integer maxUsos;
     private Integer usosActuales;
@@ -25,7 +34,7 @@ public class Cupon {
     private List<Venta> ventas = new ArrayList<>(); // Ventas donde se aplicó este cupón
     private boolean activo;
     private Usuario modificadopor = null;
-    
+
     /**
      * @return the activo
      */
@@ -39,28 +48,28 @@ public class Cupon {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
-    @Override
-public String toString() {
-    return "Cupon{" +
-            "cuponId=" + cuponId +
-            ", codigo='" + codigo + '\'' +
-            ", descripcionEs='" + descripcionEs + '\'' +
-            ", descripcionEn='" + descripcionEn + '\'' +
-            ", descuentoTipo=" + (descuentoTipo != null ? descuentoTipo.getDescripcion() : "null") +
-            ", descuentoValor=" + descuentoValor +
-            ", fechaInicio=" + fechaInicio +
-            ", fechaFin=" + fechaFin +
-            ", maxUsos=" + maxUsos +
-            ", usosActuales=" + usosActuales +
-            ", creadoPor=" + (creadoPor != null ? creadoPor.getId() : "null") +
-            '}';
-}
 
-    public Cupon(){
-        
+    @Override
+    public String toString() {
+        return "Cupon{"
+                + "cuponId=" + cuponId
+                + ", codigo='" + codigo + '\''
+                + ", descripcionEs='" + descripcionEs + '\''
+                + ", descripcionEn='" + descripcionEn + '\''
+                + ", descuentoTipo=" + (descuentoTipo != null ? descuentoTipo.getDescripcion() : "null")
+                + ", descuentoValor=" + descuentoValor
+                + ", fechaInicio=" + fechaInicio
+                + ", fechaFin=" + fechaFin
+                + ", maxUsos=" + maxUsos
+                + ", usosActuales=" + usosActuales
+                + ", creadoPor=" + (creadoPor != null ? creadoPor.getId() : "null")
+                + '}';
     }
-    
+
+    public Cupon() {
+
+    }
+
     public Cupon(String codigo, String descripcionEs, String descripcionEn, TipoDescuento descuentoTipo,
             Double descuentoValor, LocalDate fechaInicio, LocalDate fechaFin, Integer maxUsos, Integer usosActuales,
             Usuario creadoPor) {
@@ -75,8 +84,7 @@ public String toString() {
         this.usosActuales = usosActuales;
         this.creadoPor = creadoPor;
     }
-    
-    
+
     /**
      * @return the fechaModificacion
      */
@@ -90,7 +98,7 @@ public String toString() {
     public void setFechaModificacion(LocalDate fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
+
     public Integer getCuponId() {
         return cuponId;
     }
@@ -186,5 +194,5 @@ public String toString() {
     public void setModificadoPor(Usuario modificadopor) {
         this.modificadopor = modificadopor;
     }
-    
+
 }
