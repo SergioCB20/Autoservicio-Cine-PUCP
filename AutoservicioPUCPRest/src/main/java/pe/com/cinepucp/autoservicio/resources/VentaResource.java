@@ -35,11 +35,11 @@ public class VentaResource {
     public VentaResource(){
         this.ventaBO=new VentaBOImpl();
     }
-    @GET
+   /* @GET
     @Path("{fechaini}-{fechafin}")
     public List<Venta> listar(@PathParam("fechaini")LocalDateTime fechaini,@PathParam("fechafin")LocalDateTime fechafin){
         return this.ventaBO.listarVentaReporte(fechaini,fechafin);
-    }
+    }*/
     
     @GET
     @Path("{id}")
