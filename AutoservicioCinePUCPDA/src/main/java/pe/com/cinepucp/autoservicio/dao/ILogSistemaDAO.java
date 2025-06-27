@@ -4,6 +4,7 @@
  */
 package pe.com.cinepucp.autoservicio.dao;
 
+import java.util.List;
 import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 
 
@@ -12,5 +13,5 @@ import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
  * @author Sergio
  */
 public interface ILogSistemaDAO extends ICrud<LogSistema>{
-    
+    public List<LogSistema> listarReporteLogs(String fechaini,String fechafin);
 }

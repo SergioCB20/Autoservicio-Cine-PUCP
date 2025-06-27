@@ -12,6 +12,11 @@ import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
  * @author Sergio
  */
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import pe.com.cinepucp.autoservicio.config.DBManager;
 
 public class LogSistemaDAOImpl extends BaseDAOImpl<LogSistema> implements ILogSistemaDAO {
     
@@ -71,5 +76,45 @@ public class LogSistemaDAOImpl extends BaseDAOImpl<LogSistema> implements ILogSi
         log.setUsuario(rs.getInt("usuario_id"));
         
         return log;
+
     }
+    protected CallableStatement comandolistaReporte(Connection conn, String fechaini, String fechafin) throws SQLException{
+        String sql = "{CALL sp_listarReporteLogs(?, ?)}";
+        LocalDate fechai = LocalDate.parse(fechaini);
+        LocalDate fechaf = LocalDate.parse(fechaini);
+
+// Convertir a LocalDateTime con hora cero
+        LocalDateTime fecha1 = fechai.atStartOfDay();
+        LocalDateTime fecha2 = fechaf.atStartOfDay();
+        
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setTimestamp(1, Timestamp.valueOf(fecha1));
+        cmd.setTimestamp(2, Timestamp.valueOf(fecha2));
+        return cmd;
+    }
+    
+    @Override
+    public List<LogSistema> listarReporteLogs(String fechaini, String fechafin) {
+        try (
+            Connection conn = DBManager.getInstance().getConnection();
+            CallableStatement cmd = this.comandolistaReporte(conn, fechaini,fechafin);
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            LogSistemaDAOImpl logDAO =new LogSistemaDAOImpl();
+            List<LogSistema> logs = new ArrayList<>();
+            while (rs.next()) {
+                logs.add(logDAO.mapearModelo(rs));
+            }
+            return logs;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante el listado: " + e.getMessage());
+            throw new RuntimeException("No se pudo listar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al listar los registros.", e);
+        } 
+    }
+
 }

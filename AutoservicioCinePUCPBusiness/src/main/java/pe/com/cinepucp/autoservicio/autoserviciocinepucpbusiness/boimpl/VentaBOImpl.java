@@ -4,7 +4,6 @@
  */
 package pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.boimpl;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.bo.IVentaBO;
 import pe.com.cinepucp.autoservicio.dao.IVentaDAO;
@@ -39,7 +38,7 @@ public class VentaBOImpl implements IVentaBO{
         return ventaDAO.listar();
     }
     @Override
-    public List<Venta> listarVentaReporte(LocalDateTime fechaini,LocalDateTime fechafin){
+    public List<Venta> listarVentaReporte(String fechaini,String fechafin){
         return ventaDAO.listarVentasRep(fechaini, fechafin);
     }
 

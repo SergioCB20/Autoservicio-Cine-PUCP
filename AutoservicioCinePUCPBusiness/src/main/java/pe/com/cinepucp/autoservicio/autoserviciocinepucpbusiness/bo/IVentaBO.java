@@ -4,7 +4,6 @@
  */
 package pe.com.cinepucp.autoservicio.autoserviciocinepucpbusiness.bo;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.model.venta.Venta;
 
@@ -13,5 +12,5 @@ import pe.com.cinepucp.autoservicio.model.venta.Venta;
  * @author Amira
  */
 public interface IVentaBO extends IBOBase<Venta>{
-    public List<Venta> listarVentaReporte(LocalDateTime fechaini,LocalDateTime fechafin);
+    public List<Venta> listarVentaReporte(String fechaini,String fechafin);
 }
