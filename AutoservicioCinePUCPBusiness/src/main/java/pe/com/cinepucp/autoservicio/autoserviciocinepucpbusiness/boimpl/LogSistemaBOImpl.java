@@ -64,4 +64,9 @@ public class LogSistemaBOImpl implements ILogSistemaBO {
         return logDAO.buscar(id);
     }
 
+    @Override
+    public List<LogSistema> listarReporte(String fechaini, String fechafin) {
+        return logDAO.listarReporteLogs(fechaini,fechafin);
+    }
+
 }

@@ -63,7 +63,7 @@ public class VentaCRUD {
     public static void listarVentasreporte(String titulo, VentaDAOImpl ventaDAO){
         System.out.println("\n" + titulo);
         System.out.println("======================================");
-        List<Venta> ventas = ventaDAO.listarVentasRep(LocalDateTime.of(2025,06,01,10,00), LocalDateTime.now());
+        List<Venta> ventas = ventaDAO.listarVentasRep("2025-06-01","2025-06-27");
         if(ventas.isEmpty()){
             System.out.println("No hay ventas registradas");
         }else{

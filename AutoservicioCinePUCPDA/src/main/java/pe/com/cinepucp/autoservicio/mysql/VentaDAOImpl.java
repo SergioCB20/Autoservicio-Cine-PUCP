@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.config.DBManager;
 
@@ -71,16 +73,23 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
         String sql = "{CALL sp_listar_ventas()}";
         return conn.prepareCall(sql);
     }
-    protected CallableStatement comandolistaVentaReporte(Connection conn,LocalDateTime fechaini,LocalDateTime fechafin) throws SQLException {
+    protected CallableStatement comandolistaVentaReporte(Connection conn,String fechaini,String fechafin) throws SQLException {
         String sql = "{CALL sp_listarVentasReporte(?, ?)}";
+        LocalDate fechai = LocalDate.parse(fechaini);
+        LocalDate fechaf = LocalDate.parse(fechaini);
+
+// Convertir a LocalDateTime con hora cero
+        LocalDateTime fecha1 = fechai.atStartOfDay();
+        LocalDateTime fecha2 = fechaf.atStartOfDay();
+        
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setTimestamp(1, Timestamp.valueOf(fechaini));
-        cmd.setTimestamp(2, Timestamp.valueOf(fechafin));
+        cmd.setTimestamp(1, Timestamp.valueOf(fecha1));
+        cmd.setTimestamp(2, Timestamp.valueOf(fecha2));
         return cmd;
     }
     @Override
-    public List<Venta> listarVentasRep(LocalDateTime fechaini,LocalDateTime fechafin){
-         try (
+    public List<Venta> listarVentasRep(String fechaini,String fechafin){
+        try (
             Connection conn = DBManager.getInstance().getConnection();
             CallableStatement cmd = this.comandolistaVentaReporte(conn, fechaini,fechafin);
         ) {

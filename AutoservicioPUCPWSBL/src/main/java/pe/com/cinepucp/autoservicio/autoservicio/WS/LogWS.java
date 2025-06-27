@@ -55,7 +55,7 @@ public class LogWS {
     }
     
     @WebMethod(operationName = "listarLogs")
-    public List<LogSistema> listarLogs() throws Exception {
+    public List<LogSistema> listarLogs(@WebParam(name = "fechaini") String fechaini,@WebParam(name = "fechafin") String fechafin) throws Exception {
         String url = this.urlBase + this.LOG_RESOURCE;
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
                 .GET()
