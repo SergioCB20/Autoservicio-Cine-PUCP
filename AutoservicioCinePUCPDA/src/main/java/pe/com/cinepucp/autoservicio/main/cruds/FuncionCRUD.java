@@ -34,8 +34,8 @@ public class FuncionCRUD {
         
         SalaDAOImpl salaDAO=new SalaDAOImpl();
         Sala sala=salaDAO.buscar(8);
-        funcion.setPelicula(pelicula); // Asumiendo que ya existe una película con ID 
-        funcion.setSala(sala);         
+        //funcion.setPeliculaId(pelicula); // Asumiendo que ya existe una película con ID 
+       // funcion.setSala(sala);         
         funcion.setFechaHora(LocalDateTime.of(2025, 5, 3, 18, 30));
         funcion.setFormatoProyeccion("2D");
         funcion.setIdioma("Español");

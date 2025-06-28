@@ -26,7 +26,7 @@ public class UsuarioWS {
     private final ResourceBundle config;
     private final String urlBaseRest;
     private final HttpClient client = HttpClient.newHttpClient();
-    private final String USUARIO_RESOURCE = "/usuarios"; 
+    private final String USUARIO_RESOURCE = "usuarios"; 
     private final ObjectMapper deserializationMapper;
     private final ObjectMapper serializationMapper;
 
@@ -41,7 +41,7 @@ public class UsuarioWS {
     public void registrarUsuario(@WebParam(name = "usuario") Usuario usuario) throws Exception {
         String json = this.serializationMapper.writeValueAsString(usuario);
 
-        String url = this.urlBaseRest + this.USUARIO_RESOURCE; // Asume que el endpoint es /api/usuarios
+        String url = this.urlBaseRest + "/" + this.USUARIO_RESOURCE; // Asume que el endpoint es /api/usuarios
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -116,7 +116,7 @@ public class UsuarioWS {
     
     @WebMethod(operationName = "listarUsuarios")
     public List<Usuario> listarUsuarios() throws Exception {
-        String url = this.urlBaseRest + this.USUARIO_RESOURCE; // Asume /api/usuarios
+        String url = this.urlBaseRest + "/" + this.USUARIO_RESOURCE; // Asume /api/usuarios
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
