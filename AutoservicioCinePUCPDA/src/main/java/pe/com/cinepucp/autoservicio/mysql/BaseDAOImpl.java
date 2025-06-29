@@ -50,6 +50,30 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
             throw new RuntimeException("Error inesperado al insertar el registro.", e);
         }
     }
+    
+    @Override 
+    public int insertar(T modelo, Connection conn) {
+        try (
+                PreparedStatement cmd = this.comandoInsertar(conn, modelo)
+        ) {
+          
+            try (ResultSet rs = cmd.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                System.err.println("No se pudo obtener el ID generado");
+                return -1;
+            }
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante la inserción: " + e.getMessage());
+            throw new RuntimeException("No se pudo insertar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al insertar el registro.", e);
+        }
+    }
 
     @Override
     public boolean modificar(T modelo) {
