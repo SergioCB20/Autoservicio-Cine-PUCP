@@ -51,8 +51,8 @@ public class ComboItemBOImpl implements IComboItemBO{
     }
 
     @Override
-    public void eliminar(int id) {
-        ComboItemDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod) {
+        ComboItemDAO.eliminar(id, id_usua_mod);
     }
 
     @Override

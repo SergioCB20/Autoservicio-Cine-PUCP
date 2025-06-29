@@ -70,8 +70,8 @@ public class AsientoWS {
     }
     
     @WebMethod(operationName = "eliminarAsiento")
-    public void eliminarAsiento(@WebParam(name = "id") int id) throws Exception{
-        String url = this.urlBase + "/" + this.ASIENTO_RESOURCE + "/" + id;
+    public void eliminarAsiento(@WebParam(name = "id") int id,@WebParam(name = "id_mod") int id_mod) throws Exception{
+        String url = this.urlBase + "/" + this.ASIENTO_RESOURCE + "/" + id+"-"+id_mod;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()

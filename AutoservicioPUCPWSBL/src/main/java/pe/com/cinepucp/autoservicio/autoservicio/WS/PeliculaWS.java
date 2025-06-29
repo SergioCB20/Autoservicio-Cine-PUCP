@@ -72,8 +72,8 @@ public class PeliculaWS {
     }
 
     @WebMethod(operationName = "eliminarPelicula")
-    public void eliminarPelicula(@WebParam(name = "id") int id) throws Exception {
-        String url = this.urlBase + "/" + this.PELICULA_RESOURCE + "/" + id;
+    public void eliminarPelicula(@WebParam(name = "id") int id,@WebParam(name = "id_mod") int id_mod) throws Exception {
+        String url = this.urlBase + "/" + this.PELICULA_RESOURCE + "/" + id+"-"+id_mod;;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()

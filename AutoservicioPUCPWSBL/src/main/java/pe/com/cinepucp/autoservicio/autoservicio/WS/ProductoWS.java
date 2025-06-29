@@ -70,8 +70,8 @@ public class ProductoWS {
     }
     
     @WebMethod(operationName = "eliminarProducto")
-    public void eliminarProducto(@WebParam(name = "id")int id) throws Exception {
-        String url = this.urlBase + "/" + this.PRODUCTO_RESOURCE + "/" + id;
+    public void eliminarProducto(@WebParam(name = "id")int id,@WebParam(name = "id_mod") int id_mod) throws Exception {
+        String url = this.urlBase + "/" + this.PRODUCTO_RESOURCE + "/" + id+"-"+id_mod;;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()

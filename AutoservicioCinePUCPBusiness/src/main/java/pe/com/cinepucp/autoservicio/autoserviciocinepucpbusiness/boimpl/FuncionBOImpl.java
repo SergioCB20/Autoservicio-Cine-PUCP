@@ -126,7 +126,7 @@ public class FuncionBOImpl implements IFuncionBO {
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(int id,int id_usua_mod) {
         if (id <= 0) {
             throw new IllegalArgumentException("El ID de la función debe ser válido.");
         }
@@ -141,7 +141,7 @@ public class FuncionBOImpl implements IFuncionBO {
             throw new IllegalStateException("No se puede eliminar una función que tiene boletos vendidos.");
         }
         
-        funcionDAO.eliminar(id);
+        funcionDAO.eliminar(id,id_usua_mod);
     }
     
     /**

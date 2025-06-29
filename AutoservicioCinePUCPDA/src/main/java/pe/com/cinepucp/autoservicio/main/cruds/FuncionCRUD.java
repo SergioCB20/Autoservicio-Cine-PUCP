@@ -92,7 +92,7 @@ public class FuncionCRUD {
     }
 
     public static void eliminarFuncion(FuncionDAOImpl funcionDAO, int id) {
-        if (!funcionDAO.eliminar(id)) {
+        if (!funcionDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar la función con ID: " + id);
         }
         System.out.println("DELETE: Función eliminada correctamente");

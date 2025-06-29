@@ -7,6 +7,7 @@ import pe.com.cinepucp.autoservicio.config.DBManager;
 import pe.com.cinepucp.autoservicio.dao.IFuncionDAO;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Funcion;
 import pe.com.cinepucp.autoservicio.model.Peliculas.Pelicula;
+import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
 
 /**
@@ -15,7 +16,7 @@ import pe.com.cinepucp.autoservicio.model.salas.Sala;
  */
 public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO {
 //    private final int usuarioModificacionId = 1;
-
+    private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Funcion funcion) throws SQLException {
         String sql = "{CALL sp_insertar_funcion(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -30,6 +31,10 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO 
         stmt.setBoolean(7, funcion.getEstaActiva());
         stmt.setTimestamp(8, Timestamp.valueOf(funcion.getFechaModificacion()));
         stmt.setInt(9, funcion.getUsuarioModificacion());
+        LogSistema log = new LogSistema();
+        log.setAccion("Insertar Funcion " +  funcion.getFuncionId());
+        log.setUsuario(funcion.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
@@ -46,14 +51,22 @@ public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO 
         stmt.setBoolean(7, funcion.getSubtitulos());
         stmt.setBoolean(8, funcion.getEstaActiva());
         stmt.setInt(9, funcion.getUsuarioModificacion());
+        LogSistema log = new LogSistema();
+        log.setAccion("Modificar Funcion " +  funcion.getFuncionId());
+        log.setUsuario(funcion.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException {
         String sql = "{CALL sp_eliminar_funcion(?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
+        LogSistema log = new LogSistema();
+        log.setAccion("Eliminar Funcion " +  id);
+        log.setUsuario(id_modificacion);
+        logDAO.insertar(log);
         return stmt;
     }
 

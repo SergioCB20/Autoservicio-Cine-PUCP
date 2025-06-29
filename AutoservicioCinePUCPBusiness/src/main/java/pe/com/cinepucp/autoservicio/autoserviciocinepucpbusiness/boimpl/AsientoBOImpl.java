@@ -53,8 +53,8 @@ public class AsientoBOImpl implements IAsientoBO{
         return asientoDAO.listaAsientos(idsala);
     }
     @Override
-    public void eliminar(int id) {
-        asientoDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod) {
+        asientoDAO.eliminar(id,id_usua_mod);
     }
 
     @Override

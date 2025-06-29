@@ -102,7 +102,7 @@ public class VentaCRUD {
     }
 
     public static void eliminarVenta(VentaDAOImpl ventaDAO, int id) {
-        if (!ventaDAO.eliminar(id)) {
+        if (!ventaDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el venta con ID: " + id);
         }
         System.out.println("DELETE: venta eliminado correctamente");

@@ -98,8 +98,8 @@ public class BoletoWS {
     }
     
     @WebMethod(operationName = "eliminarBoleto")
-    public void eliminar(@WebParam(name = "id") int id) throws Exception{
-        String url = this.urlBase + "/" + this.BOLETO_RESOURCE + "/" + id;
+    public void eliminar(@WebParam(name = "id") int id,@WebParam(name = "id_mod") int id_mod) throws Exception{
+        String url = this.urlBase + "/" + this.BOLETO_RESOURCE + "/" + id+"-"+id_mod;;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()

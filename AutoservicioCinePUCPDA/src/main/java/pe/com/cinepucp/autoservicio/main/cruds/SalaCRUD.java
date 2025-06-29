@@ -88,7 +88,7 @@ public class SalaCRUD {
     }
 
     public static void eliminarSala(SalaDAOImpl salaDAO, int id) {
-        if (!salaDAO.eliminar(id)) {
+        if (!salaDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar la sala con ID: " + id);
         }
         System.out.println("DELETE: Sala eliminada correctamente");

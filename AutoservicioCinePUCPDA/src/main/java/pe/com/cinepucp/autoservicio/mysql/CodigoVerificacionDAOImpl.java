@@ -43,7 +43,7 @@ public class CodigoVerificacionDAOImpl extends BaseDAOImpl<CodigoVerificacion> i
     }
     
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int idCodigoVerificacion) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int idCodigoVerificacion,int id_modificacion) throws SQLException {
         String sql = "{ CALL sp_eliminar_codigoVerificacion(?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, idCodigoVerificacion); 

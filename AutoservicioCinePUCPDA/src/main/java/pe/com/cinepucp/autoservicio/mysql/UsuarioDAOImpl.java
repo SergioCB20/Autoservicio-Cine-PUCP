@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.com.cinepucp.autoservicio.config.DBManager;
 import pe.com.cinepucp.autoservicio.dao.IUsuarioDAO;
+import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
 public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO {
@@ -18,6 +19,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         stmt.setString(2, usuario.getEmail());
         stmt.setString(3, usuario.getTelefono());
         stmt.setString(4, usuario.getPassword()); 
+       
         return stmt;
     }
 
@@ -41,7 +43,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         return stmt;
     }
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException {
         String sql = "{ CALL sp_eliminar_usuario(?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);

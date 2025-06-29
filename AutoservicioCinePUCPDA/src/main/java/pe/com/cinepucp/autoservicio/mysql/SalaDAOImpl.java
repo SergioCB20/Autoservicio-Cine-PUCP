@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.config.DBManager;
 import pe.com.cinepucp.autoservicio.dao.ISalaDAO;
+import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
 import pe.com.cinepucp.autoservicio.model.salas.TipoSala;
@@ -20,7 +21,7 @@ import pe.com.cinepucp.autoservicio.model.salas.TipoSala;
 public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
 
     private final int usuarioModificacionId = 4; // TODO: Obtener el ID del usuario de la sesión
-
+    private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Sala sala) throws SQLException {
         String sql = "{CALL sp_insertar_sala(?, ?, ?, ?, ?)}";
@@ -29,7 +30,11 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         stmt.setInt(2, sala.getCapacidad());
         stmt.setString(3, sala.getTipoSala().getDescripcion());
         stmt.setBoolean(4, sala.isActiva());
-        stmt.setInt(5, usuarioModificacionId); // Usar el ID del usuario de la sesión
+        stmt.setInt(5, sala.getUsuarioModificacion()); // Usar el ID del usuario de la sesión
+        LogSistema log = new LogSistema();
+        log.setAccion("Insertar sala " +  sala.getNombre());
+        log.setUsuario(sala.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
@@ -43,15 +48,23 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         stmt.setString(4, sala.getTipoSala().getDescripcion());
         stmt.setBoolean(5, sala.isActiva());
         stmt.setInt(6, usuarioModificacionId); // Usar el ID del usuario de la sesión
+        LogSistema log = new LogSistema();
+        log.setAccion("Modificar sala " +  sala.getNombre());
+        log.setUsuario(sala.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_moficicacion) throws SQLException {
         String sql = "{CALL sp_eliminar_sala(?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
-        stmt.setInt(2, usuarioModificacionId); // Usar el ID del usuario de la sesión
+        stmt.setInt(2, id_moficicacion); // Usar el ID del usuario de la sesión
+        LogSistema log = new LogSistema();
+        log.setAccion("Eliminar Sala con id: " +  id);
+        log.setUsuario(id_moficicacion);
+        logDAO.insertar(log);
         return stmt;
     }
 

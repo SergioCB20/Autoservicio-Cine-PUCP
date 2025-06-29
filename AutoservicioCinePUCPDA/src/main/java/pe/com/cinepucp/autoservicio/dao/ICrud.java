@@ -13,7 +13,7 @@ import java.util.List;
 public interface ICrud<T> {
     int insertar(T modelo);
     boolean modificar(T modelo);
-    boolean eliminar(int id);
+    boolean eliminar(int id,int id_modificacion);
     T buscar(int id);
     List<T> listar();
 }

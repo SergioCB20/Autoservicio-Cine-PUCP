@@ -14,6 +14,6 @@ public interface IBOBase<T> {
     void registrar(T modelo) throws Exception;
     void actualizar(T modelo) throws Exception;
     List<T> listar();
-    void eliminar(int id);
+    void eliminar(int id,int id_usu_mod);
     T buscarPorId(int id);
 }

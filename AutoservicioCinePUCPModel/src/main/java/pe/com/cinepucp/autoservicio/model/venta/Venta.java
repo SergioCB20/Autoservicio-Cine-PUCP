@@ -1,14 +1,24 @@
 package pe.com.cinepucp.autoservicio.model.venta;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import pe.com.cinepucp.autoservicio.model.adapters.LocalDateTimeAdapter;
 
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Venta {
     private Integer ventaId;
     private Usuario usuario;
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss") 
     private LocalDateTime fechaHora;
     private Double subtotal;
     private Double impuestos;
@@ -20,21 +30,21 @@ public class Venta {
     private List<Cupon> cuponesAplicados = new ArrayList<>();
     
     @Override
-public String toString() {
-    return "Venta{" +
-           "ventaId=" + ventaId +
-           ", usuario=" + (usuario != null ? usuario.getId(): null) + // Mostrar ID del usuario
-           ", fechaHora=" + fechaHora +
-           ", subtotal=" + subtotal +
-           ", impuestos=" + impuestos +
-           ", total=" + total +
-           ", estado=" + estado +
-           ", metodoPago=" + metodoPago +
-           ", boletos=" + (boletos != null ? boletos.size() : 0) + " boletos" +
-           ", productosVendidos=" + (getProductosVendidos() != null ? getProductosVendidos().size() : 0) + " productos" +
-           ", cuponesAplicados=" + (getCuponesAplicados() != null ? getCuponesAplicados().size() : 0) + " cupones" +
-           '}';
-}
+    public String toString() {
+        return "Venta{" +
+               "ventaId=" + ventaId +
+               ", usuario=" + (usuario != null ? usuario.getId(): null) + // Mostrar ID del usuario
+               ", fechaHora=" + fechaHora +
+               ", subtotal=" + subtotal +
+               ", impuestos=" + impuestos +
+               ", total=" + total +
+               ", estado=" + estado +
+               ", metodoPago=" + metodoPago +
+               ", boletos=" + (boletos != null ? boletos.size() : 0) + " boletos" +
+               ", productosVendidos=" + (getProductosVendidos() != null ? getProductosVendidos().size() : 0) + " productos" +
+               ", cuponesAplicados=" + (getCuponesAplicados() != null ? getCuponesAplicados().size() : 0) + " cupones" +
+               '}';
+    }
     
     public Venta(){
 

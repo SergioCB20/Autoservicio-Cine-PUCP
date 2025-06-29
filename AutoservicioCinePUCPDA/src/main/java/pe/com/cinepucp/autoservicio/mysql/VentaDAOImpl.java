@@ -53,7 +53,7 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modif) throws SQLException {
         String sql = "{CALL sp_eliminar_venta(?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
@@ -76,9 +76,8 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
     protected CallableStatement comandolistaVentaReporte(Connection conn,String fechaini,String fechafin) throws SQLException {
         String sql = "{CALL sp_listarVentasReporte(?, ?)}";
         LocalDate fechai = LocalDate.parse(fechaini);
-        LocalDate fechaf = LocalDate.parse(fechaini);
-
-// Convertir a LocalDateTime con hora cero
+        LocalDate fechaf = LocalDate.parse(fechafin);
+        // Convertir a LocalDateTime con hora cero
         LocalDateTime fecha1 = fechai.atStartOfDay();
         LocalDateTime fecha2 = fechaf.atStartOfDay();
         

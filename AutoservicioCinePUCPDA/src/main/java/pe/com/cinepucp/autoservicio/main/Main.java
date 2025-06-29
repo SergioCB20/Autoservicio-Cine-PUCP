@@ -35,11 +35,11 @@ public class Main {
         //PeliculaCRUD.ejecutarCRUDPelicula();
         
 //        FuncionCRUD.ejecutarCRUDFuncion();
-        VentaCRUD.ejecutarCRUDVenta();
+        //VentaCRUD.ejecutarCRUDVenta();
 
         //BoletoCRUD.ejecutarCRUDBoleto();
         //VentaCRUD.ejecutarCRUDVenta(); 
-        CuponCRUD.ejecutarCRUDCupon();
+        //CuponCRUD.ejecutarCRUDCupon();
         //ProductoCRUD.ejecutarCRUDProducto();
         
     }
