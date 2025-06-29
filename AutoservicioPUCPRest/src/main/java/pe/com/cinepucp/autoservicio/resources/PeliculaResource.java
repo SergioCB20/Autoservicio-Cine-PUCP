@@ -81,13 +81,13 @@ public class PeliculaResource {
     
     @DELETE
     @Path("{id}")
-    public Response eliminar(@PathParam("id") int id) {
+    public Response eliminar(@PathParam("id") int id,@PathParam("id_mod") int id_mod) {
         if (this.peliculaBO.buscarPorId(id) == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("pelicula: " + id + ", no encontrada")
                     .build();
         }
-        this.peliculaBO.eliminar(id);
+        this.peliculaBO.eliminar(id,id_mod);
         return Response.noContent().build();
     }        
 }

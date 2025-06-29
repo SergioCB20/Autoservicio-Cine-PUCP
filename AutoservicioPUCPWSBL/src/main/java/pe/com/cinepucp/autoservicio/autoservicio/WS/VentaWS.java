@@ -70,8 +70,8 @@ public class VentaWS {
     }
 
     @WebMethod(operationName = "eliminarVenta")
-    public void eliminarVenta(@WebParam(name = "id") int id) throws Exception {
-        String url = this.urlBase + "/" + this.VENTA_RESOURCE + "/" + id;
+    public void eliminarVenta(@WebParam(name = "id") int id,@WebParam(name = "id_mod") int id_mod) throws Exception {
+        String url = this.urlBase + "/" + this.VENTA_RESOURCE + "/" + id+"-"+id_mod;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()
@@ -95,7 +95,12 @@ public class VentaWS {
 
     @WebMethod(operationName = "listarVentasReporte")
     public List<Venta> listarVentasReporte(@WebParam(name = "fechaini") String fechaini,@WebParam(name = "fechafin") String fechafin) throws Exception {
-        String url = this.urlBase + "/" + this.VENTA_RESOURCE;
+        //String url = this.urlBase + "/" + this.VENTA_RESOURCE;
+        String url = String.format("%s/%s/%s/%s", 
+                                  this.urlBase, 
+                                  this.VENTA_RESOURCE, // debería ser "ventas" 
+                                  fechaini, 
+                                  fechafin);
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
                 .GET()
                 .build();

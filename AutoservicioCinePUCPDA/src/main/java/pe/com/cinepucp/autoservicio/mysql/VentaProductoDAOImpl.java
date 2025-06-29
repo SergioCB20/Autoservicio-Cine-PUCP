@@ -30,7 +30,7 @@ public class VentaProductoDAOImpl extends BaseDAOImpl<VentaProducto> implements 
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modif) throws SQLException {
         return null;
     }
 

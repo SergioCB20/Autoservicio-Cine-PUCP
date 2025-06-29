@@ -2,13 +2,14 @@ package pe.com.cinepucp.autoservicio.mysql;
 
 import java.sql.*;
 import pe.com.cinepucp.autoservicio.dao.IProductoDAO;
+import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 import pe.com.cinepucp.autoservicio.model.comida.Producto;
 import pe.com.cinepucp.autoservicio.model.comida.TipoProducto;
 
 public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoDAO {
 
     private final int usuarioModificacionId = 4;
-
+    private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Producto producto) throws SQLException {
         String sql = "{CALL sp_insertar_producto(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -22,6 +23,10 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         stmt.setString(7, producto.getImagenUrl());
         stmt.setBoolean(8, producto.isEstaActivo());
         stmt.setInt(9,producto.getUsuarioModificacion());
+        LogSistema log = new LogSistema();
+        log.setAccion("Insertar producto con id" +  producto.getId());
+        log.setUsuario(producto.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
@@ -39,17 +44,23 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         stmt.setString(8, producto.getImagenUrl());
         stmt.setBoolean(9, producto.isEstaActivo());
         stmt.setInt(10,producto.getUsuarioModificacion());
-        
+        LogSistema log = new LogSistema();
+        log.setAccion("Modificar producto con id" +  producto.getId());
+        log.setUsuario(producto.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modif) throws SQLException {
         String sql = "{CALL sp_eliminar_producto(?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
-        stmt.setInt(2, usuarioModificacionId);
-
+        stmt.setInt(2, id_modif);
+        LogSistema log = new LogSistema();
+        log.setAccion("Insertar producto con id" + id);
+        log.setUsuario(id_modif);
+        logDAO.insertar(log);
         return stmt;
         
     }

@@ -69,8 +69,8 @@ public class BoletoBOImpl extends TransaccionalBO implements IBoletoBO{
         return boletoDAO.listar();
     }
     @Override
-    public void eliminar(int id){
-        boletoDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod){
+        boletoDAO.eliminar(id,id_usua_mod);
     }
     @Override
     public Boleto buscarPorId(int id){

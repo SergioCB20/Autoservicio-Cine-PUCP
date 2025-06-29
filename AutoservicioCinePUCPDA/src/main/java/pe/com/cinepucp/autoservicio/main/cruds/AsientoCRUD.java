@@ -99,7 +99,7 @@ public class AsientoCRUD {
     }
 
     public static void eliminarAsiento(AsientoDAOImpl asientoDAO, int id) {
-        if (!asientoDAO.eliminar(id)) {
+        if (!asientoDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el asiento con ID: " + id);
         }
         System.out.println("DELETE: Asiento eliminado correctamente");

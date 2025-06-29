@@ -34,7 +34,7 @@ public class GeneroDAOImpl extends BaseDAOImpl<Genero> implements IGeneroDAO{
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException {
         String sql = "{CALL sp_eliminar_genero(?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);

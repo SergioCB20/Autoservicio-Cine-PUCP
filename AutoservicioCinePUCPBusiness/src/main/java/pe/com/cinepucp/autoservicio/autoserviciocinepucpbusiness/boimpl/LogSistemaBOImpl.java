@@ -55,8 +55,8 @@ public class LogSistemaBOImpl implements ILogSistemaBO {
     }
 
     @Override
-    public void eliminar(int id) {
-        logDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod) {
+        logDAO.eliminar(id,id_usua_mod);
     }
 
     @Override

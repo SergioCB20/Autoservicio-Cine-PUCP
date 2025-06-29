@@ -38,7 +38,7 @@ public class SesionDAOImpl extends BaseDAOImpl<Sesion> implements ISesionDAO{
     }
     
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int idSesion) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int idSesion,int id_modificaion) throws SQLException {
         String sql = "{ CALL sp_eliminar_sesion(?) }";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, idSesion);

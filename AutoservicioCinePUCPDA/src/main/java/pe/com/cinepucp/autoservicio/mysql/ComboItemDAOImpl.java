@@ -41,7 +41,7 @@ public class ComboItemDAOImpl extends BaseDAOImpl<ComboItem> implements IComboIt
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException {
         String sql = "{CALL sp_eliminar_combo_item(?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);

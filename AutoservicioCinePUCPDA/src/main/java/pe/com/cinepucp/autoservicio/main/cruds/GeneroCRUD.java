@@ -68,7 +68,7 @@ public class GeneroCRUD{
     }
 
     public static void eliminarGenero(GeneroDAOImpl generoDAO, int id) {
-        if (!generoDAO.eliminar(id)) {
+        if (!generoDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el género con ID: " + id);
         }
         System.out.println("DELETE: Género eliminado correctamente");

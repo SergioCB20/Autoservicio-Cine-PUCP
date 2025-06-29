@@ -55,8 +55,8 @@ public class SalaBOImpl implements ISalaBO{
     }
 
     @Override
-    public void eliminar(int id) {
-        salaDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod) {
+        salaDAO.eliminar(id,id_usua_mod);
     }
 
     @Override

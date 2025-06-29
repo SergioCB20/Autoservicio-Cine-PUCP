@@ -41,8 +41,9 @@ public class VentaResource {
     }*/
 
     @GET
-    @Path("{fechaini}-{fechafin}")
-    public List<Venta> listar(@PathParam("fechaini") String fechaini,@PathParam("fechafin") String fechafin) {    
+    @Path("{fechaini}/{fechafin}")
+    public List<Venta> listar(@PathParam("fechaini") String fechaini,@PathParam("fechafin") String fechafin) {  
+        
         return this.ventaBO.listarVentaReporte(fechaini, fechafin);
     }
 
@@ -91,13 +92,13 @@ public class VentaResource {
     
     @DELETE
     @Path("{id}")
-    public Response eliminar(@PathParam("id") int id) {
+    public Response eliminar(@PathParam("id") int id,@PathParam("id_mod") int id_mod) {
         if (this.ventaBO.buscarPorId(id) == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Venta: " + id + ", no encontrada")
                     .build();
         }
-        this.ventaBO.eliminar(id);
+        this.ventaBO.eliminar(id,id_mod);
         return Response.noContent().build();
     }        
     

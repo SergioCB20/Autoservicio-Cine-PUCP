@@ -27,7 +27,7 @@ public class BoletoDetalleDAOImpl extends BaseDAOImpl<BoletoDetalle> implements 
     }
     
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException{
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException{
         return null;
     }
     

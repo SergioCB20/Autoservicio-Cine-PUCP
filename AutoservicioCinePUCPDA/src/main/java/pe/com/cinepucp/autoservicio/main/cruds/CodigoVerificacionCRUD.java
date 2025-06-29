@@ -106,7 +106,7 @@ public class CodigoVerificacionCRUD {
     }
 
     public static void eliminarCodigoVerificacion(CodigoVerificacionDAOImpl codigoVerificacionDAO, int id) {
-        if (!codigoVerificacionDAO.eliminar(id)) { 
+        if (!codigoVerificacionDAO.eliminar(id,34)) { 
             throw new RuntimeException("Error al eliminar el codigo de verificacion con ID: " + id);
         }
         System.out.println("DELETE: Codigo de verificacion eliminado correctamente con ID: " + id);

@@ -8,7 +8,8 @@ import pe.com.cinepucp.autoservicio.model.venta.Cupon;
 import pe.com.cinepucp.autoservicio.model.venta.TipoDescuento;
 
 public class CuponDAOImpl extends BaseDAOImpl<Cupon> implements ICuponDAO{
-protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throws SQLException {
+    @Override    
+    protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throws SQLException {
         String sql = "{CALL sp_insertar_cupon(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, modelo.getCodigo());
@@ -49,7 +50,7 @@ protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throw
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException {
         String sql = "{CALL sp_eliminar_cupon(?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);

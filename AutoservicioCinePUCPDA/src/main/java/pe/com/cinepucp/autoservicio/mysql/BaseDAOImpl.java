@@ -20,7 +20,7 @@ import pe.com.cinepucp.autoservicio.dao.ICrud;
 public abstract class BaseDAOImpl<T> implements ICrud<T> {
     protected abstract PreparedStatement comandoInsertar(Connection conn, T modelo) throws SQLException;
     protected abstract PreparedStatement comandoModificar(Connection conn, T modelo) throws SQLException;
-    protected abstract PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException;
+    protected abstract PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException;
     protected abstract PreparedStatement comandoBuscar(Connection conn, int id) throws SQLException;
     protected abstract PreparedStatement comandoListar(Connection conn) throws SQLException;
     
@@ -100,10 +100,10 @@ public abstract class BaseDAOImpl<T> implements ICrud<T> {
 
 
     @Override
-    public boolean eliminar(int id) {
+    public boolean eliminar(int id,int id_modificacion) {
         try (
             Connection conn = DBManager.getInstance().getConnection();
-            PreparedStatement cmd = this.comandoEliminar(conn, id);
+            PreparedStatement cmd = this.comandoEliminar(conn, id,id_modificacion);
         ) {
             
            try( ResultSet rs = cmd.executeQuery()){

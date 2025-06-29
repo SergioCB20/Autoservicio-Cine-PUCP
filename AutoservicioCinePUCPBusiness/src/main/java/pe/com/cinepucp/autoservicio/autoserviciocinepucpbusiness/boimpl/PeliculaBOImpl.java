@@ -68,8 +68,8 @@ public class PeliculaBOImpl implements IPeliculaBO {
         return peliculaDAO.listar();
     }
     @Override
-    public void eliminar(int id){
-        peliculaDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod){
+        peliculaDAO.eliminar(id,id_usua_mod);
     }
     @Override
     public Pelicula buscarPorId(int id){

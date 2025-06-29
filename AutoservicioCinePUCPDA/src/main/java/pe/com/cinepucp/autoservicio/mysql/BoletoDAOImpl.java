@@ -32,7 +32,7 @@ public class BoletoDAOImpl extends BaseDAOImpl<Boleto> implements IBoletoDAO{
     }
     
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id, int id_modificacion) throws SQLException {
         String sql = "{CALL sp_eliminar_boleto(?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);

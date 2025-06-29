@@ -44,8 +44,8 @@ public class CuponBOImpl implements ICuponBO{
         return cuponDAO.listar();
     }
     @Override
-    public void eliminar(int id){
-        cuponDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod){
+        cuponDAO.eliminar(id,id_usua_mod);
     }
     @Override
     public Cupon buscarPorId(int id){

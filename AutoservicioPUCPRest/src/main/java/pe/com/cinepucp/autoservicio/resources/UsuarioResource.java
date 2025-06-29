@@ -172,7 +172,7 @@ public class UsuarioResource {
     
     @DELETE
     @Path("{id}") // Define que el ID es parte de la URL (ej. /usuarios/123)
-    public Response eliminarUsuario(@PathParam("id") int id) {
+    public Response eliminarUsuario(@PathParam("id") int id,@PathParam("id_mod") int id_mod) {
         try {
             if (id <= 0) {
                  return Response.status(Response.Status.BAD_REQUEST)
@@ -187,7 +187,7 @@ public class UsuarioResource {
             //             .build();
             // }
 
-            usuarioBO.eliminar(id); // Llama al método eliminar del BO
+            usuarioBO.eliminar(id,id_mod); // Llama al método eliminar del BO
             return Response.status(Response.Status.NO_CONTENT).build(); // 204 No Content (éxito sin cuerpo de respuesta)
         } catch (Exception e) {
             System.err.println("Error al eliminar usuario: " + e.getMessage());
