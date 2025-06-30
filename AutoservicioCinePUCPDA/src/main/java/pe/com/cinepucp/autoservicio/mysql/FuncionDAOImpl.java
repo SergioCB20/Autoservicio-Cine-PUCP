@@ -15,7 +15,7 @@ import pe.com.cinepucp.autoservicio.model.salas.Sala;
  * @author Piero
  */
 public class FuncionDAOImpl extends BaseDAOImpl<Funcion> implements IFuncionDAO {
-//    private final int usuarioModificacionId = 1;
+
     private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Funcion funcion) throws SQLException {

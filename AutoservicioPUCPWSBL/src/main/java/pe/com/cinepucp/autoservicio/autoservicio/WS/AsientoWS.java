@@ -58,6 +58,7 @@ public class AsientoWS {
     @WebMethod(operationName = "actualizarAsiento")
     public void actualizarAsiento(@WebParam(name = "asiento") Asiento asiento) throws Exception{
         String json = this.serializationMapper.writeValueAsString(asiento);
+        System.out.println(json);
         String url;
         HttpRequest request;
         url = this.urlBase + "/" + this.ASIENTO_RESOURCE + "/" + asiento.getId();
