@@ -20,7 +20,7 @@ import pe.com.cinepucp.autoservicio.model.salas.TipoAsiento;
 
 public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO {
 
-    private static final int USUARIO_MODIFICACION_ID = 15; // ID de usuario constante
+   
     private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Asiento asiento) throws SQLException {

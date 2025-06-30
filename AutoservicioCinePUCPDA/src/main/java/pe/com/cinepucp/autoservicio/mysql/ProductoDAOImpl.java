@@ -7,8 +7,7 @@ import pe.com.cinepucp.autoservicio.model.comida.Producto;
 import pe.com.cinepucp.autoservicio.model.comida.TipoProducto;
 
 public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoDAO {
-
-    private final int usuarioModificacionId = 4;
+    
     private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Producto producto) throws SQLException {

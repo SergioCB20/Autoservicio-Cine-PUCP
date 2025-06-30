@@ -11,7 +11,7 @@ import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
  * extending BaseDAOImpl for common CRUD operations.
  */
 public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaDAO {
-    private final int usuarioModificacionId = 4;
+   
     private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
 
     @Override
@@ -61,8 +61,8 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         String sql = "{CALL sp_eliminar_pelicula(?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
-        stmt.setInt(2, usuarioModificacionId);
-        Pelicula peli;
+        stmt.setInt(2, id_modificacion);
+       
         
         LogSistema log = new LogSistema();
         log.setAccion("Elimino pelicula con id: " +  id);

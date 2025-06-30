@@ -59,6 +59,7 @@ public class SalaWS {
     @WebMethod(operationName = "actualizarSala")
     public void actualizarSala(@WebParam(name = "sala") Sala sala) throws Exception{
         String json = this.serializationMapper.writeValueAsString(sala);
+        System.out.println(json);
         String url;
         HttpRequest request;
         url = this.urlBase + "/" + this.SALA_RESOURCE + "/" + sala.getId();

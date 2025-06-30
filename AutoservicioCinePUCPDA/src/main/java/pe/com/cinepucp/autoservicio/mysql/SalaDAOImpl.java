@@ -20,7 +20,7 @@ import pe.com.cinepucp.autoservicio.model.salas.TipoSala;
 
 public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
 
-    private final int usuarioModificacionId = 4; // TODO: Obtener el ID del usuario de la sesión
+    
     private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Sala sala) throws SQLException {
@@ -29,6 +29,7 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         stmt.setString(1, sala.getNombre());
         stmt.setInt(2, sala.getCapacidad());
         stmt.setString(3, sala.getTipoSala().getDescripcion());
+        System.out.println(sala.getTipoSala().getDescripcion());
         stmt.setBoolean(4, sala.isActiva());
         stmt.setInt(5, sala.getUsuarioModificacion()); // Usar el ID del usuario de la sesión
         LogSistema log = new LogSistema();
@@ -47,9 +48,10 @@ public class SalaDAOImpl extends BaseDAOImpl<Sala> implements ISalaDAO {
         stmt.setInt(3, sala.getCapacidad());
         stmt.setString(4, sala.getTipoSala().getDescripcion());
         stmt.setBoolean(5, sala.isActiva());
-        stmt.setInt(6, usuarioModificacionId); // Usar el ID del usuario de la sesión
+        stmt.setInt(6, sala.getUsuarioModificacion()); // Usar el ID del usuario de la sesión
         LogSistema log = new LogSistema();
         log.setAccion("Modificar sala " +  sala.getNombre());
+        
         log.setUsuario(sala.getUsuarioModificacion());
         logDAO.insertar(log);
         return stmt;
