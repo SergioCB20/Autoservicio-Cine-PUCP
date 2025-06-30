@@ -7,10 +7,10 @@ import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 import pe.com.cinepucp.autoservicio.model.venta.Cupon;
 import pe.com.cinepucp.autoservicio.model.venta.TipoDescuento;
 
-public class CuponDAOImpl extends BaseDAOImpl<Cupon> implements ICuponDAO{
+public class CuponDAOImpl extends BaseDAOImpl<Cupon> implements ICuponDAO {
     @Override    
-    protected CallableStatement comandoInsertar(Connection conn, Cupon modelo) throws SQLException {
-        String sql = "{CALL sp_insertar_cupon(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+    protected PreparedStatement comandoInsertar(Connection conn, Cupon modelo) throws SQLException {
+ sql = "{CALL sp_insertar_cupon(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setString(1, modelo.getCodigo());
         stmt.setString(2, modelo.getDescripcionEs());
@@ -25,6 +25,7 @@ public class CuponDAOImpl extends BaseDAOImpl<Cupon> implements ICuponDAO{
         stmt.setBoolean(11, true); // esta_activo por defecto al insertar
         stmt.setTimestamp(12, Timestamp.valueOf(LocalDateTime.now().now())); // fecha_modificacion
         stmt.setInt(13, modelo.getModificadoPor().getId()); // usuario_modificacion (asumiendo mismo creador)
+        
         return stmt;
     }
 
