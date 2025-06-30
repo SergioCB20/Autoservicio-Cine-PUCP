@@ -15,7 +15,7 @@ public interface ICrud<T> {
     int insertar(T modelo);
     int insertar(T modelo, Connection conexion);
     boolean modificar(T modelo);
-    boolean eliminar(int id);
+    boolean eliminar(int id,int id_modificacion);
     T buscar(int id);
     List<T> listar();
 }

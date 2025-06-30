@@ -29,7 +29,7 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setBoolean(8, peli.isEstaActiva());
         stmt.setInt(9, peli.getUsuarioModificacion());
         LogSistema log = new LogSistema();
-        log.setAccion("Insertar pelicula " +  peli.getTituloEs());
+        log.setAccion("Insertar pelicula con id" +  peli.getTituloEs());
         log.setUsuario(peli.getUsuarioModificacion());
         logDAO.insertar(log);
         return stmt;
@@ -50,21 +50,23 @@ public class PeliculaDAOImpl extends BaseDAOImpl<Pelicula> implements IPeliculaD
         stmt.setBoolean(9, peli.isEstaActiva());
         stmt.setInt(10, peli.getUsuarioModificacion());
         LogSistema log = new LogSistema();
-        log.setAccion("Modificar pelicula " +  peli.getTituloEs());
+        log.setAccion("Modificar pelicula con id" +  peli.getTituloEs());
         log.setUsuario(peli.getUsuarioModificacion());
         logDAO.insertar(log);
         return stmt;
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException {
         String sql = "{CALL sp_eliminar_pelicula(?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
         stmt.setInt(2, usuarioModificacionId);
+        Pelicula peli;
+        
         LogSistema log = new LogSistema();
         log.setAccion("Elimino pelicula con id: " +  id);
-        log.setUsuario(usuarioModificacionId);
+        log.setUsuario(id_modificacion);
         logDAO.insertar(log);
         return stmt;
     }

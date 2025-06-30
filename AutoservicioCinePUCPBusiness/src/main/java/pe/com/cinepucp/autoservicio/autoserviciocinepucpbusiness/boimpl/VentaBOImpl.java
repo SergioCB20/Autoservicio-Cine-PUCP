@@ -43,8 +43,8 @@ public class VentaBOImpl implements IVentaBO{
     }
 
     @Override
-    public void eliminar(int id) {
-        ventaDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod) {
+        ventaDAO.eliminar(id,id_usua_mod);
     }
 
     @Override

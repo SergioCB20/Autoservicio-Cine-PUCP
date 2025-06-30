@@ -33,7 +33,7 @@ public class LogSistemaResource {
     }
     
     @GET
-    @Path("{fechaini}-{fechafin}")
+    @Path("{fechaini}/{fechafin}")
     public List<LogSistema> listar(@PathParam("fechaini") String fechaini,@PathParam("fechafin") String fechafin) {    
         return this.logBO.listarReporte(fechaini, fechafin);
     }

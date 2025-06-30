@@ -89,7 +89,7 @@ public class CuponCRUD {
     }
 
     public static void eliminarCupon(CuponDAOImpl cuponDAO, int id) {
-        if (!cuponDAO.eliminar(id)) {
+        if (!cuponDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el cupón con ID: " + id);
         }
         System.out.println("DELETE: Cupón eliminado correctamente");

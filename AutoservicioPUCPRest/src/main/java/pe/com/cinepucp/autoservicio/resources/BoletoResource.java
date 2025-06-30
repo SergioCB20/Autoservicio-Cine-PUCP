@@ -84,13 +84,13 @@ public class BoletoResource {
     
     @DELETE
     @Path("{id}")
-    public Response eliminar(@PathParam("id") int id) {
+    public Response eliminar(@PathParam("id") int id,@PathParam("id_mod") int id_mod) {
         if (this.boletoBO.buscarPorId(id) == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Boelto: " + id + ", no encontrada")
                     .build();
         }
-        this.boletoBO.eliminar(id);
+        this.boletoBO.eliminar(id,id_mod);
         
         return Response.noContent().build();
     }    

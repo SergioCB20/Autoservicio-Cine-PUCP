@@ -35,7 +35,7 @@ public class Main {
         //PeliculaCRUD.ejecutarCRUDPelicula();
         
 //        FuncionCRUD.ejecutarCRUDFuncion();
-        VentaCRUD.ejecutarCRUDVenta();
+        //VentaCRUD.ejecutarCRUDVenta();
 
         //BoletoCRUD.ejecutarCRUDBoleto();
         //VentaCRUD.ejecutarCRUDVenta(); 

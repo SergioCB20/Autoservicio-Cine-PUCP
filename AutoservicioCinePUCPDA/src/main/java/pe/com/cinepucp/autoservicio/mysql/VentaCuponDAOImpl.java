@@ -29,7 +29,7 @@ public class VentaCuponDAOImpl extends BaseDAOImpl<VentaCupon> implements IVenta
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_mod) throws SQLException {
         return null;
     }
 

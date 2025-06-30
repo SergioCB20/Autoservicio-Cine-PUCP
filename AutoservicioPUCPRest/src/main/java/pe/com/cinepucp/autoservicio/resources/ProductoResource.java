@@ -77,13 +77,13 @@ public class ProductoResource {
     
     @DELETE
     @Path("{id}")
-    public Response eliminar(@PathParam("id") int id) {
+    public Response eliminar(@PathParam("id") int id,@PathParam("id_mod") int id_mod) {
         if (this.productoBO.buscarPorId(id) == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Producto: " + id + ", no encontrado")
                     .build();
         }
-        this.productoBO.eliminar(id);
+        this.productoBO.eliminar(id,id_mod);
         return Response.noContent().build();
     }        
     

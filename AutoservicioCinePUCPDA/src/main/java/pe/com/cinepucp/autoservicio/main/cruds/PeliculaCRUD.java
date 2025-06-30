@@ -88,7 +88,7 @@ public class PeliculaCRUD {
     }
 
     public static void eliminarPelicula(PeliculaDAOImpl peliculaDAO, int id) {
-        if (!peliculaDAO.eliminar(id)) {
+        if (!peliculaDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar la película con ID: " + id);
         }
         System.out.println("DELETE: Película eliminada correctamente");

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.com.cinepucp.autoservicio.config.DBManager;
 import pe.com.cinepucp.autoservicio.dao.IAsientoDAO;
+import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 import pe.com.cinepucp.autoservicio.model.salas.Asiento;
 import pe.com.cinepucp.autoservicio.model.salas.Sala;
 import pe.com.cinepucp.autoservicio.model.salas.TipoAsiento;
@@ -20,7 +21,7 @@ import pe.com.cinepucp.autoservicio.model.salas.TipoAsiento;
 public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO {
 
     private static final int USUARIO_MODIFICACION_ID = 15; // ID de usuario constante
-
+    private final LogSistemaDAOImpl logDAO = new LogSistemaDAOImpl();
     @Override
     protected PreparedStatement comandoInsertar(Connection conn, Asiento asiento) throws SQLException {
         String sql = "{CALL sp_insertar_asiento(?, ?, ?, ?, ?, ?)}";
@@ -30,7 +31,11 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
         stmt.setInt(3, asiento.getNumero());
         stmt.setString(4, asiento.getTipo().getDescripcion());
         stmt.setBoolean(5, asiento.isActivo());
-        stmt.setInt(6, USUARIO_MODIFICACION_ID);
+        stmt.setInt(6, asiento.getUsuarioModificacion());
+        LogSistema log = new LogSistema();
+        log.setAccion("Insertar asiento con id :" + asiento.getId());
+        log.setUsuario(asiento.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
@@ -44,16 +49,24 @@ public class AsientoDAOImpl extends BaseDAOImpl<Asiento> implements IAsientoDAO 
         stmt.setInt(4, asiento.getNumero());
         stmt.setString(5, asiento.getTipo().getDescripcion());
         stmt.setBoolean(6, asiento.isActivo());
-        stmt.setInt(7, USUARIO_MODIFICACION_ID);
+        stmt.setInt(7, asiento.getUsuarioModificacion());
+        LogSistema log = new LogSistema();
+        log.setAccion("Modifcar asiento con id: " + asiento.getId());
+        log.setUsuario(asiento.getUsuarioModificacion());
+        logDAO.insertar(log);
         return stmt;
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_modificacion) throws SQLException {
         String sql = "{CALL sp_eliminar_asiento(?, ?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
-        stmt.setInt(2, USUARIO_MODIFICACION_ID);
+        stmt.setInt(2, id_modificacion);
+        LogSistema log = new LogSistema();
+        log.setAccion("Eliminar asiento con id: " + id);
+        log.setUsuario(id_modificacion);
+        logDAO.insertar(log);        
         return stmt;
     }
 

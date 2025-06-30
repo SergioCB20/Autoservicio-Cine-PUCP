@@ -1,35 +1,41 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.com.cinepucp.autoservicio.model.auth;
 
 /**
  *
  * @author Sergio
  */
-import java.time.LocalDate;
+import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.LocalDateTime;
+import pe.com.cinepucp.autoservicio.model.adapters.LocalDateTimeAdapter;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class LogSistema {
-    private int id;
+    private Integer id;
     private String accion;
-    private LocalDate fecha;
-    private int id_usuario;
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss") 
+    private LocalDateTime  fecha;
+    private Integer id_usuario;
 
     public LogSistema() {
     }
 
-    public LogSistema(String accion, LocalDate fecha, int id_usuario) {
+    public LogSistema(String accion, LocalDateTime fecha, Integer id_usuario) {
         this.accion = accion;
         this.fecha = fecha;
         this.id_usuario = id_usuario;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,19 +48,19 @@ public class LogSistema {
     }
 
     
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
-    public int getUsuario() {
+    public Integer getUsuario() {
         return id_usuario;
     }
 
-    public void setUsuario(int id_usuario) {
+    public void setUsuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
     }
 

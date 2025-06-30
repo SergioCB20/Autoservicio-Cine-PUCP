@@ -91,9 +91,9 @@ public class FuncionResource {
 
     @DELETE
     @Path("{id}")
-    public Response eliminar(@PathParam("id") int id) {
+    public Response eliminar(@PathParam("id") int id,@PathParam("id_mod") int id_mod) {
         try {
-            this.funcionBO.eliminar(id);
+            this.funcionBO.eliminar(id,id_mod);
             return Response.noContent().build();
         } catch (IllegalArgumentException | IllegalStateException e) {
             return Response.status(Response.Status.BAD_REQUEST)
