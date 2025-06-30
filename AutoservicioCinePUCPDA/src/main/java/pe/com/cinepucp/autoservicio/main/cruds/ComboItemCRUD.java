@@ -90,7 +90,7 @@ public class ComboItemCRUD {
     }
 
     public static void eliminarComboItem(ComboItemDAOImpl comboItemDAO, int id) {
-        if (!comboItemDAO.eliminar(id)) {
+        if (!comboItemDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el combo item con ID: " + id);
         }
         System.out.println("DELETE: ComboItem eliminado correctamente");

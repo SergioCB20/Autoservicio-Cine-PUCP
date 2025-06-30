@@ -56,14 +56,19 @@ public class LogWS {
     
     @WebMethod(operationName = "listarLogs")
     public List<LogSistema> listarLogs(@WebParam(name = "fechaini") String fechaini,@WebParam(name = "fechafin") String fechafin) throws Exception {
-        String url = this.urlBase + this.LOG_RESOURCE;
+        //String url = this.urlBase + this.LOG_RESOURCE;
+        String url = String.format("%s%s/%s/%s", 
+                                  this.urlBase, 
+                                  this.LOG_RESOURCE, // debería ser "/logs" 
+                                  fechaini, 
+                                  fechafin);
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
                 .GET()
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
         System.out.println(json);
-        List<LogSistema> logs = this.deserializationMapper.readValue(json, new TypeReference<List<LogSistema>>() {});
+        List<LogSistema> logs = this.deserializationMapper.readValue(json, new TypeReference<List<LogSistema>>(){});
 
         return logs;
     }

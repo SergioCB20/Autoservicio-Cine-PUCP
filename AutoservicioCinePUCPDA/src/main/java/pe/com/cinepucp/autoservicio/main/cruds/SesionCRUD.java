@@ -108,7 +108,7 @@ public class SesionCRUD {
     }
 
     public static void eliminarSesion(SesionDAOImpl sesionDAO, int id) {
-        if (!sesionDAO.eliminar(id)) {
+        if (!sesionDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar la sesión con ID: " + id);
         }
         System.out.println("DELETE: Sesión eliminada correctamente con ID: " + id);

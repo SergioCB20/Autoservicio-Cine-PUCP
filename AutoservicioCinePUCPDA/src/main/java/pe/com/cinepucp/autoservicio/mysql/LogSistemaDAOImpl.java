@@ -37,13 +37,13 @@ public class LogSistemaDAOImpl extends BaseDAOImpl<LogSistema> implements ILogSi
         stmt.setInt(1, modelo.getId());
         stmt.setInt(2, modelo.getUsuario());
         stmt.setString(3, modelo.getAccion());
-        stmt.setDate(4, Date.valueOf(modelo.getFecha()));
+        stmt.setTimestamp(4, Timestamp.valueOf(modelo.getFecha()));
         
         return stmt;
     }
 
     @Override
-    protected PreparedStatement comandoEliminar(Connection conn, int id) throws SQLException {
+    protected PreparedStatement comandoEliminar(Connection conn, int id,int id_mod) throws SQLException {
         String sql = "{CALL sp_eliminar_log_sistema(?)}";
         CallableStatement stmt = conn.prepareCall(sql);
         stmt.setInt(1, id);
@@ -71,8 +71,7 @@ public class LogSistemaDAOImpl extends BaseDAOImpl<LogSistema> implements ILogSi
         log.setAccion(rs.getString("accion"));
         
         
-        log.setFecha(rs.getDate("fecha_hora").toLocalDate());
-        
+        log.setFecha(rs.getTimestamp("fecha_hora").toLocalDateTime());
         log.setUsuario(rs.getInt("usuario_id"));
         
         return log;
@@ -81,7 +80,7 @@ public class LogSistemaDAOImpl extends BaseDAOImpl<LogSistema> implements ILogSi
     protected CallableStatement comandolistaReporte(Connection conn, String fechaini, String fechafin) throws SQLException{
         String sql = "{CALL sp_listarReporteLogs(?, ?)}";
         LocalDate fechai = LocalDate.parse(fechaini);
-        LocalDate fechaf = LocalDate.parse(fechaini);
+        LocalDate fechaf = LocalDate.parse(fechafin);
 
 // Convertir a LocalDateTime con hora cero
         LocalDateTime fecha1 = fechai.atStartOfDay();

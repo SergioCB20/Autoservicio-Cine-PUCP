@@ -70,8 +70,8 @@ public class UsuarioBOImpl implements IUsuarioBO {
     }
 
     @Override
-    public void eliminar(int id) {
-        usuarioDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod) {
+        usuarioDAO.eliminar(id,id_usua_mod);
     }
 
     @Override

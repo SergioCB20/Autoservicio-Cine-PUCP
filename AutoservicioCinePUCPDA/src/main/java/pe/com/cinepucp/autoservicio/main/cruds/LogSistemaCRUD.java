@@ -6,6 +6,7 @@ import pe.com.cinepucp.autoservicio.mysql.LogSistemaDAOImpl;
 import pe.com.cinepucp.autoservicio.model.auth.LogSistema;
 import pe.com.cinepucp.autoservicio.model.auth.Usuario;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 /**
@@ -37,7 +38,7 @@ public class LogSistemaCRUD {
     private static int crearLogEjemplo(ILogSistemaDAO logSistemaDAO, Usuario usuario) {
         LogSistema nuevoLog = new LogSistema();
         nuevoLog.setAccion("Prueba de Inserción");
-        nuevoLog.setFecha(LocalDate.now());
+        nuevoLog.setFecha(LocalDateTime.now());
         nuevoLog.setUsuario(usuario.getId());
 
         return insertarLogSistema(logSistemaDAO, nuevoLog);
@@ -90,7 +91,7 @@ public class LogSistemaCRUD {
     }
 
     public static void eliminarLogSistema(ILogSistemaDAO logSistemaDAO, int id) {
-        if (!logSistemaDAO.eliminar(id)) {
+        if (!logSistemaDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el log con ID: " + id);
         }
         System.out.println("DELETE: Log eliminado correctamente con ID: " + id);

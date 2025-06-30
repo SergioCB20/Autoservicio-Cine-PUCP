@@ -102,7 +102,7 @@ public class UsuarioCRUD {
     }
 
     public static void eliminarUsuario(IUsuarioDAO usuarioDAO, int id) {
-        if (!usuarioDAO.eliminar(id)) {
+        if (!usuarioDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el usuario con ID: " + id);
         }
         System.out.println("DELETE: Usuario eliminado correctamente con ID: " + id);

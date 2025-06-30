@@ -83,7 +83,7 @@ public class BoletoCRUD {
     }
 
     public static void eliminarBoleto(IBoletoDAO boletoDAO, int id) {
-        if (!boletoDAO.eliminar(id)) {
+        if (!boletoDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el boleto con ID: " + id);
         }
         System.out.println("DELETE: Boleto eliminado correctamente");

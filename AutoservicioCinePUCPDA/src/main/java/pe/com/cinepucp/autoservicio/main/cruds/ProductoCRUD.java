@@ -97,7 +97,7 @@ public class ProductoCRUD {
     }
 
     public static void eliminarProducto(ProductoDAOImpl productoDAO, int id) {
-        if (!productoDAO.eliminar(id)) {
+        if (!productoDAO.eliminar(id,34)) {
             throw new RuntimeException("Error al eliminar el producto con ID: " + id);
         }
         System.out.println("DELETE: Producto eliminado correctamente");

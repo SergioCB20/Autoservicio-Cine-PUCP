@@ -56,8 +56,8 @@ public class ProductoBOImpl implements IProductoBO{
         return productoDAO.listar();
     }
     @Override
-    public void eliminar(int id){
-        productoDAO.eliminar(id);
+    public void eliminar(int id,int id_usua_mod){
+        productoDAO.eliminar(id, id_usua_mod);
     }
     @Override
     public Producto buscarPorId(int id){
