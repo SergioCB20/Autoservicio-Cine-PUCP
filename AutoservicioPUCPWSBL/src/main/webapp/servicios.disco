@@ -4,6 +4,7 @@
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/AutoservicioPUCPWSBL/ProductoWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/AutoservicioPUCPWSBL/SalaWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/AutoservicioPUCPWSBL/CuponWS?wsdl"/>
+	<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/AutoservicioPUCPWSBL/AsientoFuncionWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/AutoservicioPUCPWSBL/UsuarioWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/AutoservicioPUCPWSBL/AuthWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/AutoservicioPUCPWSBL/BoletoWS?wsdl"/>
