@@ -43,19 +43,18 @@ public class CuponWS {
     }
     
     @WebMethod(operationName = "registrarCupon")
-    public void registrarCupon(@WebParam(name = "cupon") Cupon cupon,@WebParam(name = "stringIni") String stringIni,
-    @WebParam(name = "stringFin") String stringFin) throws Exception{
+    public void registrarCupon(@WebParam(name = "cupon") Cupon cupon) throws Exception{
          
     if (cupon == null) {
         System.out.println("ERROR: Cupon es null");
         throw new IllegalArgumentException("El cupón no puede ser null");
     }
     
-        LocalDate fechaIni = LocalDate.parse(stringIni);
+        /*LocalDate fechaIni = LocalDate.parse(stringIni);
         LocalDate fechaFin = LocalDate.parse(stringFin);
     
         cupon.setFechaInicio(fechaIni);
-        cupon.setFechaFin(fechaFin);
+        cupon.setFechaFin(fechaFin);*/
         cupon.setFechaModificacion(LocalDate.now());
     try {
         String json = this.serializationMapper.writeValueAsString(cupon);

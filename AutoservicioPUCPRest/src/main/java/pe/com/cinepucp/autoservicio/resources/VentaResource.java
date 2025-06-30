@@ -46,6 +46,11 @@ public class VentaResource {
         return this.ventaBO.listarVentaReporte(fechaini, fechafin);
     }
 
+    @GET
+    @Path ("usuario/{id}")
+    public List<Venta> listarPorUsuario(@PathParam("id") int idUsuario){
+        return this.ventaBO.listarVentaPorUsuario(idUsuario);
+    }
     
     @GET
     @Path("{id}")

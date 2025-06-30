@@ -93,7 +93,7 @@ public class UsuarioWS {
     
     @WebMethod(operationName = "buscarUsuarioPorId")
     public Usuario buscarUsuarioPorId(@WebParam(name = "id") int id) throws Exception {
-        String url = this.urlBaseRest + this.USUARIO_RESOURCE + "/" + id; // Asume /api/usuarios/{id}
+        String url = this.urlBaseRest + "/" + this.USUARIO_RESOURCE + "/" + id; // Asume /api/usuarios/{id}
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()

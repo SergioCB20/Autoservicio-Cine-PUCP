@@ -131,4 +131,33 @@ public class VentaDAOImpl extends BaseDAOImpl<Venta> implements IVentaDAO{
         venta.setMetodoPago(MetodoPago.fromString(rs.getString("metodo_pago")));
         return venta;
     }
+    @Override
+    public List<Venta> listarVentasPorUsuario(int usuario_id){
+        List<Venta> ventas = new ArrayList<>();
+
+        try (Connection conn = DBManager.getInstance().getConnection()) {
+            String sql = "{CALL sp_listar_ventas_por_usuario(?)}";
+            CallableStatement stmt = conn.prepareCall(sql);
+            stmt.setInt(1, usuario_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Venta venta = mapearModelo(rs);
+                ventas.add(venta);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error SQL al buscar ventas por usuario: " + e.getMessage());
+            throw new RuntimeException("No se pudieron recuperar las ventas con ID de usuario: " + usuario_id, e);
+        } catch (Exception e) {
+            System.err.println("Error inesperado al buscar ventas por usuario: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al buscar ventas por usuario.", e);
+        }
+
+        return ventas;
+    }
 }
