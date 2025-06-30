@@ -51,5 +51,10 @@ public class VentaBOImpl implements IVentaBO{
     public Venta buscarPorId(int id) {
         return ventaDAO.buscar(id);
     }
+
+    @Override
+    public List<Venta> listarVentaPorUsuario(int idUsuario) {
+        return ventaDAO.listarVentasPorUsuario(idUsuario);
+    }
     
 }

@@ -13,4 +13,5 @@ import pe.com.cinepucp.autoservicio.model.venta.Venta;
  */
 public interface IVentaBO extends IBOBase<Venta>{
     public List<Venta> listarVentaReporte(String fechaini,String fechafin);
+    public List<Venta> listarVentaPorUsuario(int idUsuario);
 }

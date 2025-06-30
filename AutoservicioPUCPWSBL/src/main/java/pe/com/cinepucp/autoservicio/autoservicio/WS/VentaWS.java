@@ -111,4 +111,19 @@ public class VentaWS {
 
         return ventas;
     }
+    
+    @WebMethod(operationName = "listarVentasPorUsuario")
+    public List<Venta> listarVentasPorUsuario(@WebParam(name = "idUsuario") int idUsuario) throws Exception {
+        String url = this.urlBase + "/" + VENTA_RESOURCE + "/usuario/" + idUsuario;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String json = response.body();
+        List<Venta> ventas = this.deserializationMapper.readValue(json, new TypeReference<List<Venta>>() {});
+        return ventas;
+    }
 }

@@ -27,7 +27,8 @@ public class VentaCRUD {
 //        eliminarVenta(ventaDAO, idVentas);
 //
 //        listarVentas(null, ventaDAO);
-        listarVentasreporte("Ventas en rango", ventaDAO);
+        //listarVentasreporte("Ventas en rango", ventaDAO);
+        listarVentarPorUsuario(24, ventaDAO);
         System.out.println("\n=== CRUD VENTAS COMPLETADO CON ÉXITO ===");
     }
 
@@ -73,6 +74,18 @@ public class VentaCRUD {
 
     }
 
+    public static void listarVentarPorUsuario(int idUsuario, VentaDAOImpl ventaDAO){
+        System.out.println("Lista ventas por usuario");
+        System.out.println("======================================");
+        List<Venta> ventas = ventaDAO.listarVentasPorUsuario(idUsuario);
+        if(ventas.isEmpty()){
+            System.out.println("No hay ventas registradas");
+        }else{
+            ventas.forEach(System.out::println);
+        }
+        System.out.println("======================================\n");
+    }
+    
     public static int insertarVenta(VentaDAOImpl ventaDAO, Venta venta){
         int idVenta = ventaDAO.insertar(venta);
         if(idVenta == -1){
